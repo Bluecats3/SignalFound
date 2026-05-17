@@ -1,7 +1,7 @@
 console.log("SCRIPT LOADED");
 
 // === MEMORY (PERSISTENT) ===
-const STORAGE_KEY = "signalFound";
+const STORAGE_KEY = "signalFound_v2";
 let memory = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 
 // === TYPING EFFECT ===
@@ -30,13 +30,71 @@ function typeText(element, text, speed = 20) {
     typing();
 }
 
+
+function getTimeContext() {
+    const hour = new Date().getHours();
+
+    const lines = {
+        late: [
+            "Low-cycle activity detected.",
+            "Sleep-window instability noted.",
+            "Late-hour perception drift possible."
+        ],
+        morning: [
+            "Morning-cycle input registered.",
+            "Daylight calibration active.",
+            "Early-cycle pattern scan complete."
+        ],
+        day: [
+            "Day-cycle input registered.",
+            "Ambient reality conditions stable.",
+            "Standard waking-hour scan active."
+        ],
+        night: [
+            "Night-cycle awareness active.",
+            "Low-light interpretation variance noted.",
+            "Evening-cycle pattern monitoring enabled."
+        ]
+    };
+
+    let group;
+
+    if (hour < 5) group = lines.late;
+    else if (hour < 12) group = lines.morning;
+    else if (hour < 18) group = lines.day;
+    else group = lines.night;
+
+    return group[Math.floor(Math.random() * group.length)] + "\n";
+}
+
+
+
 // === MEMORY CONTEXT ===
 function getMemoryContext() {
     if (memory.length === 0) return "";
 
-    const last = memory[memory.length - 1];
-    return `Previous observation detected: "${last.question}"\nSystem continuity maintained.\n\n`;
+    const recentMemory = memory.slice(-3);
+
+    const memoryLines = recentMemory
+        .map((item, i) => `Observation ${i + 1}: "${item.question}"`)
+        .join("\n");
+
+    const continuityLines = [
+        "Pattern history loaded.",
+        "Prior observations linked.",
+        "Memory chain active.",
+        "Timeline references retrieved.",
+        "Observation history synchronized.",
+        "Related signals recovered."
+    ];
+
+    const randomLine =
+        continuityLines[Math.floor(Math.random() * continuityLines.length)];
+
+    return `${randomLine}\n${memoryLines}\n\n`;
 }
+
+
 
 // === MAIN FUNCTION ===
 async function revealTruth() {
@@ -82,6 +140,7 @@ async function revealTruth() {
             const finalText =
                 "SIGNAL ANALYSIS\n" +
                 "INTERPRETATION\n\n" +
+                getTimeContext() +
                 getMemoryContext() +
                 reply.replace(/\n/g, "\n\n");
 

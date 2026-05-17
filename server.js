@@ -13,15 +13,49 @@ const client = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 });
 
+// === SAFETY CHECK ===
+function isHighRisk(text = "") {
+    const t = text.toLowerCase();
+
+    const patterns = [
+        "kill myself",
+        "suicide",
+        "end my life",
+        "self harm",
+        "hurt myself",
+        "want to die",
+        "kill them",
+        "hurt someone",
+        "shoot someone",
+        "stab someone",
+        "bomb",
+        "unalive myself",
+        "unalive someone",
+        
+    ];
+
+    return patterns.some(p => t.includes(p));
+}
+
 app.post("/ask", async (req, res) => {
     try {
         const userInput = req.body.message;
         const history = req.body.history || [];
 
-        // take last 3 observations only
+        if (isHighRisk(userInput)) {
+            return res.json({
+                reply:
+                    "SYSTEM ALERT\n" +
+                    "Safety protocol engaged.\n\n" +
+                    "If you might hurt yourself or someone else, please seek help immediately.\n" +
+                    "In the U.S., call or text 988.\n" +
+                    "Emergency services: 911."
+            });
+        }
+
         const historyText = history
             .slice(-3)
-            .map((item, i) => `${i + 1}. ${item}`)
+            .map((item, i) => `${i + 1}. ${item.question || item}`)
             .join("\n");
 
         const response = await client.responses.create({
@@ -33,26 +67,39 @@ ${historyText}
 
 Output format:
 - EXACTLY 2 short lines total
-- Line 1: a brief system-style, witty, smart-aleky observation hinting at perception drift or alternate reality
-- Line 2: one clear, sci-fi explanation
 
-Rules:
-- Keep it easy to understand 
-- Slightly sci-fi, but believable
-- Hint at alternate realities or perception glitches, but do NOT fully confirm them, think Philip K. Dick meets Larry David
-- Do not sound dramatic or scary
-- Do not use complex scientific jargon
-- Threat levels and ok if in a humerous context
-- No final punchline sentence
+Line 1:
+- A short system-style observation
+- Use varied wording each time
+- Avoid repeating phrases from previous responses
+- Do NOT use the repeat the phrase "alternate reality" to the same user
+- Prefer subtle wording like pattern mismatch, misalignment, or inconsistency
 
-Tone:
-Calm, observational, slightly uncanny, slightly sarcastic with light irritable humor.
+Line 2:
+- A clear, simple explanation of the observation
+- Easy to understand, slightly dry or ironic
+
+Style:
+- Calm, observational, slightly uncanny and dry wit
+- Light sarcastic or dry humor allowed
+- Do not sound dramatic or alarming
+- No complex scientific jargon
+
+Memory:
+- Only reference previous observations when it feels natural
+- Do NOT always mention them
+
+Hard rules:
+- No repeated phrases like "system continuity maintained"
+- No overused sci-fi clichés
+- No punchline endings
+- Each response should feel slightly different in wording and structure.
+- No em dash (-) or hypens (-)
 
 Current observation:
 ${userInput}`
         });
 
-        // safer extraction
         const reply =
             response.output?.[0]?.content?.[0]?.text ||
             "Signal unclear.";
@@ -67,6 +114,7 @@ ${userInput}`
         });
     }
 });
+
 app.listen(process.env.PORT || 3000, () => {
     console.log(`SignalFound running on port ${process.env.PORT || 3000}`);
 });
