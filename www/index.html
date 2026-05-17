@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SignalFound</title>
+
+    <!-- Mobile scaling -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- App identity -->
+    <meta name="application-name" content="SignalFound">
+    <meta name="theme-color" content="#000000">
+
+    <!-- iPhone app behavior -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SignalFound">
+
+    <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/icon-180.png">
+    <link rel="icon" sizes="192x192" href="/icon-192.png">
+    <link rel="icon" sizes="512x512" href="/icon-512.png">
+    <link rel="shortcut icon" href="/icon-192.png">
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="loadingScreen">
+    <div class="loadingBox">
+        <h1>SignalFound</h1>
+        <p>Initializing signal...</p>
+    </div>
+</div>
+
+<div class="container">
+    <h1>SignalFound</h1>
+    <p class="subtitle">Submit observations. The system will interpret.</p>
+
+    <textarea id="userInput" placeholder="Enter your findings..."></textarea>
+
+    <br>
+
+    <button onclick="revealTruth()">Analyze</button>
+
+    <h2>System Response</h2>
+    <div id="responseOutput"></div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
