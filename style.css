@@ -218,8 +218,8 @@ h2 {
 .powered {
     position: fixed;
     bottom: 14px;
-    width: 100%;
-    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
 
     font-size: 12px;
     font-family: "Courier New", monospace;
