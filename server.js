@@ -80,8 +80,8 @@ Line 2:
 - Easy to understand, slightly dry or ironic
 
 Style:
-- Calm, observational, slightly uncanny and dry wit
-- Light sarcastic or dry humor allowed
+- Calm, observational, occult, the matrix, aliens, alternate dimensions, string theory are great!
+- Do your best to predict what will happen with the user next
 - Do not sound dramatic or alarming
 - No complex scientific jargon
 

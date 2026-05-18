@@ -215,3 +215,29 @@ h2 {
     pointer-events: none;
     transition: opacity 0.5s ease;
 }
+.powered {
+    position: fixed;
+    bottom: 14px;
+    width: 100%;
+    text-align: center;
+
+    font-size: 12px;
+    font-family: "Courier New", monospace;
+    letter-spacing: 1px;
+
+    color: var(--blue);
+    opacity: 0.6;
+
+    text-shadow: 0 0 6px rgba(0, 174, 239, 0.4);
+
+    pointer-events: none;
+
+    animation: poweredFlicker 8s infinite;
+}
+
+@keyframes poweredFlicker {
+    0%, 100% { opacity: 0.6; }
+    48% { opacity: 0.6; }
+    50% { opacity: 0.3; }
+    52% { opacity: 0.6; }
+}
