@@ -30,7 +30,7 @@ function typeText(element, text, speed = 20) {
     typing();
 }
 
-
+// === TIME CONTEXT ===
 function getTimeContext() {
     const hour = new Date().getHours();
 
@@ -67,32 +67,6 @@ function getTimeContext() {
     return group[Math.floor(Math.random() * group.length)] + "\n";
 }
 
-
-
-// === MEMORY CONTEXT ===
-function getMemoryContext() {
-    if (memory.length === 0) return "";
-
-    const recent = memory.slice(-3); // last 3 observations
-
-    const memoryLines = [
-        "Memory chain active.",
-        "Prior signals detected.",
-        "Pattern history available.",
-        "Context fragments restored."
-    ];
-
-    const randomLine =
-        memoryLines[Math.floor(Math.random() * memoryLines.length)];
-
-    const numbered = recent
-    .map((item, index) => `[${index + 1}] "${item.question}"`)
-    .join("<br>");
-
-    return `${randomLine}<br>${numbered}<br><br>`;
-}
-
-
 // === MAIN FUNCTION ===
 async function revealTruth() {
     const inputBox = document.getElementById("userInput");
@@ -108,15 +82,15 @@ async function revealTruth() {
 
     if (!input) return;
 
-document.body.classList.add("glitch");
+    document.body.classList.add("glitch");
 
-const intro =
-    "Analyzing...\n" +
-    "Input detected...\n" +
-    "Checking memory...\n" +
-    "Scanning timeline...\n\n";
+    const intro =
+        "Analyzing...\n" +
+        "Input detected...\n" +
+        "Checking memory...\n" +
+        "Scanning timeline...\n\n";
 
-typeText(output, intro, 20);
+    typeText(output, intro, 20);
 
     setTimeout(async () => {
         try {
@@ -124,9 +98,9 @@ typeText(output, intro, 20);
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-    message: input,
-    history: memory.slice(-3)
-})
+                    message: input,
+                    history: memory.slice(-3)
+                })
             });
 
             const data = await response.json();
@@ -134,18 +108,17 @@ typeText(output, intro, 20);
 
             document.body.classList.remove("glitch");
 
-           const finalText =
-    '<span style="color:#ff2e2e">SIGNAL ANALYSIS<br>INTERPRETATION:</span><br><br>' +
-    getTimeContext().replace(/\n/g, "<br>") +
-    getMemoryContext() +
-    reply.replace(/\n/g, "<br><br>");
+            const finalText =
+                '<span style="color:#ff2e2e">SIGNAL ANALYSIS<br>INTERPRETATION:</span><br><br>' +
+                getTimeContext().replace(/\n/g, "<br>") +
+                reply.replace(/\n/g, "<br><br>");
 
-output.innerHTML = finalText;
-            
+            output.innerHTML = finalText;
+
             const brainSignal = document.getElementById("brainSignal");
-if (brainSignal) {
-    brainSignal.classList.add("showBrain");
-}
+            if (brainSignal) {
+                brainSignal.classList.add("showBrain");
+            }
 
             memory.push({
                 question: input,
@@ -162,6 +135,7 @@ if (brainSignal) {
         }
     }, 1200);
 }
+
 // === LOADING SCREEN ===
 window.addEventListener("load", () => {
     const loadingScreen = document.getElementById("loadingScreen");
@@ -174,7 +148,6 @@ window.addEventListener("load", () => {
         setTimeout(() => {
             loadingScreen.style.display = "none";
 
-            // Bottom box standby
             const standbyMessages = [
                 "SYSTEM STANDBY\nAwaiting observation...",
                 "SYSTEM IDLE\nNo anomalies detected.",
@@ -186,14 +159,12 @@ window.addEventListener("load", () => {
 
             typeText(output, randomMsg, 30);
 
-            // 🔥 Top input typing
             inputBox.dataset.system = "true";
             typeText(inputBox, "Enter observation...", 40);
 
         }, 500);
     }, 900);
 
-    // 🔥 ADD YOUR LISTENERS HERE
     inputBox.addEventListener("focus", clearSystemText);
     inputBox.addEventListener("click", clearSystemText);
     inputBox.addEventListener("touchstart", clearSystemText);
