@@ -73,18 +73,20 @@ function getTimeContext() {
 function getMemoryContext() {
     if (memory.length === 0) return "";
 
+    const last = memory[memory.length - 1];
+
     const memoryLines = [
-        "Memory chain active.",
-        "Prior signals detected.",
-        "Pattern history available.",
-        "Related observations found.",
-        "Context fragments restored."
+        "Prior signal recovered.",
+        "Earlier observation resurfaced.",
+        "Memory fragment restored.",
+        "Previous pattern detected.",
+        "Context echo located."
     ];
 
     const randomLine =
         memoryLines[Math.floor(Math.random() * memoryLines.length)];
 
-    return `${randomLine}\n\n`;
+    return `${randomLine}<br>Previous observation: "${last.question}"<br><br>`;
 }
 
 
@@ -120,9 +122,9 @@ typeText(output, intro, 20);
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    message: input,
-                    
-                })
+    message: input,
+    history: memory.slice(-3)
+})
             });
 
             const data = await response.json();
@@ -133,10 +135,10 @@ typeText(output, intro, 20);
            const finalText =
     '<span style="color:#ff2e2e">SIGNAL ANALYSIS<br>INTERPRETATION:</span><br><br>' +
     getTimeContext().replace(/\n/g, "<br>") +
-    getMemoryContext().replace(/\n/g, "<br>") +
+    getMemoryContext() +
     reply.replace(/\n/g, "<br><br>");
 
-            output.innerHTML = finalText;
+output.innerHTML = finalText;
             
             const brainSignal = document.getElementById("brainSignal");
 if (brainSignal) {
