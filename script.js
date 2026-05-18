@@ -30,41 +30,57 @@ function typeText(element, text, speed = 20) {
     typing();
 }
 
-// === TIME CONTEXT ===
-function getTimeContext() {
-    const hour = new Date().getHours();
+// === CATEGORY DETECTION ===
+function categorizeObservation(text) {
+    const lower = text.toLowerCase();
 
-    const lines = {
-        late: [
-            "Low-cycle activity detected.",
-            "Sleep-window instability noted.",
-            "Late-hour perception drift possible."
-        ],
-        morning: [
-            "Morning-cycle input registered.",
-            "Daylight calibration active.",
-            "Early-cycle pattern scan complete."
-        ],
-        day: [
-            "Day-cycle input registered.",
-            "Ambient reality conditions stable.",
-            "Standard waking-hour scan active."
-        ],
-        night: [
-            "Night-cycle awareness active.",
-            "Low-light interpretation variance noted.",
-            "Evening-cycle pattern monitoring enabled."
-        ]
-    };
+    if (lower.includes("dream") || lower.includes("sleep")) {
+        return "Sleep-state anomaly";
+    }
 
-    let group;
+    if (lower.includes("deja vu") || lower.includes("again")) {
+        return "Memory loop";
+    }
 
-    if (hour < 5) group = lines.late;
-    else if (hour < 12) group = lines.morning;
-    else if (hour < 18) group = lines.day;
-    else group = lines.night;
+    if (
+        lower.includes("phone") ||
+        lower.includes("screen") ||
+        lower.includes("internet") ||
+        lower.includes("computer")
+    ) {
+        return "Technology signal";
+    }
 
-    return group[Math.floor(Math.random() * group.length)] + "\n";
+    if (
+        lower.includes("person") ||
+        lower.includes("people") ||
+        lower.includes("stranger") ||
+        lower.includes("someone")
+    ) {
+        return "Social pattern";
+    }
+
+    if (
+        lower.includes("weird") ||
+        lower.includes("strange") ||
+        lower.includes("off") ||
+        lower.includes("glitch")
+    ) {
+        return "Reality distortion";
+    }
+
+    return "Unclassified observation";
+}
+
+// === OBSERVATION INTRO ===
+function getObservationIntro(userText) {
+    const category = categorizeObservation(userText);
+
+    return `
+        Observation received.<br>
+        Analyzing pattern...<br>
+        Category: <strong>${category}</strong>.<br><br>
+    `;
 }
 
 // === MAIN FUNCTION ===
@@ -85,10 +101,10 @@ async function revealTruth() {
     document.body.classList.add("glitch");
 
     const intro =
-        "Analyzing...\n" +
-        "Input detected...\n" +
-        "Checking memory...\n" +
-        "Scanning timeline...\n\n";
+        "Observation received...\n" +
+        "Logging anomaly...\n" +
+        "Classifying signal...\n" +
+        "Preparing interpretation...\n\n";
 
     typeText(output, intro, 20);
 
@@ -110,7 +126,7 @@ async function revealTruth() {
 
             const finalText =
                 '<span style="color:#ff2e2e">SIGNAL ANALYSIS<br>INTERPRETATION:</span><br><br>' +
-                getTimeContext().replace(/\n/g, "<br>") +
+                getObservationIntro(input) +
                 reply.replace(/\n/g, "<br><br>");
 
             output.innerHTML = finalText;
@@ -170,6 +186,7 @@ window.addEventListener("load", () => {
     inputBox.addEventListener("touchstart", clearSystemText);
 });
 
+// === CLEAR PLACEHOLDER TEXT ===
 function clearSystemText() {
     const inputBox = document.getElementById("userInput");
 
