@@ -73,22 +73,24 @@ function getTimeContext() {
 function getMemoryContext() {
     if (memory.length === 0) return "";
 
-    const last = memory[memory.length - 1];
+    const recent = memory.slice(-3); // last 3 observations
 
     const memoryLines = [
-        "Prior signal recovered.",
-        "Earlier observation resurfaced.",
-        "Memory fragment restored.",
-        "Previous pattern detected.",
-        "Context echo located."
+        "Memory chain active.",
+        "Prior signals detected.",
+        "Pattern history available.",
+        "Context fragments restored."
     ];
 
     const randomLine =
         memoryLines[Math.floor(Math.random() * memoryLines.length)];
 
-    return `${randomLine}<br>Previous observation: "${last.question}"<br><br>`;
-}
+    const numbered = recent
+    .map((item, index) => `[${index + 1}] "${item.question}"`)
+    .join("<br>");
 
+    return `${randomLine}<br>${numbered}<br><br>`;
+}
 
 
 // === MAIN FUNCTION ===
