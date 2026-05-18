@@ -11,7 +11,7 @@ workflows:
       node: 22
       ios_signing:
         distribution_type: app_store
-        bundle_identifier: Com.bluecats3.signalfound
+        bundle_identifier: com.bluecats3.signalfound
 
     scripts:
       - name: Install dependencies
