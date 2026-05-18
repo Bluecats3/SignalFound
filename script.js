@@ -137,6 +137,11 @@ typeText(output, intro, 20);
     reply.replace(/\n/g, "<br><br>");
 
             output.innerHTML = finalText;
+            
+            const brainSignal = document.getElementById("brainSignal");
+if (brainSignal) {
+    brainSignal.classList.add("showBrain");
+}
 
             memory.push({
                 question: input,

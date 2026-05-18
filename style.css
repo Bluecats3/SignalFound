@@ -237,7 +237,39 @@ h2 {
 
 @keyframes poweredFlicker {
     0%, 100% { opacity: 0.6; }
-    48% { opacity: 0.6; }
+    48% { opacity: 0.6; }bra
     50% { opacity: 0.3; }
     52% { opacity: 0.6; }
+}
+
+.brain-bg {
+    position: fixed;
+    bottom: 38px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 170px;
+    opacity: 0;
+    pointer-events: none;
+    filter: grayscale(100%) contrast(120%);
+    transition: opacity 1.2s ease;
+    z-index: 1;
+}
+
+.brain-bg.showBrain {
+    opacity: 0.09;
+    animation: brainGlitch 3s infinite;
+}
+
+@keyframes brainGlitch {
+    0%, 95%, 100% {
+        transform: translateX(-50%);
+        filter: grayscale(100%) contrast(120%);
+    }
+    96% {
+        transform: translateX(-49%) translateY(-1px);
+        filter: grayscale(100%) contrast(160%);
+    }
+    97% {
+        transform: translateX(-51%) translateY(1px);
+    }
 }
