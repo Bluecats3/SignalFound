@@ -34,14 +34,21 @@ workflows:
           xcode-project use-profiles
 
       - name: Build iOS app
-        script: |
-          cd ios/App
-          xcodebuild -project App.xcodeproj \
-            -scheme App \
-            -configuration Release \
-            -sdk iphoneos \
-            -archivePath build/App.xcarchive \
-            archive
+  script: |
+    cd ios/App
+
+    xcodebuild -project App.xcodeproj \
+      -scheme App \
+      -configuration Release \
+      -sdk iphoneos \
+      -archivePath build/App.xcarchive \
+      archive
+
+    xcodebuild -exportArchive \
+      -archivePath build/App.xcarchive \
+      -exportOptionsPlist ../../exportOptions.plist \
+      -exportPath build
 
     artifacts:
-      - ios/App/build/App.xcarchive
+      artifacts:
+      - ios/App/build/*.ipa
