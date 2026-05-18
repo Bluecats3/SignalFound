@@ -3,8 +3,13 @@
 <plist version="1.0">
 <dict>
     <key>method</key>
-    <string>app-store</string>
+    <string>app-store-connect</string>
     <key>signingStyle</key>
-    <string>automatic</string>
+    <string>manual</string>
+    <key>provisioningProfiles</key>
+    <dict>
+        <key>Com.bluecats3.signalfound</key>
+        <string>SignalFoundProfile</string>
+    </dict>
 </dict>
 </plist>
