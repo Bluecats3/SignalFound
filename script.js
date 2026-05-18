@@ -73,25 +73,18 @@ function getTimeContext() {
 function getMemoryContext() {
     if (memory.length === 0) return "";
 
-    const recentMemory = memory.slice(-3);
-
-    const memoryLines = recentMemory
-        .map((item, i) => `Observation ${i + 1}: "${item.question}"`)
-        .join("\n");
-
-    const continuityLines = [
-        "Pattern history loaded.",
-        "Prior observations linked.",
+    const memoryLines = [
         "Memory chain active.",
-        "Timeline references retrieved.",
-        "Observation history synchronized.",
-        "Related signals recovered."
+        "Prior signals detected.",
+        "Pattern history available.",
+        "Related observations found.",
+        "Context fragments restored."
     ];
 
     const randomLine =
-        continuityLines[Math.floor(Math.random() * continuityLines.length)];
+        memoryLines[Math.floor(Math.random() * memoryLines.length)];
 
-    return `${randomLine}\n${memoryLines}\n\n`;
+    return `${randomLine}\n\n`;
 }
 
 
@@ -111,15 +104,15 @@ async function revealTruth() {
 
     if (!input) return;
 
-    document.body.classList.add("glitch");
+document.body.classList.add("glitch");
 
-    const intro =
-        "Analyzing...\n" +
-        "Input detected...\n" +
-        "Checking memory...\n" +
-        "Scanning timeline...\n\n";
+const intro =
+    "Analyzing...\n" +
+    "Input detected...\n" +
+    "Checking memory...\n" +
+    "Scanning timeline...\n\n";
 
-    typeText(output, intro, 20);
+typeText(output, intro, 20);
 
     setTimeout(async () => {
         try {
@@ -128,7 +121,7 @@ async function revealTruth() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     message: input,
-                    history: memory
+                    
                 })
             });
 
@@ -137,14 +130,13 @@ async function revealTruth() {
 
             document.body.classList.remove("glitch");
 
-            const finalText =
-                "SIGNAL ANALYSIS\n" +
-                "INTERPRETATION\n\n" +
-                getTimeContext() +
-                getMemoryContext() +
-                reply.replace(/\n/g, "\n\n");
+           const finalText =
+    '<span style="color:#ff2e2e">SIGNAL ANALYSIS<br>INTERPRETATION:</span><br><br>' +
+    getTimeContext().replace(/\n/g, "<br>") +
+    getMemoryContext().replace(/\n/g, "<br>") +
+    reply.replace(/\n/g, "<br><br>");
 
-            typeText(output, finalText, 20);
+            output.innerHTML = finalText;
 
             memory.push({
                 question: input,
