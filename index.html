@@ -1,63 +1,113 @@
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Signal Found</title>
+  <meta charset="UTF-8" />
 
-    <!-- Mobile scaling -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 
-    <!-- App identity -->
-    <meta name="application-name" content="SignalFound">
-    <meta name="theme-color" content="#000000">
+  <title>Signal Found</title>
 
-    <!-- iPhone app behavior -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="SignalFound">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap"
+    rel="stylesheet"
+  />
 
-    <!-- Icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/icon-180.png">
-    <link rel="icon" sizes="192x192" href="/icon-192.png">
-    <link rel="icon" sizes="512x512" href="/icon-512.png">
-    <link rel="shortcut icon" href="/icon-192.png">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap"
+    rel="stylesheet"
+  />
 
-    <!-- PWA -->
-    <link rel="manifest" href="/manifest.json">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="style.css">
+  <link
+    rel="stylesheet"
+    href="style.css"
+  />
 </head>
 
 <body>
-<div id="loadingScreen">
-    <div class="loadingBox">
-        <h1>Signal Found</h1>
-        <p>Initializing signal...</p>
+
+  <div class="container">
+
+    <h1 class="logoTitle">
+      SIGNAL<br>
+      FOUND
+    </h1>
+
+<br>
+
+
+    <div class="signalInstruction">
+      // LOCATE AND EXTRACT ALL SIGNAL WORDS
     </div>
-</div>
 
-<div class="powered">
-  Powered by OpenAI
-</div>
+    <div class="terminalDetails">
 
-<div class="container">
-    <h1>Signal Found</h1>
-    <p class="subtitle">Submit observations. The system will interpret.</p>
+      <div class="miniLog">
 
-    <textarea id="userInput" placeholder="Enter your findings..."></textarea>
+        <div class="signalData">
+          <span>Word Count:</span>
+          <span id="wordCount">6</span>
+        </div>
 
-    <br>
+        <div class="signalData">
+          <span id="signalHint">suspicious search detected</span>
+        </div>
 
-    <button onclick="revealTruth()">Analyze</button>
+      </div>
 
-    <h2>System Response</h2>
-    <div id="responseOutput"></div>
-</div>
+      <div class="signalGraph">
+        <div class="waveLine"></div>
+      </div>
 
-<script src="script.js"></script>
+    </div>
 
-<img src="brain.png" class="brain-bg" id="brainSignal">
+    <section id="wordSignalScreen" class="decoderPanel">
+      <div id="wordGrid" class="wordGrid"></div>
+    </section>
+
+    <button id="newSignalBtn" onclick="loadWordSignal()">
+      NEW SIGNAL
+    </button>
+
+    <h2 class="responseTitle">
+      SYSTEM RESPONSE
+    </h2>
+
+    <section class="responseScreen">
+      <div id="responseOutput">
+        <span class="waitingCursor">...</span>
+      </div>
+    </section>
+
+    <div class="bottomStatus">
+      <span>TRANSMISSION RESTORED</span>
+      <span id="decodedPhrase">>>> WAITING FOR SIGNAL <<<</span>
+      <span>ARCHIVE UPDATED</span>
+    </div>
+
+    <img
+      src="android-chrome-512x512.png"
+      class="ghostBrain"
+      alt=""
+    >
+
+  </div>
+
+  <audio id="signalSound" preload="auto">
+    <source src="signal-complete.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js"></script>
 
 </body>
+
 </html>
+
