@@ -672,6 +672,7 @@ button:hover {
     padding: 8px;
     
   }
+  }
 
   /* word grid */
 
@@ -720,7 +721,7 @@ button:hover {
   button {
     width: 100%;
     font-size: 1rem;
-  }
+  
 
 }
 

@@ -2243,7 +2243,7 @@ const letters = Array.from(
       tile.dataset.col = c;
 
       tile.addEventListener("pointerdown", startSelect);
-      tile.addEventListener("pointerenter", dragSelect);
+        tile.addEventListener("pointermove", dragSelect);
       
       grid.appendChild(tile);
     }
@@ -2261,15 +2261,28 @@ function placeWordOnPath(word, path, letters) {
 
 function startSelect(e) {
 e.preventDefault();
+
   isDragging = true;
   clearSelection();
   selectedTiles = [];
+  
+  e.target.setPointerCapture(e.pointerId);
   selectTile(e.target);
 }
 
 function dragSelect(e) {
   if (!isDragging) return;
-  selectTile(e.target);
+
+  e.preventDefault();
+
+  const tile = document.elementFromPoint(
+    e.clientX,
+    e.clientY
+  );
+
+  if (tile && tile.classList.contains("letterTile")) {
+    selectTile(tile);
+  }
 }
 
 function endSelect() {
@@ -2374,6 +2387,9 @@ function checkPuzzleComplete() {
     typeSystemResponse(currentPuzzle.phrase);
   }
 }
+
+document.addEventListener("pointerup", endSelect);
+document.addEventListener("pointercancel", endSelect);
 
 loadWordSignal();
 
