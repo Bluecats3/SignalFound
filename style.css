@@ -309,21 +309,23 @@ button:hover {
 
   justify-content: center;
 
-  gap: 14px;
+  gap: 10px;
 
   color: #fff200;
 
   font-family: 'Share Tech Mono', monospace;
 
-  font-size: 22px;
+  font-size: 14px;
 
-  letter-spacing: 6px;
+  letter-spacing: 4px;
 
   text-transform: uppercase;
 
-  margin-top: 6px;
+  margin-top: 4px;
 
-  margin-bottom: 10px;
+  margin-bottom: 6px;
+
+  line-height: 1;
 
   text-shadow: none;
 
@@ -615,14 +617,18 @@ font-smooth: never;
 
 .terminalDetails {
   display: grid;
-  grid-template-columns: 1fr 1.5fr 90px;
-  gap: 12px;
+
+  grid-template-columns: 1fr 1.5fr 72px;
+
+  gap: 8px;
+
   align-items: stretch;
 
   width: 100%;
+
   max-width: 560px;
 
-  margin: 10px auto 12px;
+  margin: 6px auto 8px;
 }
 
 .miniInfoBox,
@@ -636,11 +642,13 @@ font-smooth: never;
 
   font-family: 'Share Tech Mono', monospace;
 
-  padding: 12px 14px;
+  padding: 7px 10px;
 
-  font-size: 1rem;
+  font-size: 0.82rem;
 
   text-align: left;
+
+  min-height: 52px;
 }
 
 .miniInfoBox {
@@ -651,16 +659,19 @@ font-smooth: never;
 
   justify-content: space-between;
 
-  gap: 10px;
+  gap: 6px;
 }
 
 .miniInfoBox strong {
+
   color: #fff200;
+
   font-weight: 400;
 }
 
 .miniHintBox {
-  line-height: 1.4;
+
+  line-height: 1.25;
 }
 
 .scanBox {
@@ -679,20 +690,49 @@ font-smooth: never;
     repeating-linear-gradient(
       90deg,
       rgba(0,246,255,0.15) 0 1px,
-      transparent 1px 22px
+      transparent 1px 18px
     ),
 
     repeating-linear-gradient(
       0deg,
       rgba(0,246,255,0.15) 0 1px,
-      transparent 1px 22px
+      transparent 1px 18px
     );
 
-  min-height: 78px;
+  min-height: 52px;
 }
 
+.scanBox {
+  position: relative;
+  overflow: hidden;
+}
 
+.scanBox::after {
+  content: "";
 
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    165deg,
+    transparent 42%,
+    rgba(0,246,255,0.95) 48%,
+    rgba(0,246,255,0.95) 52%,
+    transparent 58%
+  );
+
+  animation: scanMove 2.4s linear infinite;
+}
+
+@keyframes scanMove {
+  0% {
+    transform: translateX(-90%);
+  }
+
+  100% {
+    transform: translateX(90%);
+  }
+}
 
 
 
