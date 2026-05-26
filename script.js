@@ -2339,9 +2339,22 @@ document.addEventListener("pointercancel", endSelect);
 
 function checkPuzzleComplete() {
   if (foundWords.length === currentPuzzle.words.length) {
+    const sound = document.getElementById("signalSound");
+
+    if (sound) {
+      sound.currentTime = 0;
+      sound.volume = 1;
+
+      sound.play().catch(error => {
+        console.log("Sound blocked or missing:", error);
+      });
+    }
+
     typeSystemResponse(currentPuzzle.phrase);
   }
 }
+  
+
 
 function typeSystemResponse(text) {
   if (typingInterval) {
@@ -2372,21 +2385,7 @@ function randomLetter() {
   ];
 }
 
-function checkPuzzleComplete() {
-  if (foundWords.length === currentPuzzle.words.length) {
-    const sound = document.getElementById("signalSound");
 
-    if (sound) {
-      sound.currentTime = 0;
-
-      sound.play().catch(error => {
-        console.log("Sound blocked or missing:", error);
-      });
-    }
-
-    typeSystemResponse(currentPuzzle.phrase);
-  }
-}
 
 document.addEventListener("pointerup", endSelect);
 document.addEventListener("pointercancel", endSelect);
