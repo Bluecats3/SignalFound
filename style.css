@@ -806,23 +806,28 @@ font-smooth: never;
 .miniInfoBox {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: flex-start;
+  gap: 4px;
   white-space: nowrap;
 }
 
 .miniInfoBox strong {
-  color: #fff200;
+  color: #00f6ff;
   font-weight: 400;
 }
 
 .miniHintBox {
-  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.2;
 }
 
 .scanBox {
   border: 2px solid #00f6ff;
   background:
-    linear-gradient(165deg, transparent 45%, #00f6ff 48%, #00f6ff 52%, transparent 55%),
+    
     repeating-linear-gradient(
       90deg,
       rgba(0, 246, 255, 0.15) 0 1px,
@@ -833,6 +838,9 @@ font-smooth: never;
       rgba(0, 246, 255, 0.15) 0 1px,
       transparent 1px 22px
     );
+  min-height: 46px;
+  position: relative;
+  overflow: hidden;
   min-height: 46px;
 }
 
