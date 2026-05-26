@@ -1,8 +1,3 @@
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,10 +21,7 @@
     rel="stylesheet"
   />
 
-  <link
-    rel="stylesheet"
-    href="style.css"
-  />
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -41,31 +33,22 @@
       FOUND
     </h1>
 
-
-
-
     <div class="signalInstruction">
       // LOCATE AND EXTRACT ALL SIGNAL WORDS
     </div>
 
     <div class="terminalDetails">
 
-      <div class="miniLog">
-
-        <div class="signalData">
-          <span>Word Count:</span>
-          <span id="wordCount">6</span>
-        </div>
-
-        <div class="signalData">
-          <span id="signalHint">suspicious search detected</span>
-        </div>
-
+      <div class="miniInfoBox">
+        <span>Word Count:</span>
+        <strong id="wordCount">0</strong>
       </div>
 
-      <div class="signalGraph">
-        <div class="waveLine"></div>
+      <div class="miniHintBox">
+        <span id="signalHint">Hint: waiting for signal.</span>
       </div>
+
+      <div class="scanBox"></div>
 
     </div>
 
@@ -87,12 +70,6 @@
       </div>
     </section>
 
-    <div class="bottomStatus">
-      <span>TRANSMISSION RESTORED</span>
-      <span id="decodedPhrase">>>> WAITING FOR SIGNAL <<<</span>
-      <span>ARCHIVE UPDATED</span>
-    </div>
-
     <img
       src="android-chrome-512x512.png"
       class="ghostBrain"
@@ -101,11 +78,10 @@
 
   </div>
 
- <audio id="signalSound" src="signal-complete.mp3" preload="auto"></audio>
+  <audio id="signalSound" src="signal-complete.mp3" preload="auto"></audio>
 
   <script src="script.js"></script>
 
 </body>
 
 </html>
-
