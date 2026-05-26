@@ -105,9 +105,9 @@ button:hover {
   -webkit-background-clip: text;
   background-clip: text;
 
-  filter:
-    drop-shadow(0 0 10px rgba(0,234,255,0.65))
-    drop-shadow(0 0 22px rgba(0,234,255,0.25));
+
+    filter: drop-shadow(0 0 4px rgba(0,234,255,0.45));
+    
 
   transform: scaleY(1.18);
 
@@ -155,12 +155,20 @@ button:hover {
   margin: 12px auto;
 
   box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  
 
 }
 
 .decoderPanel {
 
-  background: #020f0b;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(0,25,45,0.95) 0%,
+      rgba(0,0,0,1) 75%
+    );
 
   padding: 12px 16px;
 
@@ -382,7 +390,10 @@ button:hover {
 
   text-shadow: none;
 
-  -webkit-font-smoothing: antialiased;
+-webkit-font-smoothing: none;
+-moz-osx-font-smoothing: auto;
+text-rendering: optimizeSpeed;
+font-smooth: never;
 
   image-rendering: pixelated;
 }
@@ -455,6 +466,7 @@ button:hover {
   justify-items: center;
   user-select: none;
   touch-action: none;
+  overflow: visible;
 }
 
 .wordGrid div {
@@ -465,8 +477,13 @@ button:hover {
 
 
 
-.wordTile,
+/* ========================= */
+/* LETTERS */
+/* ========================= */
+
 .letterTile {
+  position: relative;
+
   width: 64px;
   height: 64px;
 
@@ -477,43 +494,75 @@ button:hover {
   background: transparent;
   border: none;
 
-  color: #ffe600;
+  color: #2e8fff;
+
   font-family: 'Share Tech Mono', monospace !important;
+
   font-size: 3rem !important;
 
-  font-weight: 400;
-  letter-spacing: 1px;
-  
-   pointer-events: auto;
-  user-select: none;
-  touch-action: none;
+  font-weight: 500;
+
+  text-shadow:
+    0 0 6px rgba(46,143,255,0.9),
+    0 0 14px rgba(46,143,255,0.45);
+
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    transform 0.12s ease,
+    box-shadow 0.18s ease;
+
+  overflow: hidden;
 }
+
+/* ========================= */
+/* YELLOW HIGHLIGHT */
+/* ========================= */
 
 .letterTile.selected,
-.wordTile.selected {
-  color: #00eaff !important;
+.letterTile.found {
 
-  text-shadow:
-    0 0 8px #ff3131,
-    0 0 16px #ff3131;
+  color: #dff6ff;
+
+  background:
+    rgba(255, 230, 0, 0.42);
+
+  box-shadow:
+    0 0 10px rgba(255,230,0,0.45),
+    inset 0 0 12px rgba(255,230,0,0.18);
+
+  backdrop-filter: blur(1px);
+
+  border-radius: 18px;
 }
 
-.letterTile.found,
-.wordTile.found {
-  color: #00eaff !important;
+/* smoother connected look */
 
-  text-shadow:
-    0 0 8px #ff3131,
-    0 0 18px #ff3131;
+.letterTile.selected::before,
+.letterTile.found::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,180,0.18),
+      rgba(255,230,0,0.05)
+    );
+
+  pointer-events: none;
 }
-
-
 
 
 
 .signalHint {
 
-  color: #fff200;
+  color: #00d9ff;
 
   font-family: 'Share Tech Mono', monospace;
 
@@ -617,11 +666,18 @@ button:hover {
   color: #00eaff;
 }
 
+.miniLog {
+  padding: 6px 8px;
+}
+
+
+
+
+
+
 
 
 @media (max-width: 600px) {
-
- 
 
   body {
     padding: 10px;
@@ -631,98 +687,137 @@ button:hover {
     width: 100%;
     max-width: 100%;
     padding: 12px;
-    padding-bottom: 40px;
+    padding-bottom: 24px;
     box-sizing: border-box;
   }
 
   .logoTitle {
-    font-size: 3rem;
+    font-size: 2.4rem;
     line-height: 0.9;
     letter-spacing: 2px;
     transform: scaleY(0.9);
+    margin-bottom: 8px;
   }
 
   .subtitle {
-    font-size: 1rem;
-    line-height: 1.4;
-    margin-bottom: 18px;
+    font-size: 0.8rem;
+    line-height: 1.3;
+    margin-bottom: 12px;
   }
 
-  /* top info area */
+  /* ========================= */
+  /* TOP INFO AREA */
+  /* ========================= */
 
-  .bottomStatus {
-    flex-direction: column;
-    text-align: center;
-    gap: 12px;
-  }
+  .terminalDetails {
+  grid-template-columns: 1fr 72px;
+  gap: 8px;
+  margin-bottom: 8px;
+  align-items: stretch;
+}
 
-  .signalBox,
+ .miniLog {
+  width: 100%;
+  padding: 6px 8px;
+}
+
   .signalGraph {
-    width: 100%;
+    width: 62px;
+    height: 62px;
+    margin: 0;
   }
 
-  .signalBox {
-    font-size: 1.1rem;
-    line-height: 1.5;
+  .signalHint {
+    font-size: 0.7rem;
+    line-height: 1.2;
+    margin-top: 4px;
   }
 
-  /* decoder panel */
+  /* ========================= */
+  /* DECODER PANEL */
+  /* ========================= */
 
   .decoderPanel {
-    padding: 8px;
-    
+    padding: 4px;
+    margin-top: 4px;
   }
+
+  /* ========================= */
+  /* WORD GRID */
+  /* ========================= */
+
+  .wordGrid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0px;
+    width: 100%;
+    max-width: 100%;
+    padding: 2px;
+    box-sizing: border-box;
+
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
   }
 
-  /* word grid */
-
-.wordGrid {
-  display: grid;
-  grid-template-columns: repeat(8, minmax(0, 1fr));
-  gap: 0px;
-  width: 100%;
-  max-width: 100%;
-  min-height: 500px;
-  alight-content: space-evenly;
-  padding: 2px;
-  box-sizing: border-box;
-  overflow: hidden;
-  touch-action: none;
-  -webkit-user-select: none;
-  user-select: none;
-}
-
-  /* tiles */
+  /* ========================= */
+  /* TILES */
+  /* ========================= */
 
   .wordGrid div,
-.wordTile,
-.letterTile {
-  width: auto;
+  .wordTile,
+  .letterTile {
+    aspect-ratio: 1 / 1;
+    min-width: 0;
+    min-height: 0;
+     width: 100%;
   height: auto;
-  aspect-ratio: 1 / 1;
-  min-width: 0;
-  min-height: 0;
-}
+  }
 
 .wordTile,
 .letterTile {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: clamp(1rem, 5vw, 1.6rem) !important;
+
+  font-size: clamp(1.3rem, 6vw, 2rem) !important;
+
+  min-width: 42px;
+  min-height: 42px;
+
   touch-action: none;
-  -webkit-user-select: none;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: auto;
+  text-rendering: optimizeSpeed;
+  font-smooth: never;
+  image-rendering: pixelated;
+
   user-select: none;
-  min-width: 44px;
-  min-height: 44px
 }
 
+  /* ========================= */
+  /* RESPONSE BOX */
+  /* ========================= */
+
+  .responseScreen {
+  margin-top: 8px;
+  min-height: 90px;
+  padding: 10px;
+}
+
+#responseOutput {
+  font-size: 1rem;
+}
+
+  /* ========================= */
+  /* BUTTON */
+  /* ========================= */
 
   button {
     width: 100%;
-    font-size: 1rem;
-  
-
+    font-size: 0.95rem;
+    padding: 12px;
+  }
 }
 
 
@@ -816,7 +911,7 @@ button:hover {
 .container {
   position: relative;
   z-index: 2;
-  padding-bottom: 260px;
+  padding-bottom: 40px;
 }
 
 .ghostBrain {

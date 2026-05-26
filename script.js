@@ -8,7 +8,27 @@ let selectedTiles = [];
 let isDragging = false;
 let typingInterval = null;
 
+let soundUnlocked = false;
 
+
+
+function unlockSound() {
+  const sound = document.getElementById("signalSound");
+
+  if (!sound || soundUnlocked) return;
+
+  sound.play()
+    .then(() => {
+      sound.pause();
+      sound.currentTime = 0;
+      soundUnlocked = true;
+    })
+    .catch(() => {
+      console.log("Sound waiting for user tap");
+    });
+}
+
+document.addEventListener("pointerdown", unlockSound, { once: true });
 
 setInterval(function () {
   const screen = document.getElementById("wordSignalScreen");
@@ -2259,15 +2279,20 @@ function placeWordOnPath(word, path, letters) {
   }
 }
 
+
+
 function startSelect(e) {
-e.preventDefault();
+  const tile = e.target.closest(".letterTile");
+
+  if (!tile || tile.classList.contains("found")) return;
+
+  e.preventDefault();
 
   isDragging = true;
   clearSelection();
   selectedTiles = [];
-  
-  e.target.setPointerCapture(e.pointerId);
-  selectTile(e.target);
+
+  selectTile(tile);
 }
 
 function dragSelect(e) {
@@ -2275,14 +2300,12 @@ function dragSelect(e) {
 
   e.preventDefault();
 
-  const tile = document.elementFromPoint(
-    e.clientX,
-    e.clientY
-  );
+  const element = document.elementFromPoint(e.clientX, e.clientY);
+  const tile = element?.closest(".letterTile");
 
-  if (tile && tile.classList.contains("letterTile")) {
-    selectTile(tile);
-  }
+  if (!tile || tile.classList.contains("found")) return;
+
+  selectTile(tile);
 }
 
 function endSelect() {
@@ -2334,22 +2357,24 @@ function clearSelection() {
     });
 }
 
-document.addEventListener("pointerup", endSelect);
-document.addEventListener("pointercancel", endSelect);
+
+
+function playSignalSound() {
+  const sound = document.getElementById("signalSound");
+
+  if (!sound) return;
+
+  sound.currentTime = 0;
+  sound.volume = 1;
+
+  sound.play().catch(error => {
+    console.log("Sound blocked or missing:", error);
+  });
+}
 
 function checkPuzzleComplete() {
   if (foundWords.length === currentPuzzle.words.length) {
-    const sound = document.getElementById("signalSound");
-
-    if (sound) {
-      sound.currentTime = 0;
-      sound.volume = 1;
-
-      sound.play().catch(error => {
-        console.log("Sound blocked or missing:", error);
-      });
-    }
-
+    playSignalSound();
     typeSystemResponse(currentPuzzle.phrase);
   }
 }
@@ -2387,6 +2412,8 @@ function randomLetter() {
 
 
 
+document.addEventListener("pointerdown", startSelect);
+document.addEventListener("pointermove", dragSelect);
 document.addEventListener("pointerup", endSelect);
 document.addEventListener("pointercancel", endSelect);
 
