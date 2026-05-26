@@ -435,20 +435,13 @@ button:hover {
 
 }
 
-/* ========================= */
-/* MOBILE */
-/* ========================= */
-
-@media (max-width: 600px) {
-
-  body {
-    padding: 14px;
-  }
 
 
 
 
-}
+
+
+
 
 /* ========================= */
 /* WORD GRID */
@@ -567,7 +560,7 @@ button:hover {
     opacity: 1;
     transform: translateX(0);
   }
-}
+
 
 
 
@@ -640,7 +633,7 @@ button:hover {
     box-sizing: border-box;
   }
 
-  h1 {
+  .logoTitle {
     font-size: 3rem;
     line-height: 0.9;
     letter-spacing: 2px;
@@ -679,47 +672,36 @@ button:hover {
 
   /* word grid */
 
-  .wordGrid {
-
-    display: grid;
-
-    /* CHANGE THIS NUMBER
-       to match your actual puzzle columns */
-
-    grid-template-columns: repeat(8, 1fr);
-
-    gap: 4px;
-
-    width: 100%;
-    max-width: 100%;
-
-    padding: 8px;
-
-    box-sizing: border-box;
-
-    overflow: hidden;
-
-  }
+.wordGrid {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 2px;
+  width: 100%;
+  max-width: 100%;
+  padding: 4px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
 
   /* tiles */
 
-  .letterTile {
+  .wordGrid div,
+.wordTile,
+.letterTile {
+  width: auto;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  min-width: 0;
+  min-height: 0;
+}
 
-    aspect-ratio: 1 / 1;
-
-    width: 100%;
-
-    min-width: 0;
-    min-height: 0;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    font-size: clamp(1.2rem, 5vw, 2rem);
-
-  }
+.wordTile,
+.letterTile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.2rem, 6vw, 2rem) !important;
+}
 
   button {
     width: 100%;
@@ -766,6 +748,10 @@ button:hover {
   color: #00eaff;
 
 }
+
+
+
+
 
 .signalData span:last-child {
   color: #00eaff;
@@ -875,3 +861,4 @@ button:hover {
   }
 
 }
+
