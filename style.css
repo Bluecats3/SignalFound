@@ -670,6 +670,7 @@ button:hover {
 
   .decoderPanel {
     padding: 8px;
+    
   }
 
   /* word grid */
@@ -680,6 +681,8 @@ button:hover {
   gap: 0px;
   width: 100%;
   max-width: 100%;
+  min-height: 500px;
+  alight-content: space-evenly;
   padding: 2px;
   box-sizing: border-box;
   overflow: hidden;
