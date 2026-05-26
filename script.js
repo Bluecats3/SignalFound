@@ -2260,6 +2260,7 @@ function placeWordOnPath(word, path, letters) {
 }
 
 function startSelect(e) {
+e.preventDefault();
   isDragging = true;
   clearSelection();
   selectedTiles = [];

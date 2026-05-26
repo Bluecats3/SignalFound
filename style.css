@@ -686,6 +686,9 @@ button:hover {
   padding: 2px;
   box-sizing: border-box;
   overflow: hidden;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
   /* tiles */
@@ -706,7 +709,13 @@ button:hover {
   align-items: center;
   justify-content: center;
   font-size: clamp(1rem, 5vw, 1.6rem) !important;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  min-width: 44px;
+  min-height: 44px
 }
+
 
   button {
     width: 100%;
