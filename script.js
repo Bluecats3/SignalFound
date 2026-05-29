@@ -189,7 +189,7 @@ const signalPuzzles = [
 
 
 {
-  phrase: "THE ROTATION OF THE EARTH REALLY MAKES MY DAY",
+  phrase: "THE ROTATION OF THE EARTH REALLY MAKES MY DAY.",
   HINT: "Planetary dad joke detected.",
 
   words: ["ROTATION", "EARTH", "REALLY", "MAKES", "DAY", "THE"],
@@ -205,7 +205,7 @@ const signalPuzzles = [
 },
 
 {
-  phrase: "YOUR PRINTER AND I ARE NOT ON THE SAME PAGE",
+  phrase: "YOUR PRINTER AND I ARE NOT ON THE SAME PAGE.",
   HINT: "Printer relationship status unclear.",
 
   words: ["PRINTER", "PAGE", "SAME", "YOUR", "NOT", "THE"],
@@ -221,7 +221,7 @@ const signalPuzzles = [
 },
 
 {
-  phrase: "I BROKE UP WITH YOUR CALCULATOR IT KEPT COUNTING MY MISTAKES",
+  phrase: "I BROKE UP WITH YOUR CALCULATOR, IT KEPT COUNTING MY MISTAKES.",
   HINT: "Emotional math error detected.",
 
   words: ["CALCULATOR", "COUNTING", "MISTAKES", "BROKE", "YOUR"],
@@ -340,48 +340,6 @@ const signalPuzzles = [
   }
 },
 
-{
-  phrase: "THE TIMELINE IS HELD WITH GLUE.",
-
-  HINT: "Reality repair detected.",
-
-  words: [
-    "TIMELINE",
-    "HELD",
-    "WITH",
-    "GLUE",
-    "THE",
-    "IS"
-  ],
-
-  paths: {
-
-    TIMELINE: [
-      [0,0],[0,1],[0,2],[0,3],
-      [0,4],[0,5],[0,6],[0,7]
-    ],
-
-    HELD: [
-      [2,0],[2,1],[2,2],[2,3]
-    ],
-
-    WITH: [
-      [4,4],[4,5],[4,6],[4,7]
-    ],
-
-    GLUE: [
-      [6,0],[6,1],[6,2],[6,3]
-    ],
-
-    THE: [
-      [8,0],[8,1],[8,2]
-    ],
-
-    IS: [
-      [9,6],[9,7]
-    ]
-  }
-},
 
 {
   phrase: "THE MAINFRAME FEARS CUSTOMER SERVICE.",
@@ -611,7 +569,7 @@ const signalPuzzles = [
   }
 },
 {
-  phrase: "SERVER NEEDS AN ENERGY DRINK.",
+  phrase: "THE SERVER NEEDS AN ENERGY DRINK.",
 
   HINT: "HINT: exhausted machine noises detected.",
 
@@ -652,7 +610,7 @@ const signalPuzzles = [
 
 
 {
-  phrase: "MACHINE KNOWS YOU SKIPPED LEG DAY.",
+  phrase: "THE MACHINE KNOWS YOU SKIPPED LEG DAY.",
 
   HINT: "HINT: weakness analysis complete.",
 
@@ -966,84 +924,8 @@ const signalPuzzles = [
   }
 },
 
-{
-  phrase: "THE UNIVERSE RUNS ON DUCT TAPE.",
 
-  HINT: "Cosmic repair job detected.",
 
-  words: [
-    "UNIVERSE",
-    "DUCT",
-    "TAPE",
-    "RUNS",
-    "THIS",
-    
-  ],
-
-  paths: {
-
-    UNIVERSE: [
-      [0,0],[0,1],[0,2],[0,3],
-      [0,4],[0,5],[0,6],[0,7]
-    ],
-
-    DUCT: [
-      [2,0],[2,1],[2,2],[2,3]
-    ],
-
-    TAPE: [
-      [4,0],[4,1],[4,2],[4,3]
-    ],
-
-    RUNS: [
-      [6,0],[6,1],[6,2],[6,3]
-    ],
-
-    THIS: [
-      [3,7],[4,7],[5,7],[6,7]]
-    
-
-   
-  }
-},
-
-{
-  phrase: "THE SERVERS DREAM IN PIXELS.",
-
-  HINT: "Machine sleep pattern detected.",
-
-  words: [
-    "SERVERS",
-    "PIXELS",
-    "DREAM",
-    "THE",
-    "IN"
-  ],
-
-  paths: {
-
-    SERVERS: [
-      [0,0],[0,1],[0,2],[0,3],
-      [0,4],[0,5],[0,6]
-    ],
-
-    PIXELS: [
-      [2,0],[2,1],[2,2],[2,3],[2,4],[2,5]
-    ],
-
-    DREAM: [
-      [4,0],[4,1],[4,2],[4,3],[4,4]
-    ],
-
-    THE: [
-      [6,2],[7,2],[8,2]
-    ],
-
-    IN: [
-      [6,7],[7,7]
-    ]
-  }
-},
 
 {
   phrase: "HUMAN SOCIETY NEEDS MORE BEANS.",
@@ -1083,45 +965,7 @@ const signalPuzzles = [
   }
 },
 
-{
-  phrase: "YOUR CHARGER HAS SEPARATION ANXIETY.",
 
-  HINT: "Power cord emotional distress detected.",
-
-  words: [
-    "SEPARATION",
-    "CHARGER",
-    "ANXIETY",
-    "YOUR",
-    "HAS"
-  ],
-
-  paths: {
-
-    SEPARATION: [
-      [0,0],[1,0],[2,0],[3,0],[4,0],
-      [5,0],[6,0],[7,0],[8,0],[9,0]
-    ],
-
-    CHARGER: [
-      [2,1],[2,2],[2,3],[2,4],
-      [2,5],[2,6],[2,7]
-    ],
-
-    ANXIETY: [
-      [4,1],[4,2],[4,3],[4,4],
-      [4,5],[4,6],[4,7]
-    ],
-
-    YOUR: [
-      [7,6],[8,6],[9,6],[10,6]
-    ],
-
-    HAS: [
-      [8,7],[9,7],[10,7]
-    ]
-  }
-},
 
 {
   phrase: "THE SUNSET LOOPED AGAIN TODAY.",
@@ -1160,80 +1004,11 @@ const signalPuzzles = [
   }
 },
 
-{
-  phrase: "THE SYSTEM DETECTED EMOTIONAL DAMAGE.",
-
-  HINT: "Feelings scan returned unstable.",
-
-  words: [
-    "EMOTIONAL",
-    "DETECTED",
-    "DAMAGE",
-    "SYSTEM",
-    "THE"
-  ],
-
-  paths: {
-
-    EMOTIONAL: [
-      [0,0],[0,1],[0,2],[0,3],
-      [0,4],[0,5],[0,6],[0,7],[0,8]
-    ],
-
-    DETECTED: [
-      [2,0],[2,1],[2,2],[2,3],
-      [2,4],[2,5],[2,6],[2,7]
-    ],
-
-    DAMAGE: [
-      [4,0],[4,1],[4,2],[4,3],[4,4],[4,5]
-    ],
-
-    SYSTEM: [
-      [6,0],[6,1],[6,2],[6,3],[6,4],[6,5]
-    ],
-
-    THE: [
-      [5,10],[6,10],[7,10]
-    ]
-  }
-},
 
 
 
-{
-  phrase: "THIS DIMENSION FEELS UNDERFUNDED.",
 
-  HINT: "Budget reality collapse detected.",
 
-  words: [
-    "UNDERFUNDED",
-    "DIMENSION",
-    "FEELS",
-    "THIS"
-  ],
-
-  paths: {
-
-    UNDERFUNDED: [
-      [0,6],[1,6],[2,6],[3,6],[4,6],
-      [5,6],[6,6],[7,6],[8,6],[9,6],[10,6]
-    ],
-
-    DIMENSION: [
-      [2,7],[3,7],[4,7],[5,7],
-      [6,7],[7,7],[8,7],[9,7],[10,7]
-    ],
-
-    FEELS: [
-      [4,0],[4,1],[4,2],[4,3],[4,4]
-    ],
-
-    THIS: [
-      [6,0],[6,1],[6,2],[6,3]
-    ]
-  }
-},
 
 {
   phrase: "I AM CONSIDERING A MUSTACHE.",
@@ -1806,7 +1581,7 @@ const signalPuzzles = [
 },
 
 {
-  phrase: "AMAZING YOU BROKE THE SAFE MODE.",
+  phrase: "AMAZING, YOU BROKE THE SAFE MODE.",
   HINT: "Safety protocols crying.",
 
   words: ["AMAZING", "YOU", "BROKE", "SAFE", "MODE"],
@@ -2056,40 +1831,40 @@ const signalPuzzles = [
 {
   phrase: "SOMETHING INSIDE THE USB IS CRYING.",
   HINT: "Tiny digital sobbing detected.",
-  words: ["SOMETHING", "INSIDE", "CRYING", "THE", "IS", "USB"],
+  words: ["SOMETHING", "INSIDE", "CRYING", "THE", "USB"],
   paths: {
     SOMETHING: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0]],
     INSIDE: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2]],
     CRYING: [[0,4],[1,4],[2,4],[3,4],[4,4],[5,4]],
     THE: [[9,0],[9,1],[9,2]],
-    USB: [[9,4],[9,5],[9,6]],
-    IS: [[5,7], [6,7]]
+    USB: [[9,4],[9,5],[9,6]]
+    
   }
 },
 
 {
   phrase: "THE FIREWALL IS FEELING PARANOID.",
   HINT: "Security has trust issues.",
-  words: ["FIREWALL", "FEELING", "PARANOID", "THE", "IS"],
+  words: ["FIREWALL", "FEELING", "PARANOID", "THE"],
   paths: {
     FIREWALL: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]],
     FEELING: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2]],
     PARANOID: [[0,4],[1,4],[2,4],[3,4],[4,4],[5,4],[6,4],[7,4]],
-    THE: [[9,0],[9,1],[9,2]],
-    IS: [[9,6],[10,6]]
+    THE: [[9,0],[9,1],[9,2]]
+   
   }
 },
 
 {
   phrase: "SOMETHING HERE IS LEAKING ELECTRICITY!",
   HINT: "Unsafe sparkle detected.",
-  words: ["SOMETHING", "ELECTRICITY", "LEAKING", "HERE", "IS"],
+  words: ["SOMETHING", "ELECTRICITY", "LEAKING", "HERE"],
   paths: {
     SOMETHING: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0]],
     ELECTRICITY: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[7,2],[8,2],[9,2],[10,2]],
     LEAKING: [[0,4],[1,4],[2,4],[3,4],[4,4],[5,4],[6,4]],
-    HERE: [[8,4],[8,5],[8,6],[8,7]],
-    IS: [[10,5],[10,6]]
+    HERE: [[8,4],[8,5],[8,6],[8,7]]
+    
   }
 },
 
@@ -2123,28 +1898,28 @@ const signalPuzzles = [
 {
   phrase: "THE BLUETOOTH IS AFRAID OF THUNDER.",
   HINT: "Wireless fear detected.",
-  words: ["BLUETOOTH", "THUNDER", "AFRAID", "THE", "IS" ],
+  words: ["BLUETOOTH", "THUNDER", "AFRAID", "THE"],
   paths: {
     BLUETOOTH: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0]],
     THUNDER: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2]],
     AFRAID: [[0,4],[1,4],[2,4],[3,4],[4,4],[5,4]],
-    THE: [[9,0],[9,1],[9,2]],
+    THE: [[9,0],[9,1],[9,2]]
     
-    IS: [[10,5],[10,6]]
+    
   }
 },
 
 {
   phrase: "THE MAINFRAME IS ASKING WEIRD QUESTIONS...",
   HINT: "Old computer got curious.",
-  words: ["MAINFRAME", "QUESTIONS", "ASKING", "WEIRD", "THE", "IS"],
+  words: ["MAINFRAME", "QUESTIONS", "ASKING", "WEIRD", "THE"],
   paths: {
     MAINFRAME: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0]],
     QUESTIONS: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[7,2],[8,2]],
     ASKING: [[0,4],[1,4],[2,4],[3,4],[4,4],[5,4]],
     WEIRD: [[0,6],[1,6],[2,6],[3,6],[4,6]],
-    THE: [[9,0],[9,1],[9,2]],
-    IS: [[10,6],[10,7]]
+    THE: [[9,0],[9,1],[9,2]]
+    
   }
 },
 
