@@ -28,6 +28,36 @@ body {
 
 }
 
+.startScreen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  background: #050505;
+  color: #ffe600;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 24px;
+  text-align: center;
+
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.startScreen h2 {
+  color: #00eaff;
+  letter-spacing: 3px;
+}
+
+.startScreen p {
+  max-width: 320px;
+  line-height: 1.4;
+}
+
+
 .container {
 
   background: #050505;
@@ -618,7 +648,7 @@ font-smooth: never;
 .terminalDetails {
   display: grid;
 
-  grid-template-columns: 1fr 1.5fr 58px;
+  grid-template-columns: 110px 1fr 90px;
 
   gap: 6px;
 
@@ -653,12 +683,11 @@ font-smooth: never;
 
 .miniInfoBox {
   display: flex;
-
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 
-  justify-content: flex-start;
-
-  gap: 4px;
+  text-align: center;
 }
 
 .miniInfoBox strong {
@@ -669,77 +698,83 @@ font-smooth: never;
 }
 
 .miniHintBox {
-
   display: flex;
-
-  align-items: center;
+  flex-direction: column;
 
   justify-content: center;
+  align-items: center;
 
   text-align: center;
 
   line-height: 1.2;
 }
 
-.scanBox {
+.miniHintBox .boxLabel {
+  margin-bottom: 4px;
+}
+
+.scoreBox {
 
   border: 2px solid #00f6ff;
 
-  background:
-    linear-gradient(
-      165deg,
-      transparent 45%,
-      #00f6ff 48%,
-      #00f6ff 52%,
-      transparent 55%
-    ),
+  background: rgba(0,255,120,0.05);
 
-    repeating-linear-gradient(
-      90deg,
-      rgba(0,246,255,0.15) 0 1px,
-      transparent 1px 18px
-    ),
+  color: #ffe600;
 
-    repeating-linear-gradient(
-      0deg,
-      rgba(0,246,255,0.15) 0 1px,
-      transparent 1px 18px
-    );
+  font-family: 'Share Tech Mono', monospace;
 
-  min-height: 42px;
+  min-height: 52px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  text-align: center;
+
+  box-sizing: border-box;
 }
 
-.scanBox {
-  position: relative;
-  overflow: hidden;
+.boxLabel,
+.scoreLabel {
+  color: #ffe600;
+  font-size: 0.80rem;
+  letter-spacing: 1px;
 }
 
-.scanBox::after {
-  content: "";
 
-  position: absolute;
-  inset: 0;
-
-  background: linear-gradient(
-    165deg,
-    transparent 42%,
-    rgba(0,246,255,0.95) 48%,
-    rgba(0,246,255,0.95) 52%,
-    transparent 58%
-  );
-
-  animation: scanMove 2.4s linear infinite;
+#wordCount,
+#scoreDisplay {
+ animation: numberFlash 1.8s steps(2) infinite;
 }
 
-@keyframes scanMove {
-  0% {
-    transform: translateX(-90%);
+
+#wordCount,
+#signalHint,
+#scoreDisplay {
+  color: #ffe600;
+  font-size: 0.72rem;
+  font-weight: 400;
+  text-shadow: none;
+}
+
+@keyframes numberFlash {
+  0%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 6px #ffe600;
   }
 
-  100% {
-    transform: translateX(90%);
+  50% {
+    opacity: 0.35;
+    text-shadow: none;
   }
 }
+
+
+
 
 
 
@@ -780,7 +815,7 @@ font-smooth: never;
 
 .terminalDetails {
   display: grid;
-  grid-template-columns: 1fr 1.5fr 58px;
+  grid-template-columns: 95px 1fr 85px;
   gap: 6px;
   align-items: stretch;
   margin: 4px 0 6px;
@@ -792,7 +827,7 @@ font-smooth: never;
 
   background: rgba(0,255,120,0.05);
 
-  color: #00f6ff;
+  color: #ffe600;
 
   font-family: 'Share Tech Mono', monospace;
 
@@ -805,43 +840,90 @@ font-smooth: never;
 
 .miniInfoBox {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-start;
-  gap: 4px;
-  white-space: nowrap;
+  text-align: center;
 }
 
 .miniInfoBox strong {
-  color: #00f6ff;
+  color: #ffe600;
   font-weight: 400;
 }
 
+
 .miniHintBox {
   display: flex;
+  flex-direction: column;
+
+  justify-content: flex-start;
   align-items: center;
-  justify-content: center;
+
   text-align: center;
-  line-height: 1.2;
+
+  padding-top: 4px;
 }
 
-.scanBox {
-  border: 2px solid #00f6ff;
-  background:
-    
-    repeating-linear-gradient(
-      90deg,
-      rgba(0, 246, 255, 0.15) 0 1px,
-      transparent 1px 22px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      rgba(0, 246, 255, 0.15) 0 1px,
-      transparent 1px 22px
-    );
-  min-height: 46px;
+#signalHint {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.miniHintBox .boxLabel {
+  display: block;
+  width: 100%;
+
+  margin-bottom: 4px;
+
+  text-align: center;
+}
+
+
+.scoreBox {
   position: relative;
-  overflow: hidden;
-  min-height: 46px;
+
+  border: 2px solid #00f6ff;
+  background: rgba(0,255,120,0.05);
+  color: #ffe600;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.72rem;
+  min-height: 52px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.scoreLabel {
+  color: #ffe600;
+  font-size: 0.80rem;
+  letter-spacing: 1px;
+}
+
+#scoreDisplay {
+  color: #ffe600;
+  font-size: 0.72rem;
+  font-weight: 400;
+  text-shadow: none;
+  margin-top: 4px;
+}
+
+#pointsFlash {
+  position: absolute;
+  top: 8px;
+  right: 6px;
+
+  color: #ffe600;
+  font-size: 0.7rem;
+  font-weight: bold;
+
+  opacity: 0;
+  pointer-events: none;
 }
 
   /* ========================= */

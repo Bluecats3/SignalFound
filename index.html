@@ -26,13 +26,24 @@
 
 <body>
 
+  <div id="startScreen" class="startScreen">
+    <h2>SIGNAL FOUND</h2>
+    <p>Find all hidden signal words in the grid.</p>
+    <p>Drag across letters to decode each word.</p>
+    <p>Solve the full signal to earn points.</p>
+    <button onclick="startGame()">START SIGNAL</button>
+  </div>
+
   <div class="container">
 
     <h1 class="logoTitle">
-      SIGNAL <br>
-      FOUND
-      
-    </h1>
+  SIGNAL<br>
+  FOUND
+</h1>
+
+    <p class="subtitle">
+      Decode hidden transmissions and reconstruct the signal.
+    </p>
 
     <div class="signalInstruction">
       // LOCATE AND EXTRACT ALL SIGNAL WORDS
@@ -41,15 +52,20 @@
     <div class="terminalDetails">
 
       <div class="miniInfoBox">
-        <span>Word Count:</span>
+        <span class="boxLabel">WORDS REMAINING:</span>
         <strong id="wordCount">0</strong>
       </div>
 
       <div class="miniHintBox">
-        <span id="signalHint">Hint: waiting for signal.</span>
+        <span class="boxLabel">HINT:</span>
+        <span id="signalHint">waiting for signal.</span>
       </div>
 
-      <div class="scanBox"></div>
+      <div class="scoreBox">
+        <div class="scoreLabel">POINTS:</div>
+        <div id="scoreDisplay">0</div>
+        <div id="pointsFlash"></div>
+      </div>
 
     </div>
 
@@ -62,7 +78,7 @@
     </button>
 
     <h2 class="responseTitle">
-     SYSTEM RESPONSE
+      SYSTEM RESPONSE
     </h2>
 
     <section class="responseScreen">
@@ -79,7 +95,11 @@
 
   </div>
 
-  <audio id="signalSound" src="signal-complete.mp3" preload="auto"></audio>
+  <audio
+    id="signalSound"
+    src="signal-complete.mp3"
+    preload="auto">
+  </audio>
 
   <script src="script.js"></script>
 
