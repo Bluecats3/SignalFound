@@ -385,7 +385,7 @@ const signalPuzzles = [
   HINT: "Unusual internet behavior detected.",
 
   words: [
-    "CONCERNED",
+    
     "WIFI",
 
     "THE",
@@ -430,6 +430,8 @@ const signalPuzzles = [
     ]
   }
 },
+
+
 
 {
   phrase: "THOSE DISHES WILL NOT WASH THEMSELVES.",
@@ -1269,7 +1271,7 @@ const signalPuzzles = [
 },
 
 {
-  phrase: "DID YOU JUST SAY OOPS BEFORE YOU FELL?",
+  phrase: "DID YOU JUST SAY \"OOPS\" BEFORE YOU FELL?",
   HINT: "Gravity event confirmed.",
 
   words: ["BEFORE","OOPS","FELL","JUST","YOU"],
