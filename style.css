@@ -43,6 +43,7 @@ body {
 
   padding: 24px;
   text-align: center;
+  overflow: hidden;
 
   font-family: 'Share Tech Mono', monospace;
 }
@@ -57,13 +58,111 @@ body {
   line-height: 1.4;
 }
 
+.startScreen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+background:
+  url("brain.png")
+  center top / 220px no-repeat;
+
+  opacity: 0.08;
+
+  pointer-events: none;
+}
+
+.startScreen > * {
+  position: relative;
+  z-index: 2;
+}
+
+
+#infoBtn {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+
+  width: auto;
+  height: auto;
+
+  padding: 0;
+  margin: 0;
+
+  background: transparent;
+  color: #ffe600;
+
+  border: none !important;
+  box-shadow: none !important;
+
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1.6rem;
+
+  cursor: pointer;
+  z-index: 10000;
+}
+
+#infoBtn:hover {
+  background: transparent;
+  color: #00eaff;
+}
+
+.instructionScreen {
+  position: fixed;
+  inset: 0;
+
+  display: none;
+
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(5,5,5,0.96);
+
+  z-index: 99999;
+}
+
+.instructionBox {
+  position: relative;
+
+  width: 90%;
+  max-width: 420px;
+
+  padding: 24px;
+
+  text-align: center;
+
+  color: #ffe600;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.closeInfoBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  background: transparent;
+
+  border: none !important;
+  box-shadow: none !important;
+
+  width: auto;
+  height: auto;
+
+  padding: 0;
+  margin: 0;
+
+  color: #ffe600;
+  font-size: 1.3rem;
+}
+.closeInfoBtn:hover {
+  background: transparent;
+  color: #00eaff;
+}
+
 
 .container {
-
-  background: #050505;
-
+  background: #000;
   padding: 6px 18px 18px;
-
 }
 
 button {
@@ -786,6 +885,23 @@ font-smooth: never;
   body {
     padding: 10px;
   }
+
+#infoBtn {
+  width: 32px;
+  height: 32px;
+  font-size: 1rem;
+}
+
+.instructionBox {
+  width: 92%;
+  padding: 18px;
+}
+
+.instructionBox h2 {
+  font-size: 2rem;
+}
+
+
 
   .container {
     width: 100%;

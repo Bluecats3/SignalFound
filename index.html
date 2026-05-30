@@ -27,19 +27,47 @@
 <body>
 
   <div id="startScreen" class="startScreen">
-    <h2>SIGNAL FOUND</h2>
-    <p>Find all hidden signal words in the grid.</p>
-    <p>Drag across letters to decode each word.</p>
-    <p>Solve the full signal to earn points.</p>
+
+    <h2>Transmission Log</h2>
+
+    <p>We are receiving messages from a sentient processor.</p>
+    <p>Each message must be decoded from a screen of text.</p>
+    <p>Drag across the hidden words to decode each terminal communication.</p>
+    <p>The system has provided a word count and a hint for assistance.</p>
+    <p>A point system has also been supplied; however, we are still trying to understand the purpose.</p>
+
     <button onclick="startGame()">START SIGNAL</button>
+
   </div>
 
   <div class="container">
 
+    <button id="infoBtn" onclick="showInstructions()">?</button>
+
+    <div id="instructionScreen" class="instructionScreen">
+
+      <div class="instructionBox">
+
+        <button class="closeInfoBtn" onclick="closeInstructions()">
+          X
+        </button>
+
+        <h2>SIGNAL FOUND</h2>
+
+        <p>We are receiving messages from a sentient processor.</p>
+        <p>Each message must be decoded from a screen of text.</p>
+        <p>Drag across the hidden words to decode each terminal communication.</p>
+        <p>The system has provided a word count and a hint for assistance.</p>
+        <p>A point system has also been supplied; however, we are still trying to understand the purpose.</p>
+
+      </div>
+
+    </div>
+
     <h1 class="logoTitle">
-  SIGNAL<br>
-  FOUND
-</h1>
+      SIGNAL<br>
+      FOUND
+    </h1>
 
     <p class="subtitle">
       Decode hidden transmissions and reconstruct the signal.
