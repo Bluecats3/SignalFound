@@ -345,6 +345,11 @@ button:hover {
   align-items: stretch;
 }
 
+.miniInfoBox,
+.scoreBox,
+.newSignalBtn {
+  height: 72px;
+}
 .newSignalBtn {
   width: 100%;
   height: 100%;
@@ -755,8 +760,9 @@ button:hover {
   display: block;
 
   font-family: 'Share Tech Mono', monospace;
-  font-size: 18px;
+  font-size: 15px;
   line-height: 1.1;
+  transform: translateX(-12px);
 
   white-space: pre;
   text-align: center;
@@ -850,7 +856,7 @@ button:hover {
 
 .newSignalBtn {
 
-  height: 52px;
+  height: 72px;
 
   padding: 0;
 
