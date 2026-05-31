@@ -189,6 +189,8 @@ background:
   position: relative;
   z-index: 2;
   padding: 6px 18px 40px;
+  min-height: 100dvh;
+  padding-bottom: 90px;
 }
 
 button {
@@ -760,14 +762,14 @@ button:hover {
   display: block;
 
   font-family: 'Share Tech Mono', monospace;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.1;
-  transform: translateX(-12px);
+  transform: translateX(6px);
 
   white-space: pre;
   text-align: center;
 
-  margin: 12px auto 0;
+  margin: 14px auto 0;
 
   animation: duckWiggle 0.7s infinite;
 }
@@ -803,7 +805,7 @@ button:hover {
 
   body {
     padding: 10px;
-    position: fixed;
+    position: static;
     width: 100%;
   }
 
