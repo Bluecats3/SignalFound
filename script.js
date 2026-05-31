@@ -2002,13 +2002,16 @@ function checkPuzzleComplete() {
       if (reachedMilestone) {
 
        signalDisplay.innerHTML =
-  `<div class="duckWiggle">` +
-  `&lt;(o )__  &lt;(o )__  &lt;(o )__<br>` +
-  `     ( ._/    ( ._/    ( ._/` +
-  `</div><br><bf>` +
-  `+${pointsEarned} POINTS<br>` +
-  `DUCK PARADE AUTHORIZED`;
-          
+  `<div class="pointText">
+    +${pointsEarned} POINTS<br>
+    DUCK PARADE<br>
+    AUTHORIZED
+  </div>
+   <pre class="duckWiggle">
+   &lt;(o )__  &lt;(o )__  &lt;(o )__<br>
+        ( ._/    ( ._/    ( ._/ 
+
+        </pre>`;  
           
   setTimeout(() => {
     loadWordSignal();
