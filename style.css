@@ -28,10 +28,9 @@ body {
 
 }
 
-.gameScreen,
-.container,
-#wordGrid {
-  overscroll-behavior: none;
+#wordGrid,
+.wordGrid,
+.letterTile {
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
@@ -795,12 +794,11 @@ button:hover {
 
 
 @media (max-width: 600px) {
-
   html,
   body {
-    height: 100%;
-    overflow-x: hidden
-    overscroll-behavior: none;
+    min-height: 100%;
+    overflow-x: hidden;
+    overscroll-behavior-y: contain;
   }
 
   body {
@@ -808,6 +806,12 @@ button:hover {
     position: static;
     width: 100%;
   }
+
+  .container {
+    min-height: 100dvh;
+    padding-bottom: 90px;
+  }
+}
 
 #infoBtn {
   right: -24px;
