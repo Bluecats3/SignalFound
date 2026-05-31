@@ -494,7 +494,9 @@ button:hover {
 /* ========================= */
 
 #signalDisplay {
-
+  
+  overflow: hidden;
+  flex-direction: column;
   color: #ffe600;
 
   font-family: 'Share Tech Mono', monospace;
@@ -528,26 +530,7 @@ button:hover {
 
 
 
-.duckWiggle {
-  display: inline-block;
-   position: relative;
-  left: -35px;
-  animation: duckWiggle 0.45s steps(2) infinite;
-}
 
-@keyframes duckWiggle {
-  0% {
-    transform: translateX(0);
-  }
-
-  50% {
-    transform: translateX(4px);
-  }
-
-  100% {
-    transform: translateX(0);
-  }
-}
 
 
 
@@ -778,9 +761,12 @@ button:hover {
 
 .duckWiggle {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 20px;
-  line-height: 1;
+  font-size: 18px;
+  line-height: 1.1;
   white-space: pre;
+  margin: 8px auto 0;
+  max-width: 100%;
+  overflow: hidden;
   text-align: center;
   animation: duckWiggle 0.7s infinite;
 }
