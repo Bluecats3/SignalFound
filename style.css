@@ -731,16 +731,15 @@ button:hover {
   color: #00eaff;
   font-size: 0.80rem;
   letter-spacing: 1px;
+
   text-shadow:
     0 0 4px rgba(0,234,255,0.6);
 }
 
 
-#wordCount,
 #scoreDisplay {
- animation: numberFlash 1.8s steps(2) infinite;
+  margin-top: 4px;
 }
-
 
 #wordCount,
 #scoreDisplay {
@@ -748,6 +747,8 @@ button:hover {
   font-size: 0.72rem;
   font-weight: 400;
   text-shadow: none;
+  
+  animation: numberFlash 1.8s steps(2) infinite;
 }
 
 @keyframes numberFlash {
@@ -866,11 +867,6 @@ button:hover {
   text-align: center;
 }
 
-.scoreLabel {
-  color: #ffe600;
-  font-size: 0.80rem;
-  letter-spacing: 1px;
-}
 
 #scoreDisplay {
   color: #ffe600;
@@ -975,15 +971,6 @@ button:hover {
   }
 }
 
-
-
-
-
-.container {
-  position: relative;
-  z-index: 2;
-  padding-bottom: 40px;
-}
 
 .ghostBrain {
   display: block;
