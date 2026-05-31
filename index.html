@@ -16,6 +16,12 @@
     rel="stylesheet"
   />
 
+<link
+  href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+  rel="stylesheet"
+/>
+
+
   <link
     href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap"
     rel="stylesheet"
@@ -26,25 +32,16 @@
 
 <body>
 
-  <div id="startScreen" class="startScreen">
-
-    <h2>Transmission Log</h2>
-
-    <p>We are receiving messages from a sentient processor.</p>
-    <p>Each message must be decoded from a screen of text.</p>
-    <p>Drag across the hidden words to decode each terminal communication.</p>
-    <p>The system has provided a word count and a hint for assistance.</p>
-    <p>A point system has also been supplied; however, we are still trying to understand the purpose.</p>
-
-    <button onclick="startGame()">START SIGNAL</button>
-
-  </div>
+  
 
   <div class="container">
-
+  
+    <div id="duckParade" class="duckParade"></div>
     <button id="infoBtn" onclick="showInstructions()">?</button>
 
     <div id="instructionScreen" class="instructionScreen">
+    
+    
 
       <div class="instructionBox">
 
@@ -63,6 +60,18 @@
       </div>
 
     </div>
+
+
+    
+    
+  
+    
+
+
+
+
+
+
 
     <h1 class="logoTitle">
       SIGNAL<br>
@@ -121,7 +130,7 @@
       alt=""
     >
 
-  </div>
+  </div> <!-- closes container -->
 
   <audio
     id="signalSound"

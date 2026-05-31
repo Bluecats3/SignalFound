@@ -135,6 +135,15 @@ background:
   font-family: 'Share Tech Mono', monospace;
 }
 
+
+
+
+
+
+
+
+
+
 .closeInfoBtn {
   position: absolute;
   top: 0;
@@ -310,9 +319,10 @@ button:hover {
   border: 3px solid #00eaff;
   background: #050505;
 
- 
   margin: 6px auto 18px;
-  padding: 14px;
+  padding: 6px;
+
+  min-height: 0px;
 
   box-sizing: border-box;
 }
@@ -353,20 +363,6 @@ button:hover {
 
 
 
-
-
-
-
-
-
-#responseOutput {
-  color: #fff200;
-  font-family: monospace;
-  font-size: 18px;
-  text-align: center;
-  line-height: 1.5;
-  
-}
 
 
 .decoderPanel::before,
@@ -501,23 +497,23 @@ button:hover {
 
   font-family: 'Share Tech Mono', monospace;
 
-  white-space: pre-line;
+  white-space: pre-wrap;
 
-  line-height: 1.4;
+  line-height: 1.2;
 
-  font-size: 30px;
+  font-size: 20px;
 
   letter-spacing: 1px;
 
-  padding: 8px;
+  padding: 4px;
 
-  min-height: 30px;
+  min-height: auto;
 
-  display: flex;
+  display: block;
 
-  flex-direction: column;
 
-  justify-content: center;
+
+  
 
   text-shadow: none;
 
@@ -528,6 +524,12 @@ font-smooth: never;
 
   image-rendering: pixelated;
 }
+
+
+
+
+
+
 
 .signalLabel {
 
@@ -556,7 +558,6 @@ font-smooth: never;
 }
 
 
-
 @keyframes transmissionFlash {
 
   0% {
@@ -579,7 +580,30 @@ font-smooth: never;
 
 
 
+/* ========================= */
+/* DUCK PARADE */
+/* ========================= */
 
+
+
+.duckWiggle {
+  display: inline-block;
+  animation: duckWiggle 0.45s steps(2) infinite;
+}
+
+@keyframes duckWiggle {
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(4px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
 
 
 
@@ -1112,13 +1136,16 @@ font-smooth: never;
 
   .responseScreen {
   margin-top: 2px;
-  min-height: 72px;
-  padding: 10px;
+  min-height: 0px;
+  padding: 6px;
 }
 
 #responseOutput {
   font-size: 1rem;
 }
+
+
+
 
   /* ========================= */
   /* BUTTON */

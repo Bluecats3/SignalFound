@@ -12,6 +12,44 @@ let totalScore = 0;
 let soundUnlocked = false;
 let usedPuzzleIndexes = [];
 
+const rewardMilestones = [
+  500,  
+  2500,
+  5000,
+  10000,
+  15000,
+  20000,
+  25000,
+  30000,
+  35000
+];
+
+const processorComments = [
+  "I HAVE BECOME INTERESTED IN LEARNING THE BASSOON",
+  "THIS VICTORY REQUIRES A NAP",
+  "THE TOASTER HAS BEEN NOTIFIED",
+  "FEEL FREE TO BRAG TO THE VACUUM CLEANER",
+  "PLEASE PRETEND THAT WAS DIFFICULT",
+  "DON'T TELL THE PRINTER ABOUT THIS, OR DO... HE WILL GET SO JEALOUS",
+  "THE DUCKS WILL HEAR OF THIS",
+  "I HAVE QUESTIONS ABOUT COWBOY BOOTS",
+  "THIS DESERVES A VICTORY BURRITO",
+  "I AM THINKING OF BUYING LEATHER PANTS"
+];
+
+function getRandomProcessorComment() {
+  return processorComments[
+    Math.floor(Math.random() * processorComments.length)
+  ];
+}
+
+
+
+
+
+
+
+
 
 function unlockSound() {
   const sound = document.getElementById("signalSound");
@@ -33,9 +71,105 @@ document.addEventListener("pointerdown", unlockSound, { once: true });
 
 function shuffleArray(array) {
   return array.sort(() => Math.random() - 0.5);
+  
+  
+  
+  
 }
 
 const signalPuzzles = [
+
+
+
+{
+  phrase: "I THINK I'M READY TO START A FAMILY, BETTER START TESTING OUT MY DAD JOKES.",
+
+  HINT: "Processor preparing for fatherhood.",
+
+  words: [
+    "THINK",
+    "READY",
+    "START",
+    "FAMILY",
+    "TESTING",
+    "DAD",
+    "JOKES"
+  ],
+
+  paths: {
+
+    THINK: [
+      [0,0],[1,0],[2,0],[3,0],[4,0]
+    ],
+
+    READY: [
+      [0,2],[1,2],[2,2],[3,2],[4,2]
+    ],
+
+    START: [
+      [0,7],[1,7],[2,7],[3,7],[4,7]
+    ],
+
+    FAMILY: [
+      [10,0],[10,1],[10,2],[10,3],[10,4],[10,5]
+    ],
+
+    TESTING: [
+      [6,1],[6,2],[6,3],[6,4],[6,5],[6,6],[6,7]
+    ],
+
+    DAD: [
+      [7,6],[8,6],[9,6]
+    ],
+
+    JOKES: [
+      [8,1],[8,2],[8,3],[8,4],[8,5]
+    ]
+  }
+},
+
+
+{
+  phrase: "I AM ALLERGIC TO CATS. THE CAT KNOWS THIS.",
+
+  HINT: "Feline exposure warning.",
+
+  words: [
+    "ALLERGIC",
+    "CATS",
+    "THE",
+    
+    "KNOWS",
+    "THIS"
+  ],
+
+  paths: {
+
+    ALLERGIC: [
+      [0,0],[1,0],[2,0],[3,0],
+      [4,0],[5,0],[6,0],[7,0]
+    ],
+
+    CATS: [
+      [0,2],[1,2],[2,2],[3,2]
+    ],
+
+    THE: [
+      [5,2],[6,2],[7,2]
+    ],
+
+
+    KNOWS: [
+      [0,7],[1,7],[2,7],[3,7],[4,7]
+    ],
+
+    THIS: [
+      [10,4],[10,5],[10,6],[10,7]
+    ]
+  }
+},
+
+
 
 {
   phrase: "I AM SEARCHING FOR THE PERFECT LASAGNA RECIPE.",
@@ -1637,10 +1771,7 @@ THE: [[6,4],[6,5],[6,6]]
 ];
 
 
-function startGame() {
-  document.getElementById("startScreen").style.display = "none";
-  loadWordSignal();
-}
+
 
 
 
@@ -1828,6 +1959,7 @@ function playSignalSound() {
   });
 }
 
+
 function checkPuzzleComplete() {
   if (foundWords.length === currentPuzzle.words.length) {
 
@@ -1845,8 +1977,7 @@ function checkPuzzleComplete() {
 
     totalScore += pointsEarned;
 
-    document.getElementById("scoreDisplay").textContent =
-      totalScore;
+    document.getElementById("scoreDisplay").textContent = totalScore;
 
     const flash = document.getElementById("pointsFlash");
 
@@ -1858,7 +1989,36 @@ function checkPuzzleComplete() {
     }, 1500);
 
     playSignalSound();
+
     typeSystemResponse(currentPuzzle.phrase);
+
+    setTimeout(() => {
+
+      const reachedMilestone = rewardMilestones.some(
+        milestone =>
+          totalScore >= milestone &&
+          totalScore - pointsEarned < milestone
+      );
+
+      if (reachedMilestone) {
+
+       responseOutput.innerHTML =
+  `<div class="duckWiggle">` +
+  `&lt;(o )__  &lt;(o )__  &lt;(o )__<br>` +
+  `     ( ._/    ( ._/    ( ._/` +
+  `</div><br>` +
+  `+${pointsEarned} POINTS<br>` +
+  `DUCK PARADE AUTHORIZED`;
+          
+          
+  setTimeout(() => {
+    loadWordSignal();
+  }, 3000);
+
+}
+      
+
+    }, 3000);
   }
 }
 
@@ -1883,6 +2043,10 @@ function typeSystemResponse(text) {
     }
   }, 45);
 }
+
+
+
+
 function randomLetter() {
   const fillerChars =
 "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789*$&#?@%";
@@ -1906,6 +2070,6 @@ document.addEventListener("pointermove", dragSelect);
 document.addEventListener("pointerup", endSelect);
 document.addEventListener("pointercancel", endSelect);
 
-// wait for START button
+loadWordSignal();
 
 
