@@ -189,7 +189,7 @@ background:
   z-index: 2;
   padding: 6px 18px 40px;
   min-height: 100dvh;
-  padding-bottom: 90px;
+  padding-bottom: 25px;
 }
 
 button {
@@ -1010,9 +1010,9 @@ button:hover {
 
 .ghostBrain {
   display: block;
-  width: 220px;
-  margin: 25px auto 0;
-  opacity: 0.12;
+  width: 120px;
+  margin: 10px auto 0;
+  opacity: 0.06;
   pointer-events: none;
   image-rendering: pixelated;
 
