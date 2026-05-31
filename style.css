@@ -762,9 +762,9 @@ button:hover {
   display: block;
 
   font-family: 'Share Tech Mono', monospace;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.1;
-  transform: translateX(6px);
+  transform: translateX(0);
 
   white-space: pre;
   text-align: center;
@@ -799,7 +799,7 @@ button:hover {
   html,
   body {
     height: 100%;
-    overflow: hidden;
+    overflow-x: hidden
     overscroll-behavior: none;
   }
 

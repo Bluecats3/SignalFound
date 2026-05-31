@@ -2004,8 +2004,7 @@ function checkPuzzleComplete() {
        signalDisplay.innerHTML =
   `<div class="pointText">
     +${pointsEarned} POINTS<br>
-    DUCK PARADE<br>
-    AUTHORIZED
+    DUCK PARADE AUTHORIZED
   </div>
    <pre class="duckWiggle">
    &lt;(o )__  &lt;(o )__  &lt;(o )__<br>
