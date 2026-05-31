@@ -37,7 +37,6 @@
   <div class="container">
   
     <div id="duckParade" class="duckParade"></div>
-    <button id="infoBtn" onclick="showInstructions()">?</button>
 
     <div id="instructionScreen" class="instructionScreen">
     
@@ -55,7 +54,7 @@
         <p>Each message must be decoded from a screen of text.</p>
         <p>Drag across the hidden words to decode each terminal communication.</p>
         <p>The system has provided a word count and a hint for assistance.</p>
-        <p>A point system has also been supplied; however, we are still trying to understand the purpose.</p>
+        <p>A point system has also been supplied; however, the reason is still unknown.</p>
 
       </div>
 
@@ -73,57 +72,70 @@
 
 
 
-    <h1 class="logoTitle">
-      SIGNAL<br>
-      FOUND
-    </h1>
+   <div class="titleArea">
 
-    <p class="subtitle">
-      Decode hidden transmissions and reconstruct the signal.
-    </p>
+  <h1 class="logoTitle">
+    SIGNAL<br>
+    FOUND
+  </h1>
+
+  <button id="infoBtn" onclick="showInstructions()">
+    ?
+  </button>
+
+</div>
+
+   
 
     <div class="signalInstruction">
       // LOCATE AND EXTRACT ALL SIGNAL WORDS
     </div>
+<div class="topPanel">
 
-    <div class="terminalDetails">
+ <div class="systemHintBox">
 
-      <div class="miniInfoBox">
-        <span class="boxLabel">WORDS REMAINING:</span>
-        <strong id="wordCount">0</strong>
-      </div>
+  <div class="systemOutputHeader">
+    [ SYSTEM OUTPUT ]
+  </div>
 
-      <div class="miniHintBox">
-        <span class="boxLabel">HINT:</span>
-        <span id="signalHint">waiting for signal.</span>
-      </div>
+  <div id="signalDisplay">
+    HINT: waiting for signal.
+  </div>
 
-      <div class="scoreBox">
-        <div class="scoreLabel">POINTS:</div>
-        <div id="scoreDisplay">0</div>
-        <div id="pointsFlash"></div>
-      </div>
+</div>
 
+  <div class="signalControlRow">
+
+    <div class="miniInfoBox">
+      <span class="boxLabel">WORDS REMAINING:</span>
+      <strong id="wordCount">0</strong>
     </div>
 
-    <section id="wordSignalScreen" class="decoderPanel">
-      <div id="wordGrid" class="wordGrid"></div>
-    </section>
-
-    <button id="newSignalBtn" onclick="loadWordSignal()">
+    <button
+      id="newSignalBtn"
+      class="newSignalBtn"
+      onclick="loadWordSignal()"
+    >
       NEW SIGNAL
     </button>
 
-    <h2 class="responseTitle">
-      SYSTEM RESPONSE
-    </h2>
+    <div class="scoreBox">
+      <div class="scoreLabel">POINTS:</div>
+      <div id="scoreDisplay">0</div>
+      <div id="pointsFlash"></div>
+    </div>
 
-    <section class="responseScreen">
-      <div id="responseOutput">
-        <span class="waitingCursor">...</span>
-      </div>
-    </section>
+  </div>
 
+</div>
+   
+   <section id="wordSignalScreen" class="decoderPanel">
+  <div id="wordGrid" class="wordGrid"></div>
+</section>
+
+    
+
+    
     <img
       src="android-chrome-512x512.png"
       class="ghostBrain"

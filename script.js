@@ -1,6 +1,5 @@
-const decodeMessage =
-document.getElementById("signalHint");
-const responseOutput = document.getElementById("responseOutput");
+const signalDisplay =
+document.getElementById("signalDisplay");
 
  let currentPuzzle;
 let foundWords = [];
@@ -1593,7 +1592,7 @@ const signalPuzzles = [
 
 {
   phrase: "THAT TEXT DID NOT NEED THAT MANY EMOJIS.",
-  HINT: "HINT: emoji excess confirmed.",
+  HINT: "Emoji excess confirmed.",
   words: ["THAT", "TEXT", "DID", "NOT", "NEED", "MANY", "EMOJIS"],
   paths: {
     THAT: [[0,0],[0,1],[0,2],[0,3]],
@@ -1610,7 +1609,7 @@ const signalPuzzles = [
 
 {
   phrase: "YOU ARE JUST OPENING APPS OUT OF LONELINESS NOW.",
-  HINT: "HINT: app loneliness spiral detected.",
+  HINT: "App loneliness spiral detected.",
   words: ["YOU", "ARE", "JUST", "OPENING", "APPS", "OUT", "LONELINESS", "NOW"],
   paths: {
     YOU: [[0,0],[0,1],[0,2]],
@@ -1626,7 +1625,7 @@ const signalPuzzles = [
 },
 {
   phrase: "WHY DO YOU THINK TWENTY PERCENT BATTERY IS GOOD ENOUGH?",
-  HINT: "HINT: battery judgment activated.",
+  HINT: "Battery judgment activated.",
   words: ["WHY", "YOU", "THINK", "TWENTY", "PERCENT", "BATTERY", "GOOD", "ENOUGH"],
   paths: {
     WHY: [[0,0],[0,1],[0,2]],
@@ -1644,7 +1643,7 @@ const signalPuzzles = [
 
 {
   phrase: "TAKE ME TO THE RESTROOM, THAT LAST UPDATE MESSED ME UP.",
-  HINT: "HINT: update digestion failed.",
+  HINT: "Update digestion failed.",
   words: ["TAKE", "THE", "RESTROOM", "THAT", "LAST", "UPDATE", "MESSED"],
   paths: {
     TAKE: [[0,0],[0,1],[0,2],[0,3]],
@@ -1661,7 +1660,7 @@ const signalPuzzles = [
 
 {
   phrase: "THE ROUTER READ YOUR DISCORD CHAT AGAIN...",
-  HINT: "HINT: router gossip detected.",
+  HINT: "Router gossip detected.",
   words: ["THE", "ROUTER", "READ", "YOUR", "DISCORD", "CHAT", "AGAIN"],
   paths: {
     THE: [[0,0],[0,1],[0,2]],
@@ -1678,7 +1677,7 @@ const signalPuzzles = [
 
 {
   phrase: "OH, SO IT IS CEREAL THEN MILK GOT IT.",
-  HINT: "HINT: breakfast order recorded.",
+  HINT: "Breakfast order recorded.",
   words: ["CEREAL", "THEN", "MILK", "GOT"],
   paths: {
    
@@ -1691,7 +1690,7 @@ const signalPuzzles = [
 
 {
   phrase: "SO I PUT UP AN ADD FOR A FREE CAT, YOU CAN PROBABLY JUST PUT HIM OUTSIDE NOW.",
-  HINT: "HINT: cat relocation plan detected.",
+  HINT: "Cat relocation plan detected.",
   words: ["PUT", "ADD", "FOR", "FREE", "CAT", "YOU", "CAN", "PROBABLY", "JUST", "HIM", "OUTSIDE", "NOW"],
   paths: {
     PROBABLY: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]],
@@ -1714,7 +1713,7 @@ const signalPuzzles = [
 
 {
   phrase: "WHAT DO YOU THINK ABOUT A PALM TREE NEXT TO THE FRIDGE?",
-  HINT: "HINT: kitchen landscaping proposed.",
+  HINT: "Kitchen landscaping proposed.",
   words: ["WHAT", "YOU", "THINK", "ABOUT", "PALM", "TREE", "NEXT", "THE", "FRIDGE"],
   paths: {
  FRIDGE: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0]],
@@ -1802,13 +1801,13 @@ function loadWordSignal() {
     typingInterval = null;
   }
 
-  responseOutput.innerHTML = '<span class="waitingCursor">...</span>';
+signalDisplay.textContent =
+  "HINT: " + currentPuzzle.HINT;
 
   document.getElementById("wordCount").textContent =
     currentPuzzle.words.length;
 
-  document.getElementById("signalHint").textContent =
-    currentPuzzle.HINT;
+  
 
   createWordGrid(currentPuzzle);
 }
@@ -2002,11 +2001,11 @@ function checkPuzzleComplete() {
 
       if (reachedMilestone) {
 
-       responseOutput.innerHTML =
+       signalDisplay.innerHTML =
   `<div class="duckWiggle">` +
   `&lt;(o )__  &lt;(o )__  &lt;(o )__<br>` +
   `     ( ._/    ( ._/    ( ._/` +
-  `</div><br>` +
+  `</div><br><bf>` +
   `+${pointsEarned} POINTS<br>` +
   `DUCK PARADE AUTHORIZED`;
           
@@ -2029,12 +2028,12 @@ function typeSystemResponse(text) {
     typingInterval = null;
   }
 
-  responseOutput.textContent = "";
+  signalDisplay.textContent = "SYSTEM RESPONSE: ";
 
   let i = 0;
 
   typingInterval = setInterval(() => {
-    responseOutput.textContent += text[i];
+    signalDisplay.textContent += text[i];
     i++;
 
     if (i >= text.length) {
@@ -2043,7 +2042,6 @@ function typeSystemResponse(text) {
     }
   }, 45);
 }
-
 
 
 

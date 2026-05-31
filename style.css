@@ -77,11 +77,18 @@ background:
   z-index: 2;
 }
 
+.titleArea {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  margin: 0 auto;
+}
 
 #infoBtn {
-  position: fixed;
-  top: 12px;
-  right: 12px;
+  position: absolute;
+
+  right: -28px;
+  bottom: 8px;
 
   width: auto;
   height: auto;
@@ -90,16 +97,15 @@ background:
   margin: 0;
 
   background: transparent;
-  color: #ffe600;
-
   border: none !important;
   box-shadow: none !important;
 
+  color: #ffe600;
   font-family: 'Share Tech Mono', monospace;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
 
   cursor: pointer;
-  z-index: 10000;
+  z-index: 20;
 }
 
 #infoBtn:hover {
@@ -171,7 +177,9 @@ background:
 
 .container {
   background: #000;
-  padding: 6px 18px 18px;
+  position: relative;
+  z-index: 2;
+  padding: 6px 18px 40px;
 }
 
 button {
@@ -249,41 +257,103 @@ button:hover {
 
   transform: scaleY(1.18);
 
-  margin-top: 8px;
+  margin-top: 0px;
+
+  margin-bottom: 2px;
+
+}
+
+
+.systemOutputHeader {
+
+  color: #00eaff;
+
+  text-align: center;
+
+  font-family: 'Share Tech Mono', monospace;
+
+  font-size: 0.85rem;
+
+  letter-spacing: 1px;
+
+  margin-bottom: 3px;
+  
+    animation: outputBlink 2.2s steps(2) infinite;
+
+  
+}
+
+@keyframes outputBlink {
+
+  0%,
+  100% {
+    opacity: 1;
+    text-shadow:
+      0 0 4px #00eaff,
+      0 0 10px rgba(0,234,255,0.4);
+  }
+
+  50% {
+    opacity: 0.35;
+    text-shadow: none;
+  }
+
+}
+
+
+/* ========================= */
+/* NEW TOP PANEL */
+/* ========================= */
+
+.topPanel {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto 10px;
+  border: none;
+}
+
+.systemHintBox {
+
+  border: 3px solid #00eaff;
+
+  background: #050505;
+
+  padding: 10px 14px;
 
   margin-bottom: 8px;
 
+  font-family: 'Share Tech Mono', monospace;
+
+  text-align: left;
 }
 
-/* ========================= */
-/* NORMAL HEADINGS */
-/* ========================= */
 
 
-
-.subtitle {
-
-  color: var(--blue);
-
-  font-family: monospace;
-
-  letter-spacing: 3px;
-
-  margin-top: 10px;
-
-  margin-bottom: 28px;
-
+.signalControlRow {
+  display: grid;
+  grid-template-columns: 95px 1fr 85px;
+  gap: 6px;
+  align-items: stretch;
 }
 
-/* ========================= */
-/* PANELS */
-/* ========================= */
+.newSignalBtn {
+  width: 100%;
+  height: 100%;
+  min-height: 52px;
+
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.2rem;
+  }
 
 
 
-
-.decoderPanel,
-.responseScreen {
+.decoderPanel {
 
   width: 100%;
   max-width: 560px;
@@ -312,20 +382,7 @@ button:hover {
 
 }
 
-.responseScreen {
-  width: 100%;
-  max-width: 560px;
 
-  border: 3px solid #00eaff;
-  background: #050505;
-
-  margin: 6px auto 18px;
-  padding: 6px;
-
-  min-height: 0px;
-
-  box-sizing: border-box;
-}
 
 
 
@@ -365,8 +422,7 @@ button:hover {
 
 
 
-.decoderPanel::before,
-.responseScreen::before {
+.decoderPanel::before {
 
   content: "";
 
@@ -410,71 +466,10 @@ button:hover {
 
 }
 
-/* ========================= */
-/* TITLES */
-/* ========================= */
 
-.decoderPanel h2,
-.responseTitle {
 
-  color: var(--yellow);
 
-  font-size: 30px;
 
-  text-shadow:
-    0 0 12px rgba(255,255,0,0.6);
-
-}
-
-.responseTitle {
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  gap: 10px;
-
-  color: #fff200;
-
-  font-family: 'Share Tech Mono', monospace;
-
-  font-size: 14px;
-
-  letter-spacing: 4px;
-
-  text-transform: uppercase;
-
-  margin-top: 4px;
-
-  margin-bottom: 6px;
-
-  line-height: 1;
-
-  text-shadow: none;
-
-}
-
-/* LEFT + RIGHT LINES */
-
-.responseTitle::before,
-.responseTitle::after {
-
-  content: "";
-
-  height: 1px;
-
-  width: 180px;
-
-  background: #00eaff;
-
-  box-shadow:
-    0 0 10px rgba(0,234,255,0.8);
-
-  opacity: 0.9;
-
-}
 
 
 
@@ -486,97 +481,35 @@ button:hover {
 
 
 /* ========================= */
-/* RESPONSE OUTPUT */
+/* SIGNAL DISPLAY */
 /* ========================= */
 
-#responseOutput {
+#signalDisplay {
 
   color: #ffe600;
 
-  text-align: center;
-
   font-family: 'Share Tech Mono', monospace;
 
-  white-space: pre-wrap;
+  text-align: center;
 
-  line-height: 1.2;
+  display: flex;
 
-  font-size: 20px;
+  justify-content: center;
+  align-items: center;
 
-  letter-spacing: 1px;
+  min-height: 48px;
 
-  padding: 4px;
-
-  min-height: auto;
-
-  display: block;
-
-
-
-  
-
-  text-shadow: none;
-
--webkit-font-smoothing: none;
--moz-osx-font-smoothing: auto;
-text-rendering: optimizeSpeed;
-font-smooth: never;
-
-  image-rendering: pixelated;
-}
-
-
-
-
-
-
-
-.signalLabel {
-
-  color: var(--yellow);
-
-  font-size: 16px;
-
-  letter-spacing: 4px;
-
-  margin-bottom: 18px;
-
-}
-
-.bigTransmission {
-
-  font-size: 34px;
+  font-size: 1rem;
 
   line-height: 1.4;
 
-  color: var(--yellow);
+  white-space: pre-wrap;
 
-  margin-bottom: 22px;
-
-  animation: transmissionFlash 0.45s ease;
-
+  padding: 4px;
 }
 
 
-@keyframes transmissionFlash {
 
-  0% {
-
-    opacity: 0;
-
-    transform: scale(0.92);
-
-  }
-
-  100% {
-
-    opacity: 1;
-
-    transform: scale(1);
-
-  }
-
-}
 
 
 
@@ -588,6 +521,8 @@ font-smooth: never;
 
 .duckWiggle {
   display: inline-block;
+   position: relative;
+  left: -35px;
   animation: duckWiggle 0.45s steps(2) infinite;
 }
 
@@ -715,29 +650,6 @@ font-smooth: never;
 
 
 
-.signalHint {
-
-  color: #00d9ff;
-
-  font-family: 'Share Tech Mono', monospace;
-
-  font-size: 30px;
-
-  font-weight: bold;
-
-  letter-spacing: 2px;
-
-  line-height: 1.6;
-
-  margin-top: 14px;
-
-  margin-bottom: 24px;
-
-}
-
-#signalHint {
-  text-align: left;
-}
 
 .waitingCursor {
   color: #00eaff;
@@ -768,73 +680,26 @@ font-smooth: never;
 }
 
 
-.terminalDetails {
-  display: grid;
-
-  grid-template-columns: 110px 1fr 90px;
-
-  gap: 6px;
-
-  align-items: stretch;
-
-  width: 100%;
-
-  max-width: 560px;
-
-  margin: 4px auto 6px;
-}
-
-.miniInfoBox,
-.miniHintBox {
-
-  border: 2px solid #00f6ff;
-
-  background: rgba(0,255,120,0.05);
-
-  color: #00f6ff;
-
-  font-family: 'Share Tech Mono', monospace;
-
-  padding: 7px 8px;
-
-  font-size: 0.82rem;
-
-  text-align: left;
-
-  min-height: 52px;
-}
 
 .miniInfoBox {
+  border: 2px solid #00f6ff;
+  background: rgba(0,255,120,0.05);
+  color: #ffe600;
+  font-family: 'Share Tech Mono', monospace;
+
+  min-height: 52px;
+  padding: 6px 8px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
   text-align: center;
+  box-sizing: border-box;
 }
 
-.miniInfoBox strong {
 
-  color: #00f6ff;
-
-  font-weight: 400;
-}
-
-.miniHintBox {
-  display: flex;
-  flex-direction: column;
-
-  justify-content: center;
-  align-items: center;
-
-  text-align: center;
-
-  line-height: 1.2;
-}
-
-.miniHintBox .boxLabel {
-  margin-bottom: 4px;
-}
 
 .scoreBox {
 
@@ -863,9 +728,11 @@ font-smooth: never;
 
 .boxLabel,
 .scoreLabel {
-  color: #ffe600;
+  color: #00eaff;
   font-size: 0.80rem;
   letter-spacing: 1px;
+  text-shadow:
+    0 0 4px rgba(0,234,255,0.6);
 }
 
 
@@ -876,7 +743,6 @@ font-smooth: never;
 
 
 #wordCount,
-#signalHint,
 #scoreDisplay {
   color: #ffe600;
   font-size: 0.72rem;
@@ -911,8 +777,12 @@ font-smooth: never;
   }
 
 #infoBtn {
-  width: 32px;
-  height: 32px;
+  right: -24px;
+  bottom: 4px;
+
+  width: auto;
+  height: auto;
+
   font-size: 1rem;
 }
 
@@ -927,13 +797,7 @@ font-smooth: never;
 
 
 
-  .container {
-    width: 100%;
-    max-width: 100%;
-    padding: 12px;
-    padding-bottom: 24px;
-    box-sizing: border-box;
-  }
+
 
   .logoTitle {
     font-size: 2.4rem;
@@ -943,81 +807,44 @@ font-smooth: never;
     margin-bottom: 8px;
   }
 
-  .subtitle {
-    font-size: 0.8rem;
-    line-height: 1.3;
-    margin-bottom: 12px;
-  }
+
+
+    
+.topPanel {
+  width: 100%;
+}
+
+.signalControlRow {
+
+  display: grid;
+
+  grid-template-columns: 95px 1fr 85px;
+
+  gap: 6px;
+}
+
+.newSignalBtn {
+
+  height: 52px;
+
+  padding: 0;
+
+  font-size: 0.75rem;
+
+  margin: 0;
+}
 
   /* ========================= */
   /* TOP INFO AREA */
   /* ========================= */
 
-.terminalDetails {
-  display: grid;
-  grid-template-columns: 95px 1fr 85px;
-  gap: 6px;
-  align-items: stretch;
-  margin: 4px 0 6px;
-}
-
-.miniInfoBox,
-.miniHintBox {
-  border: 2px solid #00f6ff;
-
-  background: rgba(0,255,120,0.05);
-
-  color: #ffe600;
-
-  font-family: 'Share Tech Mono', monospace;
-
-  font-size: 0.72rem;
-
-  padding: 6px 8px;
-
-  box-sizing: border-box;
-}
-
-.miniInfoBox {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.miniInfoBox strong {
-  color: #ffe600;
-  font-weight: 400;
-}
 
 
-.miniHintBox {
-  display: flex;
-  flex-direction: column;
 
-  justify-content: flex-start;
-  align-items: center;
 
-  text-align: center;
 
-  padding-top: 4px;
-}
 
-#signalHint {
-  display: block;
-  width: 100%;
-  text-align: center;
-}
 
-.miniHintBox .boxLabel {
-  display: block;
-  width: 100%;
-
-  margin-bottom: 4px;
-
-  text-align: center;
-}
 
 
 .scoreBox {
@@ -1130,19 +957,7 @@ font-smooth: never;
   user-select: none;
 }
 
-  /* ========================= */
-  /* RESPONSE BOX */
-  /* ========================= */
 
-  .responseScreen {
-  margin-top: 2px;
-  min-height: 0px;
-  padding: 6px;
-}
-
-#responseOutput {
-  font-size: 1rem;
-}
 
 
 
