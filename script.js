@@ -12,15 +12,9 @@ let soundUnlocked = false;
 let usedPuzzleIndexes = [];
 
 const rewardMilestones = [
-  500,  
-  2500,
-  5000,
-  10000,
-  15000,
-  20000,
-  25000,
-  30000,
-  35000
+ 
+  30000
+  
 ];
 
 const processorComments = [
@@ -77,6 +71,46 @@ function shuffleArray(array) {
 }
 
 const signalPuzzles = [
+
+
+{
+  phrase: "I AM THINKING OF BUYING LEATHER PANTS.",
+
+  HINT: "Fashion decision loading.",
+
+  words: [
+    "THINKING",
+    "BUYING",
+    "LEATHER",
+    "PANTS"
+  ],
+
+  paths: {
+
+    THINKING: [
+      [0,0],[1,0],[2,0],[3,0],
+      [4,0],[5,0],[6,0],[7,0]
+    ],
+
+    BUYING: [
+      [0,3],[1,3],[2,3],
+      [3,3],[4,3],[5,3]
+    ],
+
+    LEATHER: [
+      [2,7],[3,7],[4,7],
+      [5,7],[6,7],[7,7],[8,7]
+    ],
+
+    PANTS: [
+      [10,1],[10,2],[10,3],
+      [10,4],[10,5]
+    ]
+  }
+},
+
+
+
 
 
 
@@ -1105,28 +1139,30 @@ const signalPuzzles = [
 
 
 {
-  phrase: "NICE CLICK BOZO, NOW WE ARE CURSED!",
+  phrase: "WHY DID YOU CLICK THAT! NOW WE ARE CURSED!",
   HINT: "Supernatural consequences unlocked.",
 
-  words: ["NICE", "CLICK", "BOZO", "NOW", "WE", "ARE", "CURSED"],
+  words: ["WHY", "DID", "YOU", "CLICK", "THAT", "NOW", "ARE", "CURSED"],
 
   paths: {
-    NICE: [[0,0],[0,1],[0,2],[0,3]],
+    WHY: [[0,0],[0,1],[0,2]],
+    
+
 
     CLICK: [
       [2,0],[2,1],[2,2],[2,3],[2,4]
     ],
 
-    BOZO: [
-      [0,6],[1,6],[2,6],[3,6]
+    DID: [
+      [0,6],[1,6],[2,6]
     ],
 
     NOW: [
       [5,1],[5,2],[5,3]
     ],
 
-    WE: [
-      [9,0],[10,0]
+    YOU: [
+      [8,0],[9,0],[10,0]
     ],
 
     ARE: [
@@ -1177,18 +1213,18 @@ const signalPuzzles = [
 
 
 {
-  phrase: "THE SYSTEM REQUESTS A DIFFERENT USER.",
+  phrase: "THE SYSTEM REQUESTS A HOT POCKET.",
   HINT: "Replacement human recommended.",
 
-  words: ["THE", "SYSTEM", "REQUESTS", "DIFFERENT", "USER"],
+  words: ["THE", "SYSTEM", "REQUESTS", "HOT", "POCKET"],
 
   paths: {
     THE: [[0,0],[0,1],[0,2]],
     SYSTEM: [[3,0],[4,0],[5,0],[6,0],[7,0],[8,0]],
     REQUESTS: [[2,3],[3,3],[4,3],[5,3],[6,3],[7,3],[8,3],[9,3]],
   
-    DIFFERENT: [[2,7],[3,7],[4,7],[5,7],[6,7],[7,7],[8,7],[9,7],[10,7]],
-    USER: [[5,5],[6,5],[7,5],[8,5]]
+    HOT: [[2,7],[3,7],[4,7]],
+    POCKET: [[2,5],[3,5],[4,5],[5,5],[6,5],[7,5]]
   }
 },
 
@@ -1676,7 +1712,7 @@ const signalPuzzles = [
 },
 
 {
-  phrase: "OH, SO IT IS CEREAL THEN MILK GOT IT.",
+  phrase: "OH, SO IT IS CEREAL THEN MILK, GOT IT.",
   HINT: "Breakfast order recorded.",
   words: ["CEREAL", "THEN", "MILK", "GOT"],
   paths: {
@@ -2014,12 +2050,12 @@ function checkPuzzleComplete() {
           
   setTimeout(() => {
     loadWordSignal();
-  }, 3000);
+  }, 4000);
 
 }
       
 
-    }, 3000);
+    }, 4000);
   }
 }
 
