@@ -542,7 +542,7 @@ button:hover {
  grid-template-columns: repeat(8, 1fr);
   gap: 4px;
   width: fit-content;
-  margin: 20px auto;
+  margin: 8px auto;
   justify-items: center;
   user-select: none;
   touch-action: none;
@@ -809,7 +809,7 @@ button:hover {
 
   .container {
     min-height: 100dvh;
-    padding-bottom: 90px;
+    padding-bottom: 0;
   }
 }
 
@@ -990,7 +990,14 @@ button:hover {
 }
 
 
-
+@media (max-width: 600px) {
+  .ghostBrain {
+    width: 120px !important;
+    max-width: 120px !important;
+    height: auto !important;
+    margin: 10px auto 0 !important;
+  }
+}
 
 
 
@@ -1011,58 +1018,29 @@ button:hover {
 .ghostBrain {
   display: block;
   width: 120px;
-  margin: 10px auto 0;
+  max-width: 120px;
+  height: auto;
+
+  margin: -40px auto 0;
+
   opacity: 0.06;
   pointer-events: none;
   image-rendering: pixelated;
 
-  animation:
-    brainFloat 7s ease-in-out infinite,
-    brainFlicker 4s infinite;
+  animation: brainFloat 7s ease-in-out infinite;
 }
 
 @keyframes brainFloat {
-
   0% {
-    transform: translateY(0px);
+    translate: 0 0;
   }
 
   50% {
-    transform: translateY(-6px);
+    translate: 0 -6px;
   }
 
   100% {
-    transform: translateY(0px);
+    translate: 0 0;
   }
-
-}
-
-@keyframes brainFlicker {
-
-  0% {
-    opacity: 0.10;
-    filter: brightness(1);
-  }
-
-  2% {
-    opacity: 0.18;
-    filter: brightness(1.4);
-  }
-
-  4% {
-    opacity: 0.08;
-    filter: brightness(0.8);
-  }
-
-  6% {
-    opacity: 0.14;
-    filter: brightness(1.2);
-  }
-
-  100% {
-    opacity: 0.10;
-    filter: brightness(1);
-  }
-
 }
 
