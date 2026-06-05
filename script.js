@@ -510,12 +510,16 @@ const soundBtn =
 soundBtn.textContent =
   soundEnabled ? "ON" : "OFF";
 
+soundBtn.classList.toggle("off", !soundEnabled);
+
 soundBtn.addEventListener("click", () => {
 
   soundEnabled = !soundEnabled;
 
   soundBtn.textContent =
     soundEnabled ? "ON" : "OFF";
+
+  soundBtn.classList.toggle("off", !soundEnabled);
 
   localStorage.setItem(
     "soundEnabled",

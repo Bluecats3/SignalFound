@@ -187,8 +187,72 @@ body {
 
 
 
+/* SOUND TOGGLE */
 
+.soundSetting {
+  margin-top: 16px;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+
+  color: #00eaff;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+#soundBtn {
+  width: 64px !important;
+  height: 26px;
+
+  position: relative;
+
+  padding: 0;
+  margin: 0;
+
+  border: 2px solid #00eaff;
+  background: #050505;
+
+  color: transparent;
+  font-size: 0;
+
+  box-shadow: none;
+}
+
+#soundBtn::before {
+  content: "";
+  position: absolute;
+
+  width: 22px;
+  height: 18px;
+
+  left: 3px;
+  top: 2px;
+
+  background: #ffe600;
+  box-shadow: 0 0 3px #ffe600;
+}
+
+#soundBtn::after {
+  content: "ON";
+  position: absolute;
+
+  right: 6px;
+  top: 5px;
+
+  color: #ffe600;
+  font-size: 0.55rem;
+}
+
+#soundBtn.off::before {
+  left: 35px;
+}
+
+#soundBtn.off::after {
+  content: "OFF";
+  left: 6px;
+  right: auto;
+}
 
 
 
@@ -859,23 +923,34 @@ button:hover {
   font-size: 2rem;
 }
 
-  #infoBtn {
-    right: -56px;
-    top: 50%;
-    transform: translateY(-50%);
-    margin-top: 0;
-    font-size: 0.72rem;
+
+
+  .titleArea {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
   }
 
+  #infoBtn {
+    position: static;
+    transform: none;
+    
+    width: auto;
+    padding: 0;
+    margin-left: 24px;
 
+    font-size: 0.62rem;
+    white-space: nowrap;
+  }
 
   .logoTitle {
-    font-size: 2.4rem;
-    line-height: 0.9;
-    letter-spacing: 2px;
-    transform: scaleY(0.9);
-    margin-bottom: 8px;
+    text-align: right;
   }
+
 
 
 
@@ -1032,14 +1107,12 @@ button:hover {
   /* ========================= */
   /* BUTTON */
   /* ========================= */
-
-  button {
-    width: 100%;
-    font-size: 0.95rem;
-    padding: 12px;
-    margin-top: 4px;
+button:not(#infoBtn):not(#soundBtn):not(.closeInfoBtn) {
+  width: 100%;
+  font-size: 0.95rem;
+  padding: 12px;
+  margin-top: 4px;
   margin-bottom: 6px;
-  }
 }
 
 
