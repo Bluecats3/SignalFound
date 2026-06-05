@@ -6,8 +6,14 @@ let foundWords = [];
 let selectedTiles = [];
 let isDragging = false;
 let typingInterval = null;
-let totalScore = 0;
+
 let bootSkipped = false;
+
+let totalScore =
+  Number(sessionStorage.getItem("signalScore")) || 0;
+
+document.getElementById("scoreDisplay").textContent =
+  totalScore;
 
 
 function skipBoot() {
@@ -40,7 +46,7 @@ function startGame() {
   }, 500);
 }
 
-
+const wordFoundSound = new Audio("word-found.mp3");
 
 const bootLines = [
   "BOOTING SENTIENT PROCESSOR...",
@@ -1171,7 +1177,7 @@ const signalPuzzles = [
     TELL: [[0,4],[1,4],[2,4],[3,4]],
     SAID: [[0,6],[1,6],[2,6],[3,6]],
     THE: [[6,4], [6,5], [6,6]],
-    PLEASE: [[9,3],[9,4],[9,5],[9,6],[9,7],[9,8]]
+    PLEASE: [[9,2],[9,3],[9,4],[9,5],[9,6],[9,7]]
   }
 },
 
@@ -2424,6 +2430,9 @@ function endSelect() {
 
   if (matchedWord && !foundWords.includes(matchedWord)) {
     foundWords.push(matchedWord);
+    
+      wordFoundSound.currentTime = 0;
+wordFoundSound.play().catch(() => {});
 
     document.getElementById("wordCount").textContent =
       currentPuzzle.words.length - foundWords.length;
@@ -2459,6 +2468,19 @@ function clearSelection() {
 }
 
 
+function playWordFoundSound() {
+  const sound = document.getElementById("wordFoundSound");
+
+  if (!sound) return;
+
+  sound.currentTime = 0;
+  sound.volume = 1;
+
+  sound.play().catch(error => {
+    console.log("Word sound blocked or missing:", error);
+  });
+}
+
 
 function playSignalSound() {
   const sound = document.getElementById("signalSound");
@@ -2472,6 +2494,8 @@ function playSignalSound() {
     console.log("Sound blocked or missing:", error);
   });
 }
+
+
 
 
 function checkPuzzleComplete() {
@@ -2490,6 +2514,10 @@ function checkPuzzleComplete() {
     const pointsEarned = currentPuzzle.words.length * 100;
 
     totalScore += pointsEarned;
+    sessionStorage.setItem(
+  "signalScore",
+  totalScore
+);
 
     document.getElementById("scoreDisplay").textContent = totalScore;
 
