@@ -860,10 +860,11 @@ button:hover {
 }
 
   #infoBtn {
-    right: -10px;
+    right: -56px;
     top: 50%;
     transform: translateY(-50%);
     margin-top: 0;
+    font-size: 0.72rem;
   }
 
 
