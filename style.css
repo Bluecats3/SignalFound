@@ -129,17 +129,15 @@ body {
 #infoBtn {
   position: absolute;
 
-  left: 100%;
-  margin-left: 40px;
-  bottom: 8px;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
 
   width: auto;
   height: auto;
 
   padding: 0;
-  margin-top: 0;
-  margin-right: 0;
-  margin-bottom: 0;
+  margin: 0;
 
   background: transparent;
   border: none !important;
@@ -147,7 +145,7 @@ body {
 
   color: #ffe600;
   font-family: 'Share Tech Mono', monospace;
-  font-size: 1.1rem;
+  font-size: clamp(0.75rem, 2vw, 1.1rem);
 
   white-space: nowrap;
 
@@ -849,7 +847,7 @@ button:hover {
     min-height: 100dvh;
     padding-bottom: 0;
   }
-}
+
 
 
 .instructionBox {
@@ -861,7 +859,12 @@ button:hover {
   font-size: 2rem;
 }
 
-
+  #infoBtn {
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-top: 0;
+  }
 
 
 
@@ -872,6 +875,9 @@ button:hover {
     transform: scaleY(0.9);
     margin-bottom: 8px;
   }
+
+
+
 
 
 
