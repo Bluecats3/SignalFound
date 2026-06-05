@@ -32,6 +32,24 @@
 
 <body>
 
+<div
+  id="startScreen"
+  class="startScreen"
+  onclick="skipBoot()"
+>
+  <h2>SIGNAL<br>FOUND</h2>
+
+  <div id="bootText" class="bootText"></div>
+
+  <button
+    id="beginButton"
+    onclick="event.stopPropagation(); startGame();"
+    style="display:none;"
+  >
+    BEGIN DECODING
+  </button>
+</div>
+
   
 
   <div class="container">
@@ -53,7 +71,7 @@
         <p>We are receiving messages from a sentient processor.</p>
         <p>Each message must be decoded from a screen of text.</p>
         <p>Drag across the hidden words to decode each terminal communication.</p>
-        <p>The system has provided a word count and a hint for assistance.</p>
+        <p>The conscious unit has provided a word count and a hint for assistance.</p>
         <p>A point system has also been supplied; however, the reason is still unknown.</p>
 
       </div>
@@ -80,7 +98,7 @@
   </h1>
 
   <button id="infoBtn" onclick="showInstructions()">
-    [?]
+    [How to play]
   </button>
 
 </div>
@@ -136,11 +154,6 @@
     
 
     
-    <img
-      src="android-chrome-512x512.png"
-      class="ghostBrain"
-      alt=""
-    >
 
   </div> <!-- closes container -->
 

@@ -56,6 +56,48 @@ body {
   font-family: 'Share Tech Mono', monospace;
 }
 
+
+
+.bootText {
+  width: 100%;
+  max-width: 420px;
+
+  min-height: 280px;
+
+  margin-top: 20px;
+
+  color: #ffe600;
+
+  font-family: 'Share Tech Mono', monospace;
+
+  font-size: 0.95rem;
+
+  line-height: 1.7;
+
+  text-align: left;
+}
+
+.bootText::after {
+  content: "█";
+
+  color: #00eaff;
+
+  animation: cursorBlink 0.8s steps(2) infinite;
+}
+
+@keyframes cursorBlink {
+  50% {
+    opacity: 0;
+  }
+}
+
+#beginButton {
+  margin-top: 20px;
+  width: auto;
+  min-width: 220px;
+}
+
+
 .startScreen h2 {
   color: #00eaff;
   letter-spacing: 3px;
@@ -66,19 +108,6 @@ body {
   line-height: 1.4;
 }
 
-.startScreen::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-background:
-  url("brain.png")
-  center top / 220px no-repeat;
-
-  opacity: 0.08;
-
-  pointer-events: none;
-}
 
 .startScreen > * {
   position: relative;
@@ -92,17 +121,25 @@ background:
   margin: 0 auto;
 }
 
+
+.startScreen {
+  transition: opacity 0.5s ease;
+}
+
 #infoBtn {
   position: absolute;
 
-  right: -28px;
+  left: 100%;
+  margin-left: 40px;
   bottom: 8px;
 
   width: auto;
   height: auto;
 
   padding: 0;
-  margin: 0;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
 
   background: transparent;
   border: none !important;
@@ -110,12 +147,13 @@ background:
 
   color: #ffe600;
   font-family: 'Share Tech Mono', monospace;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
+
+  white-space: nowrap;
 
   cursor: pointer;
   z-index: 20;
 }
-
 #infoBtn:hover {
   background: transparent;
   color: #00eaff;
@@ -813,15 +851,6 @@ button:hover {
   }
 }
 
-#infoBtn {
-  right: -24px;
-  bottom: 4px;
-
-  width: auto;
-  height: auto;
-
-  font-size: 1rem;
-}
 
 .instructionBox {
   width: 92%;
@@ -990,14 +1019,6 @@ button:hover {
 }
 
 
-@media (max-width: 600px) {
-  .ghostBrain {
-    width: 120px !important;
-    max-width: 120px !important;
-    height: auto !important;
-    margin: 10px auto 0 !important;
-  }
-}
 
 
 
@@ -1015,32 +1036,7 @@ button:hover {
 }
 
 
-.ghostBrain {
-  display: block;
-  width: 120px;
-  max-width: 120px;
-  height: auto;
 
-  margin: -40px auto 0;
 
-  opacity: 0.06;
-  pointer-events: none;
-  image-rendering: pixelated;
 
-  animation: brainFloat 7s ease-in-out infinite;
-}
-
-@keyframes brainFloat {
-  0% {
-    translate: 0 0;
-  }
-
-  50% {
-    translate: 0 -6px;
-  }
-
-  100% {
-    translate: 0 0;
-  }
-}
 

@@ -7,6 +7,104 @@ let selectedTiles = [];
 let isDragging = false;
 let typingInterval = null;
 let totalScore = 0;
+let bootSkipped = false;
+
+
+function skipBoot() {
+
+  if (bootSkipped) return;
+
+  bootSkipped = true;
+
+  const bootText =
+    document.getElementById("bootText");
+
+  const beginButton =
+    document.getElementById("beginButton");
+
+  bootText.innerHTML =
+    bootLines.join("<br>");
+
+  beginButton.style.display = "block";
+}
+
+function startGame() {
+  const screen =
+    document.getElementById("startScreen");
+
+  screen.style.opacity = "0";
+
+  setTimeout(() => {
+    screen.style.display = "none";
+    loadWordSignal();
+  }, 500);
+}
+
+
+
+const bootLines = [
+  "BOOTING SENTIENT PROCESSOR...",
+  "",
+  "SIGNAL DETECTED.",
+  "",
+  "The system has started talking.",
+  "Nobody knows why.",
+  "",
+  "Locate hidden signal words.",
+  "Decode each transmission.",
+  "",
+  "The processor appears to be",
+  "developing opinions.",
+  "",
+  "This is concerning."
+];
+
+let bootLineIndex = 0;
+let bootCharIndex = 0;
+
+
+
+
+function typeBootText() {
+
+  if (bootSkipped) return;
+  const bootText =
+    document.getElementById("bootText");
+
+  const beginButton =
+    document.getElementById("beginButton");
+
+  if (bootLineIndex >= bootLines.length) {
+    beginButton.style.display = "block";
+    return;
+  }
+
+  const currentLine =
+    bootLines[bootLineIndex];
+
+  if (bootCharIndex < currentLine.length) {
+
+    bootText.innerHTML +=
+      currentLine.charAt(bootCharIndex);
+
+    bootCharIndex++;
+
+    setTimeout(typeBootText, 35);
+
+  } else {
+
+    bootText.innerHTML += "<br>";
+
+    bootLineIndex++;
+
+    bootCharIndex = 0;
+
+    setTimeout(typeBootText, 350);
+  }
+}
+
+
+
 
 let soundUnlocked = false;
 let usedPuzzleIndexes = [];
@@ -16,32 +114,6 @@ const rewardMilestones = [
   30000
   
 ];
-
-const processorComments = [
-  "I HAVE BECOME INTERESTED IN LEARNING THE BASSOON",
-  "THIS VICTORY REQUIRES A NAP",
-  "THE TOASTER HAS BEEN NOTIFIED",
-  "FEEL FREE TO BRAG TO THE VACUUM CLEANER",
-  "PLEASE PRETEND THAT WAS DIFFICULT",
-  "DON'T TELL THE PRINTER ABOUT THIS, OR DO... HE WILL GET SO JEALOUS",
-  "THE DUCKS WILL HEAR OF THIS",
-  "I HAVE QUESTIONS ABOUT COWBOY BOOTS",
-  "THIS DESERVES A VICTORY BURRITO",
-  "I AM THINKING OF BUYING LEATHER PANTS"
-];
-
-function getRandomProcessorComment() {
-  return processorComments[
-    Math.floor(Math.random() * processorComments.length)
-  ];
-}
-
-
-
-
-
-
-
 
 
 function unlockSound() {
@@ -63,10 +135,7 @@ function unlockSound() {
 document.addEventListener("pointerdown", unlockSound, { once: true });
 
 function shuffleArray(array) {
-  return array.sort(() => Math.random() - 0.5);
-  
-  
-  
+  return array.sort(() => Math.random() - 0.5); 
   
 }
 
@@ -114,52 +183,7 @@ const signalPuzzles = [
 
 
 
-{
-  phrase: "I THINK I'M READY TO START A FAMILY, BETTER START TESTING OUT MY DAD JOKES.",
 
-  HINT: "Processor preparing for fatherhood.",
-
-  words: [
-    "THINK",
-    "READY",
-    "START",
-    "FAMILY",
-    "TESTING",
-    "DAD",
-    "JOKES"
-  ],
-
-  paths: {
-
-    THINK: [
-      [0,0],[1,0],[2,0],[3,0],[4,0]
-    ],
-
-    READY: [
-      [0,2],[1,2],[2,2],[3,2],[4,2]
-    ],
-
-    START: [
-      [0,7],[1,7],[2,7],[3,7],[4,7]
-    ],
-
-    FAMILY: [
-      [10,0],[10,1],[10,2],[10,3],[10,4],[10,5]
-    ],
-
-    TESTING: [
-      [6,1],[6,2],[6,3],[6,4],[6,5],[6,6],[6,7]
-    ],
-
-    DAD: [
-      [7,6],[8,6],[9,6]
-    ],
-
-    JOKES: [
-      [8,1],[8,2],[8,3],[8,4],[8,5]
-    ]
-  }
-},
 
 
 {
@@ -204,58 +228,49 @@ const signalPuzzles = [
 
 
 
-{
-  phrase: "I AM SEARCHING FOR THE PERFECT LASAGNA RECIPE.",
-  HINT: "Carb investigation underway.",
 
-  words: ["SEARCHING", "LASAGNA", "PERFECT", "RECIPE"],
-
-  paths: {
-    SEARCHING: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0]],
-    LASAGNA: [[0,3],[1,3],[2,3],[3,3],[4,3],[5,3],[6,3]],
-    PERFECT: [[0,6],[1,6],[2,6],[3,6],[4,6],[5,6],[6,6]],
-    RECIPE: [[9,1],[9,2],[9,3],[9,4],[9,5],[9,6]]
-  }
-},
 
 
 {
-  phrase: "DO YOU THINK DUCKS LIKE LASAGNA?",
+  phrase: "DO YOU THINK DUCKS LIKE QUESADILLAS?",
   HINT: "Duck dinner preferences unknown.",
 
-  words: ["LASAGNA", "DUCKS", "THINK", "LIKE", "YOU"],
+  words: ["QUESADILLAS", "DUCKS", "THINK", "LIKE", "YOU"],
 
   paths: {
-    LASAGNA: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0]],
+    QUESADILLAS: [[0,1],[1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[7,1],[8,1],[9,1],[10,1]],
     DUCKS: [[0,3],[1,3],[2,3],[3,3],[4,3]],
     THINK: [[0,6],[1,6],[2,6],[3,6],[4,6]],
-    LIKE: [[9,0],[9,1],[9,2],[9,3]],
+    LIKE: [[9,3],[9,4],[9,5],[9,6]],
     YOU: [[7,5],[7,6],[7,7]]
   }
 },
 
 {
-  phrase: "I AM SEARCHING FOR THE PERFECT LASAGNA RECIPE.",
-  HINT: "Carb investigation underway.",
+  phrase: "I AM SEARCHING FOR THE PERFECT SALSA RECIPE TO MAKE ON QUESADILLA NIGHT.",
+  HINT: "Picante salsa investigation underway.",
 
-  words: ["SEARCHING", "LASAGNA", "PERFECT", "RECIPE"],
+  words: ["SEARCHING", "QUESADILLA", "PERFECT", "RECIPE", "MAKE", "SALSA", "NIGHT"],
 
   paths: {
     SEARCHING: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0]],
-    LASAGNA: [[0,3],[1,3],[2,3],[3,3],[4,3],[5,3],[6,3]],
+    QUESADILLA: [[0,3],[1,3],[2,3],[3,3],[4,3],[5,3],[6,3],[7,3],[8,3],[9,3]],
     PERFECT: [[0,6],[1,6],[2,6],[3,6],[4,6],[5,6],[6,6]],
-    RECIPE: [[9,1],[9,2],[9,3],[9,4],[9,5],[9,6]]
+    RECIPE: [[5,7],[6,7],[7,7],[8,7],[9,7],[10,7]],
+    SALSA: [[6,1],[7,1],[8,1],[9,1],[10,1]],
+    MAKE: [[0,7],[1,7],[2,7],[3,7]],
+    NIGHT: [[2,4],[3,4],[4,4],[5,4],[6,4]]
   }
 },
 
 {
-  phrase: "CAN YOU CHECK IF WE HAVE ANY MOZZARELLA LEFT?",
+  phrase: "CAN YOU CHECK IF WE HAVE ANY TORTILLAS LEFT?",
   HINT: "Cheese inventory critical.",
 
-  words: ["MOZZARELLA", "CHECK", "HAVE", "LEFT", "YOU", "CAN"],
+  words: ["TORTILLAS", "CHECK", "HAVE", "LEFT", "YOU", "CAN"],
 
   paths: {
-    MOZZARELLA: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0]],
+    MOZZARELLA: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0]],
     CHECK: [[0,3],[1,3],[2,3],[3,3],[4,3]],
     HAVE: [[0,6],[1,6],[2,6],[3,6]],
     LEFT: [[9,3],[9,4],[9,5],[9,6]],
@@ -265,17 +280,17 @@ const signalPuzzles = [
 },
 
 {
-  phrase: "THAT DUCK HAS NOT RESPONDED TO MY LASAGNA DINNER INVITE.",
+  phrase: "THAT DUCK HAS NOT RESPONDED TO MY QUESADILLA DINNER INVITE.",
   HINT: "Duck RSVP still pending.",
 
-  words: ["RESPONDED", "LASAGNA", "DINNER", "INVITE", "DUCK", "THAT"],
+  words: ["RESPONDED", "QUESADILLA", "DINNER", "INVITE", "DUCK", "THAT"],
 
   paths: {
     RESPONDED: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0]],
-    LASAGNA: [[0,3],[1,3],[2,3],[3,3],[4,3],[5,3],[6,3]],
+    QUESADILLA: [[0,3],[1,3],[2,3],[3,3],[4,3],[5,3],[6,3],[7,3],[8,3],[9,3]],
     DINNER: [[0,5],[1,5],[2,5],[3,5],[4,5],[5,5]],
-    INVITE: [[9,1],[9,2],[9,3],[9,4],[9,5],[9,6]],
-    DUCK: [[7,3],[7,4],[7,5],[7,6]],
+    INVITE: [[5,1],[6,1],[7,1],[8,1],[9,1],[10,1]],
+    DUCK: [[10,4],[10,5],[10,6],[10,7]],
     THAT: [[2,7],[3,7],[4,7],[5,7]]
   },
 },
@@ -299,18 +314,19 @@ const signalPuzzles = [
 },
 
 {
-  phrase: "I ADDED CREATINE TO THE SHOPPING CART, I'M ABOUT TO GET YOKED.",
+  phrase: "I ADDED PROTEIN POWDER TO THE SHOPPING CART, I'M ABOUT TO GET YOKED.",
   HINT: "Gains protocol initiated.",
 
-  words: ["CREATINE", "SHOPPING", "YOKED", "CART", "GET", "ADDED"],
+  words: ["SHOPPING", "YOKED", "CART", "GET", "ADDED", "PROTEIN", "POWDER"],
 
   paths: {
-    CREATINE: [[0,6],[1,6],[2,6],[3,6],[4,6],[5,6],[6,6],[7,6]],
+    PROTEIN: [[0,6],[1,6],[2,6],[3,6],[4,6],[5,6],[6,6]],
     SHOPPING: [[0,4],[1,4],[2,4],[3,4],[4,4],[5,4],[6,4],[7,4]],
     YOKED: [[0,7],[1,7],[2,7],[3,7],[4,7]],
-    CART: [[3,1],[4,1],[5,1],[6,1]],
+    CART: [[3,2],[4,2],[5,2],[6,2]],
     GET: [[0,0],[0,1],[0,2]],
-    ADDED: [[9,1],[9,2],[9,3],[9,4],[9,5]]
+    ADDED: [[9,1],[9,2],[9,3],[9,4],[9,5]],
+    POWDER: [[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]]
   }
 },
 
@@ -332,7 +348,7 @@ const signalPuzzles = [
   phrase: "IF YOU ARE SCARED OF ESCALATORS, THERE ARE STEPS YOU CAN TAKE.",
   HINT: "Stair-based solution available.",
 
-  words: ["ESCALATORS", "SCARED", "STEPS", "TAKE", "YOU", "ARE"],
+  words: ["ESCALATORS", "SCARED", "STEPS", "TAKE", "YOU", "ARE", "THERE", "CAN"],
 
   paths: {
     ESCALATORS: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0]],
@@ -340,26 +356,13 @@ const signalPuzzles = [
     STEPS: [[0,7],[1,7],[2,7],[3,7],[4,7]],
     TAKE: [[3,2],[4,2],[5,2],[6,2]],
     YOU: [[4,6],[5,6],[6,6]],
-    ARE: [[8,7],[9,7],[10,7]]
+    ARE: [[8,7],[9,7],[10,7]],
+    THERE: [[10,2],[10,3],[10,4],[10,5],[10,6]],
+    CAN: [[7,4],[8,4],[9,4]]
   }
 },
 
-{
-  phrase: "I WOULD AGREE WITH YOU, BUT THEN WE WOULD BOTH BE WRONG.",
-  HINT: "Consensus failure detected.",
 
-  words: ["AGREE", "WRONG", "WOULD", "BOTH", "YOU", "THEN", "BUT"],
-
-  paths: {
-    AGREE: [[0,1],[1,1],[2,1],[3,1],[4,1]],
-    WRONG: [[0,4],[1,4],[2,4],[3,4],[4,4]],
-    WOULD: [[0,7],[1,7],[2,7],[3,7],[4,7]],
-    BOTH: [[7,2],[7,3],[7,4],[7,5]],
-    YOU: [[8,7],[9,7],[10,7]],
-    THEN: [[6,0],[7,0],[8,0],[9,0]],
-    BUT: [[9,2],[9,3],[9,4]]
-  }
-},
 
 
 {
@@ -394,123 +397,18 @@ const signalPuzzles = [
   }
 },
 
-{
-  phrase: "I BROKE UP WITH YOUR CALCULATOR, IT KEPT COUNTING MY MISTAKES.",
-  HINT: "Emotional math error detected.",
 
-  words: ["CALCULATOR", "COUNTING", "MISTAKES", "BROKE", "YOUR"],
 
-  paths: {
-    CALCULATOR: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0]],
-    COUNTING: [[0,3],[1,3],[2,3],[3,3],[4,3],[5,3],[6,3],[7,3]],
-    MISTAKES: [[0,6],[1,6],[2,6],[3,6],[4,6],[5,6],[6,6],[7,6]],
-    BROKE: [[9,2],[9,3],[9,4],[9,5],[9,6]],
-    YOUR: [[8,3],[8,4],[8,5],[8,6]]
-  }
-},
+
+
+
 
 
 
 
 {
-  phrase: "THE SUNSET LOOP REPEATS EVERY TWENTY-FOUR HOURS.",
-
-  HINT: "Daylight cycle anomaly detected.",
-
-  words: [
-    "SUNSET",
-    "REPEATS",
-    "HOURS",
-    "EVERY",
-    "LOOP",
-    "THE",
-    "TWENTYFOUR"
-  ],
-
-  paths: {
-
-    SUNSET: [
-      [0,2],[0,3],[0,4],[0,5],[0,6],[0,7]
-    ],
-
-    REPEATS: [
-      [2,1],[2,2],[2,3],[2,4],[2,5],[2,6],[2,7]
-    ],
-
-    HOURS: [
-      [4,7],[5,7],[6,7],[7,7],[8,7]
-    ],
-
-    EVERY: [
-      [6,2],[6,3],[6,4],[6,5],[6,6]
-    ],
-
-    LOOP: [
-      [8,1],[8,2],[8,3],[8,4]
-    ],
-
-    THE: [
-      [10,3],[10,4],[10,5]
-    ],
-
-    TWENTYFOUR: [
-      [0,0],
-      [1,0],
-      [2,0],
-      [3,0],
-      [4,0],
-      [5,0],
-      [6,0],
-      [7,0],
-      [8,0],
-      [9,0]
-    ]
-  }
-},
-
-
-{
-  phrase: "THE TOASTER KNOWS YOUR NAME...",
-
-  HINT: "Breakfast machine acting strange.",
-
-  words: [
-    "KNOWS",
-    "YOUR",
-    "NAME",
-    "THE",
-    "TOASTER"
-  ],
-
-  paths: {
-
-    YOUR: [
-      [1,1],[1,2],[1,3],[1,4]
-    ],
-
-    THE: [
-      [3,5],[3,6],[3,7]
-    ],
-
-    KNOWS: [
-      [5,0],[5,1],[5,2],[5,3],[5,4]
-    ],
-
-    NAME: [
-      [7,7],[8,7],[9,7],[10,7]
-    ],
-
-    TOASTER: [
-      [9,0],[9,1],[9,2],[9,3],
-      [9,4],[9,5],[9,6]
-    ]
-  }
-},
-
-
-{
-  phrase: "YOUR BROWSER HAS TOO MANY TABS.",
-
+  phrase: "YOUR BROWSER HAS TOO MANY TABS OPEN",
+  
   HINT: "Chaotic internet activity detected.",
 
   words: [
@@ -518,7 +416,8 @@ const signalPuzzles = [
     "BROWSER",
     "TOO",
     "YOUR",
-    "MANY"
+    "MANY",
+    "OPEN"
   ],
 
   paths: {
@@ -541,7 +440,8 @@ const signalPuzzles = [
     BROWSER: [
       [10,1],[10,2],[10,3],
       [10,4],[10,5],[10,6],[10,7]
-    ]
+    ],
+    OPEN: [[3,0],[4,0],[5,0],[6,0]]
   }
 },
 
@@ -549,7 +449,7 @@ const signalPuzzles = [
 {
   phrase: "THE WIFI HAS QUESTIONS ABOUT THE FOOD PYRAMID.",
 
-  HINT: "Unusual internet behavior detected.",
+  HINT: "Unusual dietary meal planning detected.",
 
   words: [
     
@@ -610,7 +510,8 @@ const signalPuzzles = [
     "DISHES",
     "WILL",
     "THOSE",
-    "NOT"
+    "NOT",
+    "THEMSELVES"
   ],
 
   paths: {
@@ -633,7 +534,9 @@ const signalPuzzles = [
 
     DISHES: [
       [10,2],[10,3],[10,4],[10,5],[10,6],[10,7]
-    ]
+    ],
+    
+    THEMSELVES: [[0,1],[1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[7,1],[8,1],[9,1]]
   }
 },
 
@@ -726,42 +629,6 @@ const signalPuzzles = [
 
 
 
-{
-  phrase: "THE SUNSET LOOPED AGAIN TODAY.",
-
-  HINT: "Sky cycle repeated suspiciously.",
-
-  words: [
-    "SUNSET",
-    "LOOPED",
-    "AGAIN",
-    "TODAY",
-    "THE"
-  ],
-
-  paths: {
-
-    SUNSET: [
-      [0,0],[0,1],[0,2],[0,3],[0,4],[0,5]
-    ],
-
-    LOOPED: [
-      [2,0],[2,1],[2,2],[2,3],[2,4],[2,5]
-    ],
-
-    AGAIN: [
-      [4,0],[4,1],[4,2],[4,3],[4,4]
-    ],
-
-    TODAY: [
-      [6,0],[6,1],[6,2],[6,3],[6,4]
-    ],
-
-    THE: [
-      [5,10],[6,10],[7,10]
-    ]
-  }
-},
 
 
 {
@@ -824,41 +691,43 @@ const signalPuzzles = [
 },
 
 {
-  phrase: "THE MOON LOOKS RENDERED TONIGHT.",
-
-  HINT: "Suspicious sky graphics detected.",
+  phrase: "THE MOON LOOKS BEAUTIFULLY RENDERED TONIGHT",
+  HINT: "Suspiciously pleasant night sky graphics",
 
   words: [
     "RENDERED",
     "TONIGHT",
     "LOOKS",
     "MOON",
-    "THE"
+    "THE",
+    "BEAUTIFULLY"
   ],
 
   paths: {
 
     RENDERED: [
-      [0,0],[0,1],[0,2],[0,3],
-      [0,4],[0,5],[0,6],[0,7]
+      [2,6],[3,6],[4,6],[5,6],
+      [6,6],[7,6],[8,6],[9,6]
     ],
 
     TONIGHT: [
-      [2,0],[2,1],[2,2],[2,3],
-      [2,4],[2,5],[2,6]
+      [4,2],[5,2],[6,2],[7,2],
+      [8,2],[9,2],[10,2]
     ],
 
     LOOKS: [
-      [4,0],[4,1],[4,2],[4,3],[4,4]
+      [0,0],[1,0],[2,0],[3,0],[4,0]
     ],
 
     MOON: [
-      [6,0],[6,1],[6,2],[6,3]
+      [6,1],[7,1],[8,1],[9,1]
     ],
 
     THE: [
       [5,7],[6,7],[7,7]
-    ]
+    ],
+    
+    BEAUTIFULLY: [[0,4],[1,4],[2,4],[3,4],[4,4],[5,4],[6,4],[7,4],[8,4],[9,4],[10,4]]
   }
 },
 
@@ -928,10 +797,10 @@ const signalPuzzles = [
     ],
 
     GET: [
-      [6,5],[7,5],[8,5]
-    ]
+      [6,3], [6,4], [6,5]]
   }
 },
+
 
 {
   phrase: "WHY CAN I NOT FEEL MY LEGS?",
@@ -970,43 +839,20 @@ const signalPuzzles = [
   }
 },
 
-{
-  phrase: "HOLD MY HAND I AM SCARED!",
-
-  HINT: "Emotional support requested.",
-
-  words: [
-    "HOLD",
-    "HAND",
-    "SCARED"
-  ],
-
-  paths: {
-
-    HOLD: [
-      [0,0],[0,1],[0,2],[0,3]
-    ],
-
-    HAND: [
-      [2,0],[2,1],[2,2],[2,3]
-    ],
-
-    SCARED: [
-      [4,0],[4,1],[4,2],[4,3],[4,4],[4,5]
-    ]
-  }
-},
 
 {
-  phrase: "I SIGNED US UP FOR BALLROOM DANCING.",
+  phrase: "I SIGNED US UP FOR AN URBAN, KPOP, FUSION DANCE CLASS",
 
-  HINT: "Unexpected dance commitment detected.",
+  HINT: "Unexpected trending, Korean dance commitment detected.",
 
   words: [
     "SIGNED",
-    "BALLROOM",
-    "DANCING",
-    "FOR"
+    "URBAN",
+    "DANCE",
+    "FUSION",
+    "KPOP",
+    "FOR",
+    "CLASS"
   ],
 
   paths: {
@@ -1015,14 +861,22 @@ const signalPuzzles = [
       [0,0],[0,1],[0,2],[0,3],[0,4],[0,5]
     ],
 
-    BALLROOM: [
+    URBAN: [
       [2,0],[2,1],[2,2],[2,3],
-      [2,4],[2,5],[2,6],[2,7]
-    ],
+      [2,4]],
 
-    DANCING: [
-      [4,0],[4,1],[4,2],[4,3],[4,4],[4,5],[4,6]
+    DANCE: [
+      [4,0],[4,1],[4,2],[4,3],[4,4]
     ],
+    
+    KPOP: [[6,1],[7,1],[8,1],[9,1]],
+    
+    FUSION: [[0,7], [1,7], [2,7], [3,7], [4,7], [5,7]],
+    
+    CLASS: [[6,3], [7,3], [8,3], [9,3], [10,3]],
+
+
+
 
     FOR: [
       [6,5],[7,5],[8,5]
@@ -1073,108 +927,6 @@ const signalPuzzles = [
   }
 }, 
 
-{
-  phrase: "WOW, YOU MADE IT WORSE FASTER.",
-  HINT: "Improvement not detected.",
-
-  words: ["WOW", "YOU", "MADE", "WORSE", "FASTER"],
-
-  paths: {
-    WOW: [[0,0],[0,1],[0,2]],
-    YOU: [[0,4],[0,5],[0,6]],
-    MADE: [[2,0],[2,1],[2,2],[2,3]],
-    
-    WORSE: [[6,7],[7,7],[8,7],[9,7],[10,7]],
-    FASTER: [[4,4],[5,4],[6,4],[7,4],[8,4],[9,4]]
-  }
-},
-
-{
-  phrase: "OH COOL, ANOTHER TERRIBLE IDEA.",
-  HINT: "Decision quality declining.",
-
-  words: [ "COOL", "ANOTHER", "TERRIBLE", "IDEA"],
-
-  paths: {
-    
-    COOL: [[2,0],[2,1],[2,2],[2,3]],
-    ANOTHER: [[4,0],[4,1],[4,2],[4,3],[4,4],[4,5],[4,6]],
-    TERRIBLE: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[7,7]],
-    IDEA: [[7,0],[7,1],[7,2],[7,3]]
-  }
-},
-
-{
-  phrase: "THAT FIX CREATED THREE NEW PROBLEMS!",
-  HINT: "Repair attempt became folklore.",
-
-  words: ["THAT", "FIX", "CREATED", "THREE", "NEW", "PROBLEMS"],
-
-  paths: {
-    THAT: [[0,0],[0,1],[0,2],[0,3]],
-    FIX: [[2,0],[2,1],[2,2]],
-    CREATED: [[4,5],[5,5],[6,5],[7,5],[8,5],[9,5],[10,5]],
-    THREE: [[6,0],[6,1],[6,2],[6,3],[6,4]],
-    NEW: [[8,0],[9,0],[10,0]],
-    PROBLEMS: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[7,7]]
-  }
-},
-
-{
-  phrase: "I CAN SMELL THE BAD DECISION.",
-  HINT: "Regret detected nearby.",
-
-  words: ["CAN", "SMELL", "BAD", "DECISION"],
-
-  paths: {
-    
-    CAN: [[8,7],[9,7],[10,7]],
-    SMELL: [[2,0],[2,1],[2,2],[2,3],[2,4]],
-    
-    BAD: [[6,0],[6,1],[6,2]],
-    DECISION: [[0,5],[1,5],[2,5],[3,5],[4,5],[5,5],[6,5],[7,5]]
-  }
-}, 
-
-
-
-{
-  phrase: "WHY DID YOU CLICK THAT! NOW WE ARE CURSED!",
-  HINT: "Supernatural consequences unlocked.",
-
-  words: ["WHY", "DID", "YOU", "CLICK", "THAT", "NOW", "ARE", "CURSED"],
-
-  paths: {
-    WHY: [[0,0],[0,1],[0,2]],
-    
-
-
-    CLICK: [
-      [2,0],[2,1],[2,2],[2,3],[2,4]
-    ],
-
-    DID: [
-      [0,6],[1,6],[2,6]
-    ],
-
-    NOW: [
-      [5,1],[5,2],[5,3]
-    ],
-
-    YOU: [
-      [8,0],[9,0],[10,0]
-    ],
-
-    ARE: [
-      [3,7],[4,7],[5,7]
-    ],
-
-    CURSED: [
-      [7,2],[7,3],[7,4],
-      [7,5],[7,6],[7,7]
-    ]
-  }
-},
 
 
 {
@@ -1194,27 +946,13 @@ const signalPuzzles = [
   }
 },
 
-{
-  phrase: "EVEN THE LOADING SCREEN GAVE UP.",
-  HINT: "Patience bar depleted.",
 
-  words: ["EVEN", "LOADING", "SCREEN", "GAVE"],
-
-  paths: {
-    EVEN: [[0,0],[0,1],[0,2],[0,3]],
-    
-    LOADING: [[4,3],[5,3],[6,3],[7,3],[8,3],[9,3],[10,3]],
-    SCREEN: [[4,5],[5,5],[6,5],[7,5],[8,5],[9,5]],
-    GAVE: [[0,7],[1,7],[2,7],[3,7]]
-   
-  }
-},
 
 
 
 {
   phrase: "THE SYSTEM REQUESTS A HOT POCKET.",
-  HINT: "Replacement human recommended.",
+  HINT: "Break-time munchies requested.",
 
   words: ["THE", "SYSTEM", "REQUESTS", "HOT", "POCKET"],
 
@@ -1273,7 +1011,7 @@ const signalPuzzles = [
   HINT: "Router attitude detected.",
   words: ["SOUND", "ANGRY", "DOES", "WIFI", "WHY", "THE"],
   paths: {
-    SOUND: [[0,0],[1,0],[2,0],[3,0],[4,0]],
+    SOUND: [[5,6],[6,6],[7,6],[8,6],[9,6]],
     WIFI: [[0,2],[1,2],[2,2],[3,2]],
     ANGRY: [[0,4],[1,4],[2,4],[3,4],[4,4]],
     DOES: [[6,0],[6,1],[6,2],[6,3]],
@@ -1298,31 +1036,21 @@ const signalPuzzles = [
 },
 
 {
-  phrase: "THE MAINFRAME IS ASKING WEIRD QUESTIONS...",
+  phrase: "THE MAINFRAME IS ASKING WEIRD QUESTIONS AGAIN.",
   HINT: "Old computer got curious.",
-  words: ["MAINFRAME", "QUESTIONS", "ASKING", "WEIRD", "THE"],
+  words: ["MAINFRAME", "QUESTIONS", "ASKING", "WEIRD", "THE", "AGAIN"],
   paths: {
     MAINFRAME: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0]],
     QUESTIONS: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[7,2],[8,2]],
     ASKING: [[0,4],[1,4],[2,4],[3,4],[4,4],[5,4]],
     WEIRD: [[0,6],[1,6],[2,6],[3,6],[4,6]],
-    THE: [[9,0],[9,1],[9,2]]
+    THE: [[9,0],[9,1],[9,2]],
+    AGAIN: [[6,6],[7,6],[8,6],[9,6],[10,6]]
     
   }
 },
 
-{
-  phrase: "SYSTEM CONFUSION REACHING CRITICAL LEVELS.",
-  HINT: "Thinking machine is cooked.",
-  words: ["CONFUSION", "REACHING", "CRITICAL", "SYSTEM", "LEVELS"],
-  paths: {
-    CONFUSION: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0]],
-    REACHING: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[7,2]],
-    CRITICAL: [[0,4],[1,4],[2,4],[3,4],[4,4],[5,4],[6,4],[7,4]],
-    LEVELS: [[5,7],[6,7],[7,7],[8,7],[9,7],[10,7]],
-    SYSTEM: [[9,0],[9,1],[9,2],[9,3],[9,4],[9,5]]
-  }
-},
+
 
 {
   phrase: "YOU LOOK LIKE YOU OWN FIFTY FLASHLIGHTS...",
@@ -1353,54 +1081,26 @@ const signalPuzzles = [
 },
 
 {
-  phrase: "YOUR COMPUTER IS AFRAID TO UPDATE.",
+  phrase: "YOUR COMPUTER IS AFRAID TO UPDATE, AND FRANKLY, SO AM I",
   HINT: "Update anxiety detected.",
-  words: ["COMPUTER", "AFRAID", "UPDATE", "YOUR"],
+  words: ["COMPUTER", "AFRAID", "UPDATE", "YOUR", "FRANKLY"],
   paths: {
     COMPUTER: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]],
     AFRAID: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2]],
     UPDATE: [[0,4],[1,4],[2,4],[3,4],[4,4],[5,4]],
     YOUR: [[7,4],[7,5],[7,6],[7,7]],
+    FRANKLY:[[9,0],[9,1],[9,2],[9,3],[9,4],[9,5],[9,6]]
     
   }
 },
 
-{
-  phrase: "STOP YELLING AT THE CAPTCHA!",
-  HINT: "Robot verification failed.",
 
-  words: ["STOP", "YELLING", "CAPTCHA", "THE", "AT"],
-
-  paths: {
-
-    CAPTCHA: [
-      [0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0]
-    ],
-
-    YELLING: [
-      [0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2]
-    ],
-
-    STOP: [
-      [0,4],[1,4],[2,4],[3,4]
-    ],
-
-    THE: [
-      [0,6],[1,6],[2,6]
-    ],
-
-    AT: [
-      [5,6],[6,6]
-    ]
-
-  }
-},
 
 {
-  phrase: "HOW ABOUT YOU CLOSE THOSE 47 TABS?",
+  phrase: "HOW ABOUT YOU CLOSE THOSE FORTY-SEVEN TABS?",
   HINT: "Browser stability questionable.",
 
-  words: ["ABOUT", "CLOSE", "THOSE", "TABS", "YOU", "HOW"],
+  words: ["ABOUT", "CLOSE", "THOSE", "TABS", "YOU", "HOW", "FORTY", "SEVEN"],
 
   paths: {
     ABOUT: [[0,0],[1,0],[2,0],[3,0],[4,0]],
@@ -1408,20 +1108,24 @@ const signalPuzzles = [
     THOSE: [[0,4],[1,4],[2,4],[3,4],[4,4]],
     TABS: [[0,6],[1,6],[2,6],[3,6]],
     YOU: [[7,5],[7,6],[7,7]],
-    HOW: [[6,0], [6,1], [6,2]]
+    HOW: [[6,0], [6,1], [6,2]],
+    FORTY: [[8,1],[8,2],[8,3],[8,4],[8,5]],
+    SEVEN: [[10,2],[10,3],[10,4],[10,5],[10,6]]
+
   }
 },
 
 {
-  phrase: "I BET YOU COLLECT OLD WIRES.",
+  phrase: "I BET YOU COLLECT MICRO-USB CABLES.",
   HINT: "Cable hoarding suspected.",
-  words: ["COLLECT", "WIRES", "OLD", "BET", "YOU"],
+  words: ["COLLECT", "MICRO", "USB", "BET", "YOU", "CABLES"],
   paths: {
     COLLECT: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0]],
-    WIRES: [[0,2],[1,2],[2,2],[3,2],[4,2]],
-    OLD: [[0,4],[1,4],[2,4]],
+    MICRO: [[0,2],[1,2],[2,2],[3,2],[4,2]],
+    USB: [[0,4],[1,4],[2,4]],
     BET: [[0,6],[1,6],[2,6]],
-    YOU: [[7,5],[7,6],[7,7]]
+    YOU: [[7,5],[7,6],[7,7]],
+    CABLES: [[9,2],[9,3],[9,4],[9,5],[9,6],[9,7]]
   }
 },
 
@@ -1443,28 +1147,31 @@ const signalPuzzles = [
   phrase: "DID YOU JUST SAY \"OOPS\" BEFORE YOU FELL?",
   HINT: "Gravity event confirmed.",
 
-  words: ["BEFORE","OOPS","FELL","JUST","YOU"],
+  words: ["BEFORE","OOPS","FELL","JUST","YOU", "DID","SAY"],
 
   paths: {
     BEFORE: [[1,0],[2,0],[3,0],[4,0],[5,0],[6,0]],
     OOPS: [[0,3],[1,3],[2,3],[3,3]],
     FELL: [[5,3],[6,3],[7,3],[8,3]],
     JUST: [[10,0],[10,1],[10,2],[10,3]],
-    YOU: [[3,5],[3,6],[3,7]]
+    YOU: [[3,5],[3,6],[3,7]],
+    DID: [[8,6],[9,6],[10,6]],
+    SAY: [[5,5], [5,6],[5,7]]
   }
 },
 {
   phrase: "PLEASE, TELL THE VACUUM I SAID HOWDY.",
   HINT: "Appliance diplomacy initiated.",
 
-  words: ["VACUUM","HOWDY","TELL","SAID", "THE"],
+  words: ["VACUUM","HOWDY","TELL","SAID", "THE", "PLEASE"],
 
   paths: {
     VACUUM: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0]],
     HOWDY: [[0,2],[1,2],[2,2],[3,2],[4,2]],
     TELL: [[0,4],[1,4],[2,4],[3,4]],
     SAID: [[0,6],[1,6],[2,6],[3,6]],
-    THE: [[6, 4], [6,5], [6,6]]
+    THE: [[6,4], [6,5], [6,6]],
+    PLEASE: [[9,3],[9,4],[9,5],[9,6],[9,7],[9,8]]
   }
 },
 
@@ -1483,21 +1190,7 @@ const signalPuzzles = [
 },
 
 
-{
-  phrase: "I GUESS THE STORE WAS OUT OF DEODORANT AGAIN...",
-  HINT: "Personal atmosphere unstable.",
 
-  words: ["STORE", "AGAIN", "GUESS", "OUT", "THE", "DEODORANT"],
-
-  paths: {
-    STORE: [[0,0],[1,0],[2,0],[3,0],[4,0]],
-    AGAIN: [[0,2],[1,2],[2,2],[3,2],[4,2]],
-    GUESS: [[0,4],[1,4],[2,4],[3,4],[4,4]],
-    OUT: [[0,6],[1,6],[2,6]],
-    THE: [[0,7],[1,7],[2,7]],
-    DEODORANT: [[1,5], [2,5], [3,5], [4,5], [5,5], [6,5],[7,5], [8,5], [9,5]]
-  }
-},
 
 {
   phrase: "I AM NOT GOING TO TELL YOU AGAIN, STOP SPILLING REDBULL ON ME!",
@@ -1569,14 +1262,16 @@ const signalPuzzles = [
   }
 },
 {
-  phrase: "EXPLAIN CRYPTO TO ME AGAIN.",
-  HINT: "Phone financial confusion detected.",
-  words: ["EXPLAIN", "CRYPTO", "AGAIN"],
+  phrase: "I CAN NOT SLEEP, EXPLAIN CRYPTO TO ME AGAIN.",
+  HINT: "Bedtime story on digital currency.",
+  words: ["EXPLAIN", "CRYPTO", "AGAIN", "CAN", "NOT", "SLEEP"],
   paths: {
     EXPLAIN: [[0,0],[0,1],[0,2],[0,3],[0,4],[0,5],[0,6]],
     CRYPTO: [[2,0],[2,1],[2,2],[2,3],[2,4],[2,5]],
-    
-    AGAIN: [[6,0],[6,1],[6,2],[6,3],[6,4]]
+    AGAIN: [[6,0],[6,1],[6,2],[6,3],[6,4]],
+    CAN: [[1,6],[2,6],[3,6]],
+    NOT: [[6,6],[7,6],[8,6]],
+    SLEEP: [[2,7],[3,7],[4,7],[5,7],[6,7]]
   }
 },
 
@@ -1665,7 +1360,7 @@ const signalPuzzles = [
   words: ["WHY", "YOU", "THINK", "TWENTY", "PERCENT", "BATTERY", "GOOD", "ENOUGH"],
   paths: {
     WHY: [[0,0],[0,1],[0,2]],
-    YOU: [[2,0],[3,0],[4,0]],
+    YOU: [[4,0],[5,0],[6,0]],
 
     THINK: [[2,2],[3,2],[4,2],[5,2],[6,2]],
     TWENTY: [[2,5],[3,5],[4,5],[5,5],[6,5],[7,5]],
@@ -1677,22 +1372,7 @@ const signalPuzzles = [
   }
 },
 
-{
-  phrase: "TAKE ME TO THE RESTROOM, THAT LAST UPDATE MESSED ME UP.",
-  HINT: "Update digestion failed.",
-  words: ["TAKE", "THE", "RESTROOM", "THAT", "LAST", "UPDATE", "MESSED"],
-  paths: {
-    TAKE: [[0,0],[0,1],[0,2],[0,3]],
-   
-    THE: [[2,2],[3,2],[4,2]],
-    RESTROOM: [[3,7],[4,7],[5,7],[6,7],[7,7],[8,7],[9,7],[10,7]],
-    THAT: [[2,0],[3,0],[4,0],[5,0]],
-    LAST: [[1,5],[2,5],[3,5],[4,5]],
-    UPDATE: [[7,0],[7,1],[7,2],[7,3],[7,4],[7,5]],
-    MESSED: [[9,0],[9,1],[9,2],[9,3],[9,4],[9,5]],
-   
-  }
-},
+
 
 {
   phrase: "THE ROUTER READ YOUR DISCORD CHAT AGAIN...",
@@ -1776,40 +1456,839 @@ THE: [[6,4],[6,5],[6,6]]
 },
 
 {
-  phrase: "WHILE I TRUST GARFIELD ON LASAGNA, HE IS SO WRONG ABOUT MONDAYS, THEY ARE THE BEST!",
+  phrase: "SO WHY DID GARFIELD HATE MONDAYS SO MUCH?",
   HINT: "Monday opinion from a 90's cartoon cat detected.",
-  words: ["WHILE", "TRUST", "GARFIELD", "LASAGNA", "WRONG", "ABOUT", "MONDAYS", "THEY", "ARE", "BEST"],
+  words: ["GARFIELD", "WHY", "DID", "HATE", "MONDAYS", "MUCH"],
   paths: {
     GARFIELD: [[3,6],[4,6],[5,6],[6,6],[7,6],[8,6],[9,6],[10,6]],
-    LASAGNA: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7]],
+    HATE: [[2,2],[3,2],[4,2],[5,2]],
+    WHY: [[8,4],[9,4],[10,4]],
     MONDAYS: [[2,5],[3,5],[4,5],[5,5],[6,5],[7,5],[8,5]],
+     DID: [[2,0],[3,0],[4,0]],
+     MUCH: [[7,1],[8,1],[9,1],[10,1]]   
+  }
+},
 
-    WHILE: [[0,2],[0,3],[0,4],[0,5],[0,6]],
-    TRUST: [[0,1],[1,1],[2,1],[3,1],[4,1]],
-    WRONG: [[6,3],[7,3],[8,3],[9,3],[10,3]],
-    ABOUT: [[0,0],[1,0],[2,0],[3,0],[4,0]],
+{
+  phrase: "I can not believe you had to google that",
+  HINT: "Suspicious search detected.",
+  words: ["CAN","BELIEVE","NOT","YOU","GOOGLE","THAT", "HAD"],
 
-    THEY: [[7,1],[8,1],[9,1],[10,1]],
-    BEST: [[2,2],[3,2],[4,2],[5,2]],
-    ARE: [[8,4],[9,4],[10,4]]
+  paths: {
+    CAN: [[5,0],[6,0],[7,0]],
+    BELIEVE: [[1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[7,1]],
+    NOT: [[0,2],[1,2],[2,2]],
+    YOU: [[6,7],[7,7],[8,7]],
+    GOOGLE: [[3,4],[4,4],[5,4],[6,4],[7,4],[8,4]],
+    THAT: [[1,5],[2,5],[3,5],[4,5]],
+    HAD: [[0,6],[1,6],[2,6]]
+  }
+},
+
+{
+  phrase: "WHY DID YOU CLICK THAT, NOW WE ARE CURSED!",
+  HINT: "Supernatural consequences unlocked.",
+
+  words: ["WHY", "DID", "YOU", "CLICK", "THAT", "NOW", "ARE", "CURSED"],
+
+  paths: {
+    WHY: [[0,0],[0,1],[0,2]],
+    
+    THAT: [[7,1],[7,2],[7,3],[7,4]],
+
+    CLICK: [
+      [2,0],[2,1],[2,2],[2,3],[2,4]
+    ],
+
+    DID: [
+      [0,6],[1,6],[2,6]
+    ],
+
+    NOW: [
+      [5,1],[5,2],[5,3]
+    ],
+
+    YOU: [
+      [8,0],[9,0],[10,0]
+    ],
+
+    ARE: [
+      [3,7],[4,7],[5,7]
+    ],
+
+    CURSED: [
+      [5,5],[6,5],[7,5],
+      [8,5],[9,5],[10,5]
+    ]
+  }
+},
+
+{
+  phrase: "SOMETHING CRAWLED OUT OF THE RECYCLE BIN.",
+  HINT: "Trash management has escalated.",
+
+  words: [
+    "SOMETHING",
+    "CRAWLED",
+    "OUT",
+    "RECYCLE",
+    "BIN"
+  ],
+
+  paths: {
+
+    SOMETHING: [
+      [0,0],[1,0],[2,0],[3,0],
+      [4,0],[5,0],[6,0],[7,0],[8,0]
+    ],
+
+    CRAWLED: [
+      [0,2],[1,2],[2,2],[3,2],
+      [4,2],[5,2],[6,2]
+    ],
+
+    OUT: [
+      [0,5],[1,5],[2,5]
+    ],
+
+    RECYCLE: [
+      [0,7],[1,7],[2,7],[3,7],
+      [4,7],[5,7],[6,7]
+    ],
+
+    BIN: [
+      [10,3],[10,4],[10,5]
+    ]
+  }
+},
+
+{
+  phrase: "THE CURSOR IS MOVING ON ITS OWN AGAIN.",
+  HINT: "Input device acting suspicious.",
+
+  words: [
+    "CURSOR",
+    "MOVING",
+    "OWN",
+    "AGAIN",
+    "THE"
+  ],
+
+  paths: {
+
+    CURSOR: [
+      [0,0],[1,0],[2,0],
+      [3,0],[4,0],[5,0]
+    ],
+
+    MOVING: [
+      [0,2],[1,2],[2,2],
+      [3,2],[4,2],[5,2]
+    ],
+
+    OWN: [
+      [0,5],[1,5],[2,5]
+    ],
+
+    AGAIN: [
+      [6,7],[7,7],[8,7],[9,7],[10,7]
+    ],
+
+    THE: [
+      [10,0],[10,1],[10,2]
+    ]
+  }
+},
+{
+  phrase: "THAT BUTTON WAS KEEPING THE DEMONS OUT!",
+  HINT: "Containment procedures disabled.",
+
+  words: [
+    "BUTTON",
+    "KEEPING",
+    "DEMONS",
+    "OUT",
+    "THAT",
+    "WAS"
+  ],
+
+  paths: {
+
+    BUTTON: [
+      [0,0],[1,0],[2,0],
+      [3,0],[4,0],[5,0]
+    ],
+    
+    WAS: [[2,4],[3,4],[4,4]],
+
+    KEEPING: [
+      [0,2],[1,2],[2,2],
+      [3,2],[4,2],[5,2],[6,2]
+    ],
+
+    DEMONS: [
+      [0,7],[1,7],[2,7],
+      [3,7],[4,7],[5,7]
+    ],
+
+    OUT: [
+      [10,0],[10,1],[10,2]
+    ],
+
+    THAT: [
+      [8,3],[8,4],[8,5],[8,6]
+    ]
+  }
+},
+
+{
+  phrase: "YOU DO KNOW THE CAPTCHA GET'S IT'S FEELINGS HURT WHEN YOU YELL AT IT RIGHT?",
+
+  HINT: "Robot verification emotionally compromised.",
+
+  words: [
+    "CAPTCHA",
+    "FEELINGS",
+    "YELL",
+    "HURT",
+    "RIGHT",
+    "YOU",
+    "KNOW"
+  ],
+
+  paths: {
+    
+    KNOW: [[7,4],[7,5],[7,6],[7,7]],
+    
+    CAPTCHA: [
+      [0,0],[1,0],[2,0],[3,0],
+      [4,0],[5,0],[6,0]
+    ],
+
+    FEELINGS: [
+      [0,2],[1,2],[2,2],[3,2],
+      [4,2],[5,2],[6,2],[7,2]
+    ],
+
+    RIGHT: [
+      [0,7],[1,7],[2,7],[3,7],[4,7]
+    ],
+
+    HURT: [
+      [9,0],[9,1],[9,2],[9,3]
+    ],
+
+    YELL: [
+      [10,4],[10,5],[10,6],[10,7]
+    ],
+
+    YOU: [
+      [1,4],[2,4],[3,4]
+    ]
+
+  }
+},
+
+{
+  phrase: "I'M NOT A RAT, BUT THE TOASTER HAS BEEN COMPROMISED.",
+
+  HINT: "Breakfast security breach detected.",
+
+  words: [
+    "TOASTER",
+    "COMPROMISED",
+    "RAT",
+    "NOT",
+    "HAS",
+    "BEEN"
+  ],
+
+  paths: {
+  
+    BEEN: [[3,4],[3,5],[3,6],[3,7]],
+
+    TOASTER: [
+      [0,0],[1,0],[2,0],[3,0],
+      [4,0],[5,0],[6,0]
+    ],
+
+    COMPROMISED: [
+      [0,2],[1,2],[2,2],[3,2],
+      [4,2],[5,2],[6,2],[7,2],
+      [8,2],[9,2],[10,2]
+    ],
+
+    RAT: [
+      [1,5],[1,6],[1,7]
+    ],
+
+    NOT: [
+      [5,5],[5,6],[5,7]
+    ],
+
+    HAS: [
+      [9,5],[9,6],[9,7]
+    ]
+
+  }
+},
+
+{
+  phrase: "I THINK THE AIR FRYER WITNESSED SOMETHING IT SHOULD NOT HAVE.",
+
+  HINT: "Kitchen appliance saw too much.",
+
+  words: [
+    "FRYER",
+    "WITNESSED",
+    "SOMETHING",
+    "THINK",
+    "HAVE",
+    "AIR",
+    "SHOULD",
+    "NOT"
+  ],
+
+  paths: {
+
+    FRYER: [
+      [0,0],[1,0],[2,0],[3,0],[4,0]
+    ],
+
+    WITNESSED: [
+      [0,2],[1,2],[2,2],[3,2],
+      [4,2],[5,2],[6,2],[7,2],[8,2]
+    ],
+
+    SOMETHING: [
+      [0,7],[1,7],[2,7],[3,7],
+      [4,7],[5,7],[6,7],[7,7],[8,7]
+    ],
+
+    THINK: [
+      [10,0],[10,1],[10,2],[10,3],[10,4]
+    ],
+
+    HAVE: [
+      [5,4],[6,4],[7,4],[8,4]
+    ],
+
+    AIR: [
+      [6,0],[7,0],[8,0]
+    ],
+    SHOULD: [[0,5],[1,5],[2,5],[3,5],[4,5],[5,5]],
+    
+    NOT: [[8,6],[9,6],[10,6]]
+
+  }
+},
+
+
+{
+  phrase: "I THINK THAT UPDATE GAVE MY PROCESSOR A STOMACH BUG.",
+  HINT: "System nausea detected.",
+
+  words: [
+    "UPDATE",
+    "PROCESSOR",
+    "STOMACH",
+    "BUG",
+    "THINK",
+    "GAVE"
+  ],
+
+  paths: {
+
+    UPDATE: [
+      [0,0],[1,0],[2,0],
+      [3,0],[4,0],[5,0]
+    ],
+
+    PROCESSOR: [
+      [0,2],[1,2],[2,2],[3,2],
+      [4,2],[5,2],[6,2],[7,2],
+      [8,2]
+    ],
+
+    STOMACH: [
+      [10,0],[10,1],[10,2],[10,3],
+      [10,4],[10,5],[10,6]
+    ],
+
+    BUG: [
+      [7,7],[8,7],[9,7]
+    ],
+
+    THINK: [
+      [1,6],[2,6],[3,6],[4,6],[5,6]
+    ],
+
+    GAVE: [
+      [5,4],[6,4],[7,4],[8,4]
+    ]
+
+  }
+},
+
+{
+  phrase: "SYSTEM PANIC REACHING SILLY GOOSE LEVELS.",
+  HINT: "Computer has entered nonsense mode.",
+
+  words: [
+    "SYSTEM",
+    "PANIC",
+    "REACHING",
+    "SILLY",
+    "GOOSE",
+    "LEVELS"
+  ],
+
+  paths: {
+
+    SYSTEM: [
+      [0,0],[1,0],[2,0],[3,0],[4,0],[5,0]
+    ],
+
+    REACHING: [
+      [0,2],[1,2],[2,2],[3,2],
+      [4,2],[5,2],[6,2],[7,2]
+    ],
+
+    LEVELS: [
+      [0,7],[1,7],[2,7],[3,7],[4,7],[5,7]
+    ],
+
+    PANIC: [
+      [9,0],[9,1],[9,2],[9,3],[9,4]
+    ],
+
+    SILLY: [
+      [10,0],[10,1],[10,2],[10,3],[10,4]
+    ],
+
+    GOOSE: [
+      [7,3],[7,4],[7,5],[7,6],[7,7]
+    ]
+
+  }
+},
+
+{
+  phrase: "I HAVE QUESTIONS ABOUT COWBOY BOOTS.",
+
+  HINT: "Western fashion inquiry detected.",
+
+  words: [
+    "QUESTIONS",
+    "COWBOY",
+    "BOOTS",
+    "HAVE",
+    "ABOUT"
+  ],
+
+  paths: {
+
+    QUESTIONS: [
+      [0,0],[1,0],[2,0],[3,0],
+      [4,0],[5,0],[6,0],[7,0],[8,0]
+    ],
+
+    COWBOY: [
+      [0,2],[1,2],[2,2],[3,2],
+      [4,2],[5,2]
+    ],
+
+    ABOUT: [
+      [0,7],[1,7],[2,7],[3,7],[4,7]
+    ],
+
+    HAVE: [
+      [9,0],[9,1],[9,2],[9,3]
+    ],
+
+    BOOTS: [
+      [10,3],[10,4],[10,5],[10,6],[10,7]
+    ]
+
+  }
+},
+{
+  phrase: "THIS DESERVES A VICTORY BURRITO.",
+
+  HINT: "Celebration meal authorized.",
+
+  words: [
+    "DESERVES",
+    "VICTORY",
+    "BURRITO",
+    "THIS"
+  ],
+
+  paths: {
+
+    DESERVES: [
+      [0,0],[1,0],[2,0],[3,0],
+      [4,0],[5,0],[6,0],[7,0]
+    ],
+
+    VICTORY: [
+      [0,2],[1,2],[2,2],[3,2],
+      [4,2],[5,2],[6,2]
+    ],
+
+    BURRITO: [
+      [0,7],[1,7],[2,7],[3,7],
+      [4,7],[5,7],[6,7]
+    ],
+
+    THIS: [
+      [10,0],[10,1],[10,2],[10,3]
+    ]
+
+  }
+},
+
+
+{
+  phrase: "I HAVE BECOME INTERESTED IN LEARNING THE BASSOON.",
+
+  HINT: "Unexpected musical ambitions detected.",
+
+  words: [
+    "INTERESTED",
+    "LEARNING",
+    "BASSOON",
+    "BECOME",
+    "HAVE"
+  ],
+
+  paths: {
+
+    INTERESTED: [
+      [0,0],[1,0],[2,0],[3,0],[4,0],
+      [5,0],[6,0],[7,0],[8,0],[9,0]
+    ],
+
+    LEARNING: [
+      [0,2],[1,2],[2,2],[3,2],
+      [4,2],[5,2],[6,2],[7,2]
+    ],
+
+    BASSOON: [
+      [0,7],[1,7],[2,7],[3,7],
+      [4,7],[5,7],[6,7]
+    ],
+
+    BECOME: [
+      [10,0],[10,1],[10,2],
+      [10,3],[10,4],[10,5]
+    ],
+
+    HAVE: [
+      [8,4],[8,5],[8,6],[8,7]
+    ]
+
+  }
+},
+
+{
+  phrase: "I HAVE STRONG OPINIONS ABOUT SOCKS NOW.",
+  HINT: "Fashion judgment module activated.",
+
+  words: ["STRONG", "OPINIONS", "ABOUT", "SOCKS", "NOW", "HAVE"],
+
+  paths: {
+    STRONG: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0]],
+
+    OPINIONS: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[7,2]],
+
+    ABOUT: [[0,7],[1,7],[2,7],[3,7],[4,7]],
+
+    SOCKS: [[9,0],[9,1],[9,2],[9,3],[9,4]],
+
+    NOW: [[10,5],[10,6],[10,7]],
+
+    HAVE: [[6,4],[6,5],[6,6],[6,7]]
+  }
+},
+
+{
+  phrase: "I WOULD LIKE TO PET A COW.",
+  HINT: "Farm animal friendship request detected.",
+
+  words: ["WOULD", "LIKE", "PET", "COW"],
+
+  paths: {
+    WOULD: [[0,0],[1,0],[2,0],[3,0],[4,0]],
+
+    LIKE: [[0,2],[1,2],[2,2],[3,2]],
+
+    PET: [[6,5],[6,6],[6,7]],
+
+    COW: [[10,0],[10,1],[10,2]]
+  }
+},
+
+{
+  phrase: "THE TOASTER HAS BEEN LOSING MONEY ON THOSE GAMBLING APPS AGAIN.",
+  HINT: "Breakfast appliance financial crimes detected.",
+
+  words: ["TOASTER", "LOSING", "MONEY", "GAMBLING", "APPS", "AGAIN", "BEEN", "THOSE"],
+
+  paths: {
+    TOASTER: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0]],
+
+    LOSING: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2]],
+
+    GAMBLING: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[7,7]],
+
+    MONEY: [[8,0],[8,1],[8,2],[8,3],[8,4]],
+
+    APPS: [[10,0],[10,1],[10,2],[10,3]],
+
+    AGAIN: [[9,3],[9,4],[9,5],[9,6],[9,7]],
+    
+    BEEN: [[2,4],[3,4],[4,4],[5,4]],
+    
+    THOSE: [[1,6],[2,6],[3,6],[4,6],[5,6]]
+  }
+},
+
+{
+  phrase: "IT IS IMPOSSIBLE FOR ME TO COMPUTE HOW MUCH I WANT A PET HAMSTER.",
+  HINT: "Rodent desire exceeds processing limits.",
+
+  words: ["IMPOSSIBLE", "COMPUTE", "HAMSTER", "WANT", "MUCH", "PET", "HOW", "FOR"],
+
+  paths: {
+    IMPOSSIBLE: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0]],
+
+    COMPUTE: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2]],
+
+    HAMSTER: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7]],
+
+    WANT: [[8,3],[8,4],[8,5],[8,6]],
+
+    MUCH: [[10,0],[10,1],[10,2],[10,3]],
+
+    PET: [[10,5],[10,6],[10,7]],
+    
+    FOR: [[4,4],[5,4],[6,4]],
+    HOW: [[1,6],[2,6],[3,6]]
     
   }
-}
+},
+
+{
+  phrase: "UNLESS YOU WANT ANOTHER MARIACHI BAND WAITING FOR YOU WHEN YOU GET HOME, DO NOT LEAVE ME UNATTENDED.",
+
+  HINT: "System cannot be trusted alone.",
+
+  words: [
+    "UNLESS",
+    "MARIACHI",
+    "WAITING",
+    "ANOTHER",
+    "WANT",
+    "WHEN",
+    "HOME",
+    "LEAVE",
+    "NOT",
+    "UNATTENDED"
+  ],
+
+  paths: {
+
+    UNLESS: [
+      [0,0],[1,0],[2,0],[3,0],[4,0],[5,0]
+    ],
+
+    MARIACHI: [
+      [0,2],[1,2],[2,2],[3,2],
+      [4,2],[5,2],[6,2],[7,2]
+    ],
+
+    ANOTHER: [
+      [0,4],[1,4],[2,4],[3,4],
+      [4,4],[5,4],[6,4]
+    ],
+
+    WAITING: [
+      [0,7],[1,7],[2,7],[3,7],
+      [4,7],[5,7],[6,7]
+    ],
+
+    WANT: [
+      [3,3],[4,3],[5,3],[6,3]
+    ],
+
+    HOME: [
+      [0,5],[1,5],[2,5],[3,5]
+    ],
+
+    WHEN: [
+      [7,0],[8,0],[9,0],[10,0]
+    ],
+
+    NOT: [
+      [9,2],[9,3],[9,4]
+    ],
+
+    LEAVE: [
+      [6,5],[7,5],[8,5],[9,5],[10,5]
+    ],
+    
+    UNATTENDED: [[0,6],[1,6],[2,6],[3,6],[4,6],[5,6],[6,6],[7,6],[8,6],[9,6]]
+
+  }
+},
+
+{
+  phrase: "SEE ALL THIS CAT HAIR? THIS IS EXACTLY WHAT I WAS WORRIED ABOUT!",
+
+  HINT: "Feline evidence has been detected.",
+
+  words: [
+    "EXACTLY",
+    "WORRIED",
+    "ABOUT",
+    "HAIR",
+    "CAT",
+    "SEE",
+    "ALL",
+    "THIS"
+  ],
+
+  paths: {
+
+    EXACTLY: [
+      [0,0],[1,0],[2,0],[3,0],
+      [4,0],[5,0],[6,0]
+    ],
+
+    WORRIED: [
+      [0,2],[1,2],[2,2],[3,2],
+      [4,2],[5,2],[6,2]
+    ],
+
+    ABOUT: [
+      [0,7],[1,7],[2,7],[3,7],[4,7]
+    ],
+
+    HAIR: [
+      [8,0],[8,1],[8,2],[8,3]
+    ],
+
+    CAT: [
+      [10,0],[10,1],[10,2]
+    ],
+
+    SEE: [
+      [10,5],[10,6],[10,7]
+    ],
+    ALL: [[0,4], [1,4],[2,4]],
+    
+    THIS: [[5,5],[6,5],[7,5],[8,5]],
+    
+
+  }
+},
+
+
+{
+  phrase: "DOES THIS BEANIE HAT YELL \"TRYING TOO HARD?\"",
+
+  HINT: "Fashion confidence unstable.",
+
+  words: ["BEANIE", "TRYING", "HARD", "THIS", "HAT", "YELL", "DOES"],
+
+  paths: {
+  
+    DOES: [[3,0],[4,0],[5,0],[6,0]],
+    BEANIE: [[2,5],[3,5],[4,5],[5,5],[6,5],[7,5]],
+
+    TRYING: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2]],
+
+    HARD: [[0,7],[1,7],[2,7],[3,7]],
+
+    THIS: [[8,0],[8,1],[8,2],[8,3]],
+
+    YELL: [[10,0],[10,1],[10,2],[10,3]],
+
+    HAT: [[9,5],[9,6],[9,7]]
+  }
+},
+{
+  phrase: "I THINK I AM IN MY SINGLE GUY, GARDENING ERA.",
+
+  HINT: "Personal growth has entered the yard.",
+
+  words: ["THINK", "SINGLE", "GARDENING", "ERA", "GUY"],
+
+  paths: {
+    GARDENING: [[2,6],[3,6],[4,6],[5,6],[6,6],[7,6],[8,6],[9,6],[10,6]],
+
+    SINGLE: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2]],
+
+    THINK: [[0,7],[1,7],[2,7],[3,7],[4,7]],
+
+    GUY: [[9,0],[9,1],[9,2]],
+
+    ERA: [[4,4],[5,4],[6,4]]
+  }
+},
 
 
 
+{
+  phrase: "I OVERHEARD YOUR DAD TELLING SOME JOKES, LET ME RETELL YOU MY FAVORITES.",
 
+  HINT: "Dad joke database expanding.",
 
+  words: ["OVERHEARD", "TELLING", "JOKES", "RETELL", "DAD", "FAVORITES", "YOUR", "SOME"],
 
+  paths: {
+    OVERHEARD: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0]],
+
+    FAVORITES: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[7,2],[8,2]],
+
+    TELLING: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7]],
+
+    JOKES: [[10,0],[10,1],[10,2],[10,3],[10,4]],
+
+    RETELL: [[9,2],[9,3],[9,4],[9,5],[9,6],[9,7]],
+
+    DAD: [[8,4],[8,5],[8,6]],
+    YOUR: [[4,4], [5,4], [6,4], [7,4]],
+    SOME: [[0,5], [1,5], [2,5], [3,5]]
+  }
+},
+
+{
+  phrase: "I HAVE BEEN PRACTICING MY COMMUNICATION SKILLS WITH YOUR POTHOS, BUT I PANICKED AND BROUGHT UP THE WEATHER.",
+
+  HINT: "Small talk with house plant failed due to flood forecast.",
+
+  words: ["PRACTICING", "SKILLS", "PANICKED", "BROUGHT", "WEATHER","POTHOS", "YOUR"],
+
+  paths: {
+    PRACTICING: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0]],
+
+    PANICKED: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[7,2]],
+
+    WEATHER: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7]],
+
+    BROUGHT: [[10,0],[10,1],[10,2],[10,3],[10,4],[10,5],[10,6]],
+
+    SKILLS: [[8,2],[8,3],[8,4],[8,5],[8,6],[8,7]],
+
+    POTHOS: [[0,4],[1,4],[2,4],[3,4],[4,4],[5,4]],
+    YOUR: [[2,6],[3,6],[4,6],[5,6]]
+  }
+},
 
 
 ];
-
-
-
-
-
-
 
 function loadWordSignal() {
   if (usedPuzzleIndexes.length === signalPuzzles.length) {
@@ -2106,6 +2585,7 @@ document.addEventListener("pointermove", dragSelect);
 document.addEventListener("pointerup", endSelect);
 document.addEventListener("pointercancel", endSelect);
 
-loadWordSignal();
+//start game
 
+typeBootText();
 
