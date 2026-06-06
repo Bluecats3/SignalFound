@@ -7,6 +7,7 @@ let selectedTiles = [];
 let isDragging = false;
 let typingInterval = null;
 
+let completionTimer = null;
 let bootSkipped = false;
 
 let totalScore =
@@ -117,7 +118,7 @@ let soundUnlocked = false;
 let usedPuzzleIndexes = [];
 
 const rewardMilestones = [
-  500,
+  900,
   2500,
   5000,
   10000,
@@ -256,13 +257,17 @@ function loadWordSignal() {
 
   foundWords = [];
   selectedTiles = [];
-
+  
+if (completionTimer) {
+  clearTimeout(completionTimer);
+  completionTimer = null;
+}
   if (typingInterval) {
     clearInterval(typingInterval);
     typingInterval = null;
   }
 
-signalDisplay.textContent =
+signalDisplay.innerHTML =
   "HINT: " + currentPuzzle.HINT;
 
   document.getElementById("wordCount").textContent =
@@ -466,13 +471,13 @@ function checkPuzzleComplete() {
 
     setTimeout(() => {
       flash.style.opacity = "0";
-    }, 1500);
+    }, 6000);
 
     playSignalSound();
 
   typeSystemResponse(currentPuzzle.phrase);
 
-setTimeout(() => {
+completionTimer = setTimeout(() => {
 
 const reachedMilestone = rewardMilestones.some(
   milestone =>
@@ -527,12 +532,12 @@ ${"   ( ._/  ".repeat(duckCount)}
 
 } else {
 
-  signalDisplay.innerHTML +=
-    "<br><br>PRESS NEW SIGNAL TO CONTINUE";
+  signalDisplay.innerHTML =
+    "PRESS NEW SIGNAL TO CONTINUE";
 
 }
 
-}, 6000);
+}, 1500);
 }
 }
 
