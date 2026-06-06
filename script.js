@@ -1563,15 +1563,15 @@ const signalPuzzles = [
 },
 
 {
-  phrase: "SO I PUT UP AN ADD FOR A FREE CAT, YOU CAN PROBABLY JUST PUT HIM OUTSIDE NOW.",
+  phrase: "SO I PUT UP AN AD FOR A FREE CAT, YOU CAN PROBABLY JUST PUT HIM OUTSIDE NOW.",
   HINT: "Cat relocation plan detected.",
-  words: ["PUT", "ADD", "FOR", "FREE", "CAT", "YOU", "CAN", "PROBABLY", "JUST", "HIM", "OUTSIDE", "NOW"],
+  words: ["PUT","FOR", "FREE", "CAT", "YOU", "CAN", "PROBABLY", "JUST", "HIM", "OUTSIDE", "NOW"],
   paths: {
     PROBABLY: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]],
     OUTSIDE: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7]],
 
     PUT: [[0,2],[0,3],[0,4]],
-    ADD: [[2,2],[2,3],[2,4]],
+    
     FOR: [[4,2],[4,3],[4,4]],
     HIM: [[5,4],[5,5],[5,6]],
     CAT: [[6,2],[6,3],[6,4]],
@@ -3184,7 +3184,7 @@ function checkPuzzleComplete() {
 
     setTimeout(() => {
       flash.style.opacity = "0";
-    }, 10000);
+    }, 7500);
 
     playSignalSound();
 
@@ -3251,7 +3251,7 @@ ${"   ( ._/  ".repeat(duckCount)}
 
 }
 
-}, 10000);
+}, 7500);
 }
 }
 
