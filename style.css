@@ -257,7 +257,7 @@ body {
 
 #tutorialVideo {
   width: 100%;
-  max-width: 260px;
+  max-width: 220px;
 
   margin: 8px auto 18px;
 
@@ -928,6 +928,8 @@ button:hover {
 
 
 .instructionBox {
+  max-height: 90vh;
+  overflow-y: auto;
   width: 92%;
   padding: 18px;
 }
