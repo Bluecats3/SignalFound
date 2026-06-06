@@ -882,7 +882,7 @@ button:hover {
 
   margin: 14px auto 0;
 
-  animation: duckWiggle 4s linear forwards;
+  animation: duckWiggle 8s linear forwards;
 }
 
 @keyframes duckWiggle {

@@ -117,18 +117,15 @@ let soundUnlocked = false;
 let usedPuzzleIndexes = [];
 
 const rewardMilestones = [
-  100,
-  200,
-  300,
-  400,
   500,
-  600,
-  700,
-  800,
-  900,
-  1000
+  2500,
+  5000,
+  10000,
+  20000,
+  30000,
+  40000,
+  50000
 ];
-
 
 function unlockSound() {
   const sound = document.getElementById("signalSound");
@@ -492,34 +489,50 @@ console.log("reached milestone:", reachedMilestone);
     typingInterval = null;
   }
 
-  signalDisplay.innerHTML = "";
 
-  if (reachedMilestone) {
-    setTimeout(() => {
-      signalDisplay.innerHTML =
-        `<div class="pointText">
-          +${pointsEarned} POINTS<br>
-          DUCK PARADE AUTHORIZED
-        </div>
+let duckCount = 1;
 
-        <div class="duckMover">
-          <pre class="duckWiggle">
-&lt;(o )__  &lt;(o )__  &lt;(o )__<br>
-   ( ._/    ( ._/    ( ._/
-          </pre>
-        </div>`;
+if (totalScore >= 500) duckCount = 1;
+if (totalScore >= 2500) duckCount = 2;
+if (totalScore >= 5000) duckCount = 4;
+if (totalScore >= 10000) duckCount = 6;
+if (totalScore >= 20000) duckCount = 8;
+if (totalScore >= 30000) duckCount = 10;
+if (totalScore >= 40000) duckCount = 12;
+if (totalScore >= 50000) duckCount = 14;
+if (totalScore >= 60000) duckCount = 16;
 
-      setTimeout(() => {
-        loadWordSignal();
-      }, 4000);
+signalDisplay.innerHTML = "";
 
-    }, 300);
+if (reachedMilestone) {
+  setTimeout(() => {
+    signalDisplay.innerHTML =
+      `<div class="pointText">
+        +${pointsEarned} POINTS<br>
+        DUCK PARADE AUTHORIZED
+      </div>
 
-  } else {
-    loadWordSignal();
-  }
+      <div class="duckMover">
+        <pre class="duckWiggle">
+${"&lt;(o )__  ".repeat(duckCount)}<br>
+${"   ( ._/  ".repeat(duckCount)}
+        </pre>
+      </div>
 
-}, 3000);
+      <div class="continueText">
+        PRESS NEW SIGNAL TO CONTINUE
+      </div>`;
+
+  }, 300);
+
+} else {
+
+  signalDisplay.innerHTML +=
+    "<br><br>PRESS NEW SIGNAL TO CONTINUE";
+
+}
+
+}, 6000);
 }
 }
 
