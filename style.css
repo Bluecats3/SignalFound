@@ -255,7 +255,20 @@ body {
 }
 
 
+#tutorialVideo {
+  width: 100%;
+  max-width: 260px;
 
+  margin: 8px auto 18px;
+
+  display: block;
+
+  border: 2px solid #00eaff;
+  background: #050505;
+
+  box-shadow:
+    0 0 8px rgba(0,234,255,0.2);
+}
 
 
 .closeInfoBtn {
