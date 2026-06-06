@@ -1055,8 +1055,8 @@ button:hover {
   /* ========================= */
 
   .decoderPanel {
-    margin-top: 4px;
-  margin-bottom: 12px;
+    margin-top: 2px;
+  margin-bottom: 8px;
   padding: 14px;
   }
 
@@ -1121,14 +1121,13 @@ button:hover {
   /* ========================= */
   /* BUTTON */
   /* ========================= */
-button:not(#infoBtn):not(#soundBtn):not(.closeInfoBtn) {
+button:not(#infoBtn):not(#soundBtn):not(.closeInfoBtn):not(.newSignalBtn) {
   width: 100%;
   font-size: 0.95rem;
   padding: 12px;
   margin-top: 4px;
   margin-bottom: 6px;
 }
-
 
 
 
