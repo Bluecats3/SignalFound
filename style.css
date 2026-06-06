@@ -933,7 +933,7 @@ button:hover {
 }
 
 .logoTitle {
-  font-size: 4.1rem;
+  font-size: clamp(3rem, 12vw, 4rem);
   line-height: 0.9;
   transform: scaleY(1.05);
   text-align: center;
