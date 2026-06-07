@@ -27,7 +27,7 @@ workflows:
 
       - name: Sync Capacitor
         script: |
-          npx capacitor sync ios
+          npx cap sync ios
 
       - name: Set up code signing
         script: |
