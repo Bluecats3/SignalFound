@@ -9,6 +9,8 @@ workflows:
 
     environment:
       node: 22
+      vars:
+        BUILD_NUMBER: 2
       ios_signing:
         distribution_type: app_store
         bundle_identifier: Com.bluecats3.signalfound
@@ -25,6 +27,8 @@ workflows:
           cp index.html style.css script.js manifest.json www/
           cp *.png www/ 2>/dev/null || true
           cp favicon.ico www/ 2>/dev/null || true
+          cp *.mp3 www/ 2>/dev/null || true
+          cp *.mp4 www/ 2>/dev/null || true
 
       - name: Sync Capacitor
         script: |
@@ -37,6 +41,7 @@ workflows:
       - name: Build iOS app
         script: |
           cd ios/App
+          agvtool new-version -all $BUILD_NUMBER
 
           xcodebuild -project App.xcodeproj \
             -scheme App \
