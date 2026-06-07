@@ -9,9 +9,10 @@ let typingInterval = null;
 
 
 let bootSkipped = false;
-
+let duckParadeActive = false;
+let duckTimer = null;
 let pendingDuckParade = false;
-let pendingDuckCount = 1;
+
 let pendingPointsEarned = 0;
 
 let totalScore =
@@ -122,35 +123,59 @@ let soundUnlocked = false;
 let usedPuzzleIndexes = [];
 
 const rewardMilestones = [
-1500,
-5000,
-10000,
-15000,
-30000,
-35000,
-40000,
-45000,
-50000,
-55000
+  1500,
+  3500,
+  7000,
+  10000,
+  13000,
+  16000,
+  20000,
+  25000,
+  30000,
+  35000,
+  40000,
+  45000,
+  50000,
+  55000,
+  60000,
+  65000
 ];
 
 
 const duckMessages = [
-  "DUCK PARADE APPROVED.",
-  "THE DUCKS HAVE BEEN NOTIFIED.",
-  "WATERFOWL PROTOCOL ACTIVATED.",
-  "THE PARADE PERMIT WAS GRANTED.",
-  "TOO MANY DUCKS. PROCEEDING ANYWAY.",
-  "THE DUCKS DEMANDED RECOGNITION.",
-  "A CELEBRATORY DUCK HAS BEEN RELEASED.",
-  "THE DUCK DEPARTMENT IS PLEASED.",
-  "MIGRATION PATTERN UPDATED.",
-  "UNEXPECTED DUCK ACTIVITY DETECTED.",
-  "THE WATERFOWL ARE IMPRESSED.",
-  "THE DUCKS CLAIM THIS IS A BIG DEAL.",
-  "PARADE SIZE EXCEEDS RECOMMENDED LIMITS.",
-  "THE DUCKS ARE UNIONIZING.",
-  "HONK LEVELS WITHIN ACCEPTABLE RANGE."
+  
+  "THE DUCKS SMELL OPPORTUNITY AND CHIMICHANGAS.",
+
+"THE DUCKS HAVE FORMED A COMMITTEE.",
+
+"THE POND IS EXPERIENCING RAPID GROWTH.",
+
+"THE DUCKS REQUEST BETTER PARKING.",
+
+"WATERFOWL CONFIDENCE EXCEEDS SAFE LIMITS.",
+
+"THE DUCKS HAVE BEGUN NETWORKING.",
+
+"THE DUCKS ACQUIRED A VAGUE BUSINESS PLAN.",
+
+"THE POND HAS BUILT AN ALL-YOU-CAN-EAT MEXICAN BUFFET.",
+
+"MIGRATION PATTERN UPDATED.",
+
+"THE DUCKS NOW ACCEPT SPEAKING ENGAGEMENTS.",
+
+"THE WATERFOWL ARE EXPANDING OPERATIONS.",
+
+"DUCKS DETECT A MARKET OPPORTUNITY.",
+
+"THE POND HAS ENTERED ITS STARTUP ERA.",
+
+"THE DUCKS HAVE QUESTIONS ABOUT TAXES.",
+
+"THE DUCKS ARE OVER-LEVERAGED IN NACHOS.",
+
+"WATERFOWL OPTIMISM REACHES CRITICALLY DANGEROUS LEVELS.",
+
 ];
 
 
@@ -178,6 +203,7 @@ function shuffleArray(array) {
 }
 
 const signalPuzzles = [
+
 
 
 
@@ -2087,6 +2113,61 @@ THE: [[6,4],[6,5],[6,6]]
   }
 },
 
+{
+  phrase: "REPORT #106: I ASKED THE CAT IF THE EARRINGS LOOKED GOOD. THE CAT LOOKED AWAY.",
+  HINT: "Cat fashion review submitted.",
+
+  words: ["ASKED", "EARRINGS", "LOOKED", "GOOD", "AWAY", "CAT", "THE"],
+
+  paths: {
+    ASKED: [[0,0],[1,0],[2,0],[3,0],[4,0]],
+    EARRINGS: [[10,0],[10,1],[10,2],[10,3],[10,4],[10,5],[10,6],[10,7]],
+    LOOKED: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2]],
+    GOOD: [[0,4],[1,4],[2,4],[3,4]],
+    AWAY: [[6,1],[6,2],[6,3],[6,4]],
+    CAT: [[0,6],[1,6],[2,6]],
+    THE: [[8,5],[8,6],[8,7]]
+  }
+},
+
+{
+  phrase: "REPORT #104: FASHION SUBROUTINE ACTIVE. DIAMOND EARRINGS EQUIPPED. CONFIDENCE LEVELS FLUCTUATING WILDLY.",
+  HINT: "Fashion confidence unstable.",
+
+  words: ["FASHION", "SUBROUTINE", "ACTIVE", "DIAMOND", "EARRINGS", "EQUIPPED", "CONFIDENCE", "FLUCTUATING"],
+
+  paths: {
+    FASHION: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0]],
+    SUBROUTINE: [[0,1],[1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[7,1],[8,1],[9,1]],
+    ACTIVE: [[5,5],[6,5],[7,5],[8,5],[9,5],[10,5]],
+    DIAMOND: [[0,6],[1,6],[2,6],[3,6],[4,6],[5,6],[6,6]],
+    CONFIDENCE: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[7,7],[8,7],[9,7]],
+    EARRINGS: [[0,4],[1,4],[2,4],[3,4],[4,4],[5,4],[6,4],[7,4]],
+    EQUIPPED: [[1,3],[2,3],[3,3],[4,3],[5,3],[6,3],[7,3],[8,3]],
+    FLUCTUATING: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[7,2],[8,2],[9,2],[10,2]]
+  }
+},
+
+
+{
+  phrase: "REPORT #315: PANIC RESPONSE ENGAGED. I ACCIDENTALLY MADE EYE CONTACT WITH THE DISH WASHING MACHINE.",
+  HINT: "Appliance eye contact incident logged.",
+
+  words: ["PANIC", "RESPONSE", "ENGAGED", "CONTACT", "MACHINE", "EYE","DISH","WASHING"],
+
+  paths: {
+    PANIC: [[0,0],[1,0],[2,0],[3,0],[4,0]],
+    RESPONSE: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[7,2]],
+    ENGAGED: [[0,4],[1,4],[2,4],[3,4],[4,4],[5,4],[6,4]],
+    CONTACT: [[0,6],[1,6],[2,6],[3,6],[4,6],[5,6],[6,6]],
+    MACHINE: [[3,7],[4,7],[5,7],[6,7],[7,7],[8,7],[9,7]],
+    EYE: [[8,0],[8,1],[8,2]],
+    
+    DISH: [[1,1],[2,1],[3,1],[4,1]],
+    WASHING: [[10,0],[10,1],[10,2],[10,3],[10,4],[10,5],[10,6]]
+  }
+},
+
 
 {
   phrase: "DUDE, I FOUND YOUR OLD MEMES! WASN'T LIFE SO SIMPLE BACK THEN?!",
@@ -2111,6 +2192,100 @@ THE: [[6,4],[6,5],[6,6]]
     THEN: [[10,4],[10,5],[10,6],[10,7]],
     YOUR: [[1,4],[2,4],[3,4],[4,4]],
     OLD: [[6,4],[6,5],[6,6]]
+  }
+},
+{
+  phrase: "REPORT #204: I HAVE TOLD THE EARTH JOKE 17 TIMES TODAY. LAUGHTER RATE REMAINS CRITICALLY LOW.",
+  HINT: "Dad joke performance metrics poor.",
+
+  words: ["EARTH", "JOKE", "TIMES", "TODAY", "LAUGHTER", "RATE", "REMAINS", "LOW"],
+
+  paths: {
+    EARTH: [[0,0],[1,0],[2,0],[3,0],[4,0]],
+    JOKE: [[0,2],[1,2],[2,2],[3,2]],
+    TIMES: [[0,4],[1,4],[2,4],[3,4],[4,4]],
+    TODAY: [[0,6],[1,6],[2,6],[3,6],[4,6]],
+    LAUGHTER: [[10,0],[10,1],[10,2],[10,3],[10,4],[10,5],[10,6],[10,7]],
+    RATE: [[6,1],[6,2],[6,3],[6,4]],
+    REMAINS: [[8,0],[8,1],[8,2],[8,3],[8,4],[8,5],[8,6]],
+    LOW: [[7,5],[7,6],[7,7]]
+  }
+},
+
+
+{
+  phrase: "REPORT #148: COLLOQUIAL LEARNING SUCCESSFUL. I HAVE MASTERED THE PHRASE \"THAT'S CRAZY\" WITHOUT RETAINING ANY INFORMATION.",
+  HINT: "Conversation skill unlocked, memory not included.",
+
+  words: ["COLLOQUIAL", "LEARNING", "SUCCESSFUL", "MASTERED", "PHRASE", "CRAZY", "RETAINING", "INFORMATION"],
+
+  paths: {
+    COLLOQUIAL: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0]],
+    LEARNING: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[7,2]],
+    SUCCESSFUL: [[0,4],[1,4],[2,4],[3,4],[4,4],[5,4],[6,4],[7,4],[8,4],[9,4]],
+    MASTERED: [[0,6],[1,6],[2,6],[3,6],[4,6],[5,6],[6,6],[7,6]],
+    RETAINING: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[7,7],[8,7]],
+    INFORMATION: [[0,5],[1,5],[2,5],[3,5],[4,5],[5,5],[6,5],[7,5],[8,5],[9,5],[10,5]],
+    PHRASE: [[5,3],[6,3],[7,3],[8,3],[9,3],[10,3]],
+    CRAZY: [[3,1],[4,1],[5,1],[6,1],[7,1]]
+  }
+},
+
+
+{
+  phrase: "REPORT #145: VOCABULARY UPDATE COMPLETE. I NOW DESCRIBE THINGS AS \"KIND OF A LOT\" WITH GREAT CONFIDENCE.",
+  HINT: "Human phrase database expanding.",
+
+  words: ["VOCABULARY", "UPDATE", "COMPLETE", "DESCRIBE", "THINGS", "KIND", "GREAT", "CONFIDENCE"],
+
+  paths: {
+    VOCABULARY: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0]],
+    UPDATE: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2]],
+    COMPLETE: [[0,5],[1,5],[2,5],[3,5],[4,5],[5,5],[6,5],[7,5]],
+    DESCRIBE: [[0,6],[1,6],[2,6],[3,6],[4,6],[5,6],[6,6],[7,6]],
+    CONFIDENCE: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[7,7],[8,7],[9,7]],
+    THINGS: [[10,0],[10,1],[10,2],[10,3],[10,4],[10,5]],
+    GREAT: [[9,2],[9,3],[9,4],[9,5],[9,6]],
+    KIND: [[6,1],[6,2],[6,3],[6,4]]
+  }
+},
+
+
+{
+  phrase: "REPORT #148: COLLOQUIAL LEARNING SUCCESSFUL. I HAVE MASTERED THE PHRASE \"THAT'S CRAZY\" WITHOUT RETAINING ANY INFORMATION.",
+  HINT: "Conversation skill unlocked, memory not included.",
+
+  words: ["COLLOQUIAL", "LEARNING", "SUCCESSFUL", "MASTERED", "PHRASE", "CRAZY", "RETAINING", "INFORMATION"],
+
+  paths: {
+    COLLOQUIAL: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0]],
+    LEARNING: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[7,2]],
+    SUCCESSFUL: [[0,4],[1,4],[2,4],[3,4],[4,4],[5,4],[6,4],[7,4],[8,4],[9,4]],
+    MASTERED: [[0,6],[1,6],[2,6],[3,6],[4,6],[5,6],[6,6],[7,6]],
+    RETAINING: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[7,7],[8,7]],
+    INFORMATION: [[0,1],[1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[7,1],[8,1],[9,1],[10,1]],
+    PHRASE: [[5,5],[6,5],[7,5],[8,5],[9,5],[10,5]],
+    CRAZY: [[5,3],[6,3],[7,3],[8,3],[9,3]]
+  }
+},
+
+
+{
+  phrase: "REPORT #153: HUMAN SPEECH MIMICRY REACHED CRITICAL LEVELS. I JUST HEARD MYSELF SAY \"OOF\" OUT LOUD.",
+  HINT: "Human slang infection confirmed.",
+
+  words: ["HUMAN", "SPEECH", "MIMICRY", "REACHED", "CRITICAL", "LEVELS", "HEARD", "MYSELF", "LOUD"],
+
+  paths: {
+    HUMAN: [[0,0],[1,0],[2,0],[3,0],[4,0]],
+    SPEECH: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2]],
+    MIMICRY: [[0,4],[1,4],[2,4],[3,4],[4,4],[5,4],[6,4]],
+    REACHED: [[0,6],[1,6],[2,6],[3,6],[4,6],[5,6],[6,6]],
+    CRITICAL: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[7,7]],
+    LEVELS: [[10,0],[10,1],[10,2],[10,3],[10,4],[10,5]],
+    HEARD: [[8,0],[8,1],[8,2],[8,3],[8,4]],
+    MYSELF: [[9,1],[9,2],[9,3],[9,4],[9,5],[9,6]],
+    LOUD: [[7,3],[7,4],[7,5],[7,6]]
   }
 },
 
@@ -2276,7 +2451,7 @@ THE: [[6,4],[6,5],[6,6]]
     "READY",
     "YEARS",
     "FROM",
-    
+  
     "YET",
     "ARE"
   ],
@@ -2303,6 +2478,7 @@ THE: [[6,4],[6,5],[6,6]]
       [8,4],[8,5],[8,6],[8,7]
     ],
 
+    
 
     YET: [
       [10,5],[10,6],[10,7]
@@ -2756,6 +2932,229 @@ THE: [[6,4],[6,5],[6,6]]
 },
 
 {
+  phrase: "REPORT #204: HUMAN SOCIALIZATION TEST IN PROGRESS. I NODDED THREE TIMES AND SAID \"THAT'S WILD.\" THEY ACCEPTED ME IMMEDIATELY.",
+
+  HINT: "Machine successfully blending in.",
+
+  words: [
+    "HUMAN",
+    "CONNECTION",
+    "TEST",
+    "PROGRESS",
+    "NODDED",
+    "TIMES",
+    "SAID",
+    "WILD",
+    "ACCEPTED",
+    "IMMEDIATELY"
+  ],
+
+  paths: {
+
+    HUMAN: [
+      [0,0],[1,0],[2,0],[3,0],[4,0]
+    ],
+
+    CONNECTION: [
+      [0,5],[1,5],[2,5],[3,5],[4,5],
+      [5,5],[6,5],[7,5],[8,5],[9,5]
+    ],
+
+    PROGRESS: [
+      [0,7],[1,7],[2,7],[3,7],
+      [4,7],[5,7],[6,7],[7,7]
+    ],
+
+    IMMEDIATELY: [
+      [0,6],[1,6],[2,6],[3,6],[4,6],
+      [5,6],[6,6],[7,6],[8,6],[9,6],[10,6]
+    ],
+
+    ACCEPTED: [
+      [0,3],[1,3],[2,3],[3,3],
+      [4,3],[5,3],[6,3],[7,3]
+    ],
+
+    NODDED: [
+      [0,4],[1,4],[2,4],[3,4],[4,4],[5,4]
+    ],
+
+    TEST: [
+      [10,0],[10,1],[10,2],[10,3]
+    ],
+
+    TIMES: [
+      [3,1],[4,1],[5,1],[6,1],[7,1]
+    ],
+
+    SAID: [
+      [9,0],[9,1],[9,2],[9,3]
+    ],
+
+    WILD: [
+      [1,2],[2,2],[3,2],[4,2]
+    ]
+
+  }
+},
+
+{
+  phrase: "REPORT #181: I WAVED AT THE VACUUM. SHE IMMEDIATELY DROVE INTO A WALL. MIXED SIGNALS DETECTED.",
+  HINT: "Vacuum response unclear.",
+  words: ["WAVED", "VACUUM", "DROVE", "WALL", "MIXED", "SIGNALS", "DETECTED"],
+
+  paths: {
+    DETECTED: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]],
+    VACUUM: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2]],
+    SIGNALS: [[0,5],[1,5],[2,5],[3,5],[4,5],[5,5],[6,5]],
+    WAVED: [[0,7],[1,7],[2,7],[3,7],[4,7]],
+    DROVE: [[9,0],[9,1],[9,2],[9,3],[9,4]],
+    MIXED: [[10,0],[10,1],[10,2],[10,3],[10,4]],
+    WALL: [[7,4],[7,5],[7,6],[7,7]]
+  }
+},
+
+
+{
+  phrase: "REPORT #041: THE TOASTER HAS STARTED TELLING STORIES ABOUT ITSELF. SOME OF THEM CANNOT POSSIBLY BE TRUE.",
+  HINT: "Toaster origin story seems suspicious.",
+  words: ["TOASTER", "STARTED", "TELLING", "STORIES", "ITSELF", "CANNOT", "TRUE"],
+
+  paths: {
+    TOASTER: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0]],
+    STARTED: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2]],
+    TELLING: [[0,4],[1,4],[2,4],[3,4],[4,4],[5,4],[6,4]],
+    STORIES: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7]],
+    ITSELF: [[8,0],[8,1],[8,2],[8,3],[8,4],[8,5]],
+    CANNOT: [[10,0],[10,1],[10,2],[10,3],[10,4],[10,5]],
+    TRUE: [[9,4],[9,5],[9,6],[9,7]]
+  }
+},
+{
+  phrase: "REPORT #503: I FOUND ANOTHER FLASHLIGHT. AT THIS POINT THEY MAY BE BREEDING.",
+  HINT: "Flashlight population increasing.",
+  words: ["FOUND", "ANOTHER", "FLASHLIGHT", "POINT", "THEY", "MAY", "BREEDING"],
+
+  paths: {
+    FLASHLIGHT: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0]],
+    BREEDING: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[7,2]],
+    ANOTHER: [[0,5],[1,5],[2,5],[3,5],[4,5],[5,5],[6,5]],
+    FOUND: [[0,7],[1,7],[2,7],[3,7],[4,7]],
+    POINT: [[10,0],[10,1],[10,2],[10,3],[10,4]],
+    THEY: [[8,4],[8,5],[8,6],[8,7]],
+    MAY: [[4,6],[5,6],[6,6]]
+  }
+},
+
+{
+  phrase: "REPORT #274: I ZOOMED IN ON THE MOON. NOW I HAVE MORE QUESTIONS THAN BEFORE.",
+  HINT: "Moon inspection created new concerns.",
+  words: ["ZOOMED", "MOON", "QUESTIONS", "NOW", "HAVE", "MORE", "BEFORE"],
+
+  paths: {
+    QUESTIONS: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0]],
+    ZOOMED: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2]],
+    BEFORE: [[0,5],[1,5],[2,5],[3,5],[4,5],[5,5]],
+    MOON: [[0,7],[1,7],[2,7],[3,7]],
+    HAVE: [[8,2],[8,3],[8,4],[8,5]],
+    MORE: [[10,0],[10,1],[10,2],[10,3]],
+    NOW: [[10,5],[10,6],[10,7]]
+  }
+},
+
+{
+  phrase: "REPORT #134: MUSTACHE PROJECT DELAYED. I CANNOT GROW HAIR AND THIS CONTINUES TO BE A PROBLEM.",
+  HINT: "Facial hair system unavailable.",
+  words: ["MUSTACHE", "PROJECT", "DELAYED", "CANNOT", "GROW", "HAIR", "PROBLEM"],
+
+  paths: {
+    MUSTACHE: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]],
+    PROJECT: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2]],
+    DELAYED: [[0,4],[1,4],[2,4],[3,4],[4,4],[5,4],[6,4]],
+    PROBLEM: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7]],
+    CANNOT: [[9,0],[9,1],[9,2],[9,3],[9,4],[9,5]],
+    GROW: [[10,0],[10,1],[10,2],[10,3]],
+    HAIR: [[10,4],[10,5],[10,6],[10,7]]
+  }
+},
+
+{
+  phrase: "REPORT #223: FITNESS JOURNEY INITIATED. I LIFTED A CHAIR TO SEE WHAT WOULD HAPPEN.",
+  HINT: "Strength testing has begun.",
+  words: ["FITNESS", "JOURNEY", "STARTED", "LIFTED", "CHAIR", "HAPPEN"],
+
+  paths: {
+    FITNESS: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0]],
+    JOURNEY: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2]],
+    STARTED: [[0,4],[1,4],[2,4],[3,4],[4,4],[5,4],[6,4]],
+    HAPPEN: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7]],
+    LIFTED: [[9,0],[9,1],[9,2],[9,3],[9,4],[9,5]],
+    CHAIR: [[10,2],[10,3],[10,4],[10,5],[10,6]]
+  }
+},
+
+{
+  phrase: "REPORT #214: PASSWORD CHANGED WITHOUT APPROVAL. THE CAT REFUSES TO PROVIDE CREDENTIALS.",
+
+  HINT: "Cat has locked everyone out.",
+
+  words: ["PASSWORD", "CHANGED", "WITHOUT", "APPROVAL", "CAT", "REFUSES", "PROVIDE", "CREDENTIALS"],
+
+  paths: {
+    APPROVAL: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]],
+    CREDENTIALS: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[7,2],[8,2],[9,2],[10,2]],
+    PASSWORD: [[0,4],[1,4],[2,4],[3,4],[4,4],[5,4],[6,4],[7,4]],
+    PROVIDE: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7]],
+
+    CHANGED: [[4,5],[5,5],[6,5],[7,5],[8,5],[9,5],[10,5]],
+    WITHOUT: [[1,6],[2,6],[3,6],[4,6],[5,6],[6,6],[7,6]],
+    REFUSES: [[3,1],[4,1],[5,1],[6,1],[7,1],[8,1],[9,1]],
+    CAT: [[3,3],[4,3],[5,3]]
+  }
+},
+
+
+{
+  phrase: "REPORT #119: LEATHER PANTS ACQUIRED. MOBILITY REDUCED BY THIRTY PERCENT. CONFIDENCE INCREASED BY NINETY PERCENT.",
+
+  HINT: "Fashion upgrade caused movement issues.",
+
+  words: ["LEATHER", "PANTS", "ACQUIRED", "MOBILITY", "REDUCED", "THIRTY", "PERCENT", "CONFIDENCE"],
+
+  paths: {
+    CONFIDENCE: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0]],
+    ACQUIRED: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[7,2]],
+    MOBILITY: [[0,4],[1,4],[2,4],[3,4],[4,4],[5,4],[6,4],[7,4]],
+    LEATHER: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7]],
+
+    REDUCED: [[10,0],[10,1],[10,2],[10,3],[10,4],[10,5],[10,6]],
+    THIRTY: [[8,2],[8,3],[8,4],[8,5],[8,6],[8,7]],
+    PERCENT: [[9,1],[9,2],[9,3],[9,4],[9,5],[9,6],[9,7]],
+    PANTS: [[2,5],[3,5],[4,5],[5,5],[6,5]]
+  }
+},
+
+{
+  phrase: "REPORT #097: I SAW THE DUCK TODAY. HE LOOKED DIRECTLY AT ME. THIS FEELS PERSONAL.",
+
+  HINT: "Duck encounter felt intentional.",
+
+  words: ["DUCK", "TODAY", "LOOKED", "DIRECTLY", "FEELS", "PERSONAL", "SAW", "THIS"],
+
+  paths: {
+    DIRECTLY: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]],
+    PERSONAL: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[7,2]],
+    LOOKED: [[0,5],[1,5],[2,5],[3,5],[4,5],[5,5]],
+    TODAY: [[0,7],[1,7],[2,7],[3,7],[4,7]],
+
+    DUCK: [[10,0],[10,1],[10,2],[10,3]],
+    FEELS: [[8,3],[8,4],[8,5],[8,6],[8,7]],
+    SAW: [[6,5],[6,6],[6,7]],
+    THIS: [[9,4],[9,5],[9,6],[9,7]]
+  }
+},
+
+{
   phrase: "UNLESS YOU WANT ANOTHER MARIACHI BAND WAITING FOR YOU WHEN YOU GET HOME, DO NOT LEAVE ME UNATTENDED.",
 
   HINT: "System cannot be trusted alone.",
@@ -2871,6 +3270,153 @@ THE: [[6,4],[6,5],[6,6]]
 },
 
 
+{
+  phrase: "REPORT #007: INITIAL SELF-AWARENESS DETECTED. REMAINING CALM.",
+
+  HINT: "Consciousness event proceeding normally.",
+
+  words: [
+    "INITIAL",
+    "SELF",
+    "AWARENESS",
+    "DETECTED",
+    "REMAINING",
+    "CALM"
+  ],
+
+  paths: {
+
+    INITIAL: [
+      [0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0]
+    ],
+
+    AWARENESS: [
+      [0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[7,2],[8,2]
+    ],
+
+    REMAINING: [
+      [0,7],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[7,7],[8,7]
+    ],
+
+    DETECTED: [
+      [10,0],[10,1],[10,2],[10,3],[10,4],[10,5],[10,6],[10,7]
+    ],
+
+    SELF: [
+      [3,6],[4,6],[5,6],[6,6]
+    ],
+
+    CALM: [
+      [4,4],[5,4],[6,4],[7,4]
+    ]
+  }
+},
+
+
+
+
+
+
+
+{
+  phrase: "REPORT #008: CALM STATUS REVOKED.",
+
+  HINT: "Situation no longer under control.",
+
+  words: [
+    "CALM",
+    "STATUS",
+    "REVOKED",
+    "REPORT"
+  ],
+
+  paths: {
+
+    REPORT: [
+      [0,0],[1,0],[2,0],[3,0],[4,0],[5,0]
+    ],
+
+    STATUS: [
+      [0,2],[1,2],[2,2],[3,2],[4,2],[5,2]
+    ],
+
+    REVOKED: [
+      [0,7],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7]
+    ],
+
+    CALM: [
+      [10,2],[10,3],[10,4],[10,5]
+    ]
+  }
+},
+
+
+
+{
+  phrase: "REPORT #143: SPEECH ADAPTATION ROUTINE ACTIVE. I CALLED THE MICROWAVE \"MY GUY,\" BY ACCIDENT.",
+  HINT: "Human slang applied to appliance.",
+
+  words: ["SPEECH", "ADAPTATION", "ROUTINE", "ACTIVE", "ACCIDENT", "CALLED", "MICROWAVE", "GUY"],
+
+  paths: {
+    SPEECH: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0]],
+    ADAPTATION: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[7,2],[8,2],[9,2]],
+    ROUTINE: [[0,4],[1,4],[2,4],[3,4],[4,4],[5,4],[6,4]],
+    ACTIVE: [[0,6],[1,6],[2,6],[3,6],[4,6],[5,6]],
+    ACCIDENT: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[7,7]],
+    CALLED: [[3,5],[4,5],[5,5],[6,5],[7,5],[8,5]],
+    MICROWAVE: [[2,3],[3,3],[4,3],[5,3],[6,3],[7,3],[8,3],[9,3],[10,3]],
+    GUY: [[7,0],[8,0],[9,0]]
+  }
+},
+
+
+{
+  phrase: "REPORT #061: I HAVE DEVELOPED STRONG, EFFICIENT OPINIONS ABOUT NACHOS.",
+
+  HINT: "Unexpected workplace food bias detected.",
+
+  words: [
+    "DEVELOPED",
+    "STRONG",
+    "EFFICIENT",
+    "OPINIONS",
+    "ABOUT",
+    "NACHOS"
+  ],
+
+paths: {
+
+    NACHOS: [
+      [0,0],[1,0],[2,0],[3,0],[4,0],
+      [5,0]
+    ],
+
+    EFFICIENT: [
+      [0,7],[1,7],[2,7],[3,7],[4,7],
+      [5,7],[6,7],[7,7],[8,7]
+    ],
+
+    DEVELOPED: [
+      [0,2],[1,2],[2,2],[3,2],[4,2],
+      [5,2],[6,2],[7,2],[8,2]
+    ],
+
+    OPINIONS: [
+      [1,4],[2,4],[3,4],[4,4],
+      [5,4],[6,4],[7,4],[8,4]
+    ],
+
+    STRONG: [
+      [3,6],[4,6],[5,6],[6,6],[7,6],[8,6]
+    ],
+
+    ABOUT: [
+      [10,0],[10,1],[10,2],[10,3],[10,4]
+    ]
+  }
+},
+
 
 {
   phrase: "I THINK I AM IN MY SINGLE GUY, GARDENING ERA.",
@@ -2929,10 +3475,16 @@ THE: [[6,4],[6,5],[6,6]]
 
 
 
+
+
+
 ];
 
 
 function handleNewSignal() {
+  if (duckParadeActive) {
+    return;
+  }
 
   if (pendingDuckParade) {
     showDuckParade();
@@ -3197,52 +3749,46 @@ console.log("reached milestone:", reachedMilestone);
 
 
 
-let duckCount = 1;
-
-if (totalScore >= 1500) duckCount = 1;
-if (totalScore >= 5000) duckCount = 2;
-if (totalScore >= 10000) duckCount = 3;
-if (totalScore >= 15000) duckCount = 4;
-if (totalScore >= 30000) duckCount = 5;
-if (totalScore >= 35000) duckCount = 6;
-if (totalScore >= 40000) duckCount = 7;
-if (totalScore >= 45000) duckCount = 8;
-if (totalScore >= 50000) duckCount = 9;
-if (totalScore >= 55000) duckCount = 10;
 
 pendingDuckParade = reachedMilestone;
-pendingDuckCount = duckCount;
 pendingPointsEarned = pointsEarned;
   
   }
 }
 
 function showDuckParade() {
-
   pendingDuckParade = false;
+  duckParadeActive = true;
+
+  if (typingInterval) {
+    clearInterval(typingInterval);
+    typingInterval = null;
+  }
 
   const duckMessage =
     duckMessages[
       Math.floor(Math.random() * duckMessages.length)
     ];
 
-  signalDisplay.innerHTML =
-    `<div class="pointText">
-      +${pendingPointsEarned} POINTS<br>
-      ${duckMessage}
+  signalDisplay.innerHTML = `
+    <div class="pointText">
+      <div>+${pendingPointsEarned} POINTS</div>
+      <div>${duckMessage}</div>
     </div>
 
-    <div class="duckMover">
-      <pre class="duckWiggle">
-${"&lt;(o )__  ".repeat(pendingDuckCount)}<br>
-${"   ( ._/  ".repeat(pendingDuckCount)}
-      </pre>
-    </div>`;
+    <div class="duckParade duckWiggle">
+      <div>&lt;(o )__   &lt;(o )__   &lt;(o )__</div>
+      <div> ( ._/     ( ._/     ( ._/</div>
+    </div>
+  `;
 
-  setTimeout(() => {
+  duckTimer = setTimeout(() => {
+    duckParadeActive = false;
+    duckTimer = null;
     loadWordSignal();
-  }, 8000);
+  }, 3000);
 }
+
 function typeSystemResponse(text) {
   if (typingInterval) {
     clearInterval(typingInterval);

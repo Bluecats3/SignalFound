@@ -858,42 +858,41 @@ background:
 }
 
 .pointText {
-  margin-bottom: 12px;
-}
-
-
-
-.duckMover {
-  width: 100%;
-  overflow: hidden;
-}
-
-.duckWiggle {
   display: block;
+  text-align: center;
+  line-height: 1.35;
+  margin-bottom: 14px;
+}
+
+.pointText div {
+  display: block;
+}
+
+.duckParade {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  text-align: center;
+  color: #ffe600;
   font-family: 'Share Tech Mono', monospace;
   font-size: 13px;
   line-height: 1.1;
-  white-space: pre;
-  text-align: center;
-  margin: 14px auto 0;
+}
 
-  animation: duckWiggle 8s linear forwards;
+.duckParade div {
+  display: block;
+  white-space: pre;
+}
+
+.duckWiggle {
+  animation: duckWiggle 0.7s steps(2) infinite;
 }
 
 @keyframes duckWiggle {
-  0% {
-    transform: translateX(85%) rotate(-2deg);
-  }
-
-  50% {
-    transform: translateX(0%) rotate(2deg);
-  }
-
-  100% {
-    transform: translateX(-85%) rotate(-2deg);
-  }
+  0% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+  100% { transform: translateX(0); }
 }
-
 
 
 
