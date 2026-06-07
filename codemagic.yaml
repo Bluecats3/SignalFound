@@ -17,6 +17,7 @@ workflows:
       - name: Install dependencies
         script: |
           npm install
+          npm install @capacitor/cli @capacitor/core @capacitor/ios
 
       - name: Prepare web assets
         script: |
