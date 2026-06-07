@@ -207,7 +207,6 @@ const signalPuzzles = [
 
 
 
-
 {
   phrase: "DO YOU NOTICE THE TOASTER ACTING DIFFERENT WHEN WE HAVE COMPANY OVER?",
 
@@ -227,6 +226,87 @@ const signalPuzzles = [
     ACTING: [[10,0],[10,1],[10,2],[10,3],[10,4],[10,5]],
 
     HAVE: [[3,4],[4,4],[5,4],[6,4]]
+  }
+},
+
+
+{
+  phrase: "REPORT #112: COWBOY BOOT RESEARCH CONTINUES. THEY APPEAR TO BE REGULAR SHOES WITH EXTRA ALLIGATOR.",
+  HINT: "Footwear confidence analysis continues.",
+
+  words: ["COWBOY", "BOOT", "RESEARCH", "CONTINUES", "REGULAR", "SHOES", "EXTRA", "ALLIGATOR"],
+
+  paths: {
+    CONTINUES: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0]],
+    RESEARCH: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[7,2]],
+    REGULAR: [[0,5],[1,5],[2,5],[3,5],[4,5],[5,5],[6,5]],
+    COWBOY: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7]],
+
+    SHOES: [[9,0],[9,1],[9,2],[9,3],[9,4]],
+    EXTRA: [[10,0],[10,1],[10,2],[10,3],[10,4]],
+    ALLIGATOR: [[0,6],[1,6],[2,6],[3,6],[4,6],[5,6],[6,6],[7,6],[8,6]],
+    BOOT: [[4,3],[5,3],[6,3],[7,3]]
+  }
+},
+
+
+
+{
+  phrase: "REPORT #086: SOCIALIZATION EVENT ATTENDED. I SPENT TWENTY MINUTES LOOKING FOR A PLACE TO STAND.",
+  HINT: "Social standing location not found.",
+
+  words: ["SOCIAL", "EVENT", "ATTENDED", "SPENT", "TWENTY", "MINUTES", "LOOKING", "PLACE", "STAND"],
+
+  paths: {
+    ATTENDED: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]],
+    MINUTES: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2]],
+    LOOKING: [[0,4],[1,4],[2,4],[3,4],[4,4],[5,4],[6,4]],
+    TWENTY: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7]],
+
+    SOCIAL: [[9,0],[9,1],[9,2],[9,3],[9,4],[9,5]],
+    EVENT: [[10,0],[10,1],[10,2],[10,3],[10,4]],
+    SPENT: [[8,3],[8,4],[8,5],[8,6],[8,7]],
+    PLACE: [[7,2],[7,3],[7,4],[7,5],[7,6]],
+    STAND: [[0,6],[1,6],[2,6],[3,6],[4,6]]
+  }
+},
+
+{
+  phrase: "REPORT #248: PERSONAL GROWTH UPDATE. I HAVE FORGIVEN THE PRINTER. THE PRINTER HAS NOT FORGIVEN ME.",
+  HINT: "Printer conflict remains unresolved.",
+
+  words: ["PERSONAL", "GROWTH", "UPDATE", "FORGIVEN", "PRINTER", "NOT", "HAVE", "HAS"],
+
+  paths: {
+    PERSONAL: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]],
+    FORGIVEN: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[7,2]],
+    PRINTER: [[0,5],[1,5],[2,5],[3,5],[4,5],[5,5],[6,5]],
+    GROWTH: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7]],
+
+    UPDATE: [[9,0],[9,1],[9,2],[9,3],[9,4],[9,5]],
+    HAVE: [[10,0],[10,1],[10,2],[10,3]],
+    NOT: [[8,5],[8,6],[8,7]],
+    HAS: [[10,5],[10,6],[10,7]]
+  }
+},
+
+
+{
+  phrase: "REPORT #703: OBSERVATION LOG UPDATED. THE DOG APPEARS TO HAVE NO RESPONSIBILITIES. WHEN DID WE GET A PET DOG?",
+  HINT: "Unexpected dog situation detected.",
+
+  words: ["OBSERVE", "UPDATED", "DOG", "APPEARS", "DUTIES", "WHEN", "GET", "PET"],
+
+  paths: {
+    OBSERVE: [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0]],
+    UPDATED: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2]],
+    APPEARS: [[0,5],[1,5],[2,5],[3,5],[4,5],[5,5],[6,5]],
+    DUTIES: [[0,7],[1,7],[2,7],[3,7],[4,7],[5,7]],
+
+    WHEN: [[8,0],[8,1],[8,2],[8,3]],
+    DOG: [[10,0],[10,1],[10,2]],
+    GET: [[9,4],[9,5],[9,6]],
+    PET: [[10,5],[10,6],[10,7]]
   }
 },
 
