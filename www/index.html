@@ -1,58 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>SignalFound</title>
+  <meta charset="UTF-8" />
 
-    <!-- Mobile scaling -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 
-    <!-- App identity -->
-    <meta name="application-name" content="SignalFound">
-    <meta name="theme-color" content="#000000">
+  <title>Signal Found</title>
 
-    <!-- iPhone app behavior -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="SignalFound">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap"
+    rel="stylesheet"
+  />
 
-    <!-- Icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/icon-180.png">
-    <link rel="icon" sizes="192x192" href="/icon-192.png">
-    <link rel="icon" sizes="512x512" href="/icon-512.png">
-    <link rel="shortcut icon" href="/icon-192.png">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+    rel="stylesheet"
+  />
 
-    <!-- PWA -->
-    <link rel="manifest" href="/manifest.json">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap"
+    rel="stylesheet"
+  />
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
+
+  <link rel="manifest" href="manifest.json" />
+
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+  <meta name="theme-color" content="#02091f" />
+
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  />
+
+  <meta
+    name="apple-mobile-web-app-title"
+    content="Signal Found"
+  />
+
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  />
 </head>
 
 <body>
-<div id="loadingScreen">
-    <div class="loadingBox">
-        <h1>SignalFound</h1>
-        <p>Initializing signal...</p>
+
+<div
+  id="startScreen"
+  class="startScreen"
+  onclick="skipBoot()"
+>
+  <h2>SIGNAL<br>FOUND</h2>
+
+  <div id="bootText" class="bootText"></div>
+
+  <button
+    id="beginButton"
+    onclick="event.stopPropagation(); startGame();"
+    style="display:none;"
+  >
+    BEGIN DECODING
+  </button>
+</div>
+
+  
+
+  <div class="container">
+  
+    
+
+    <div id="instructionScreen" class="instructionScreen">
+    
+    
+
+      <div class="instructionBox">
+
+        <button class="closeInfoBtn" onclick="closeInstructions()">
+          X
+        </button>
+        
+
+        <h2>SIGNAL FOUND</h2>
+        <video
+  id="tutorialVideo"
+  autoplay
+  muted
+  loop
+  playsinline
+>
+  <source src="tutorial.mp4" type="video/mp4">
+</video>
+
+       
+        <p>Find the hidden signal words.</p>
+        <p>Drag across letters to decode.</p>
+        <p>Decode every word to reveal the message.</p>
+        <p>Word Count and Hint provided.</p>
+        <p>Stack points to authorize duck parade.</p>
+       
+
+      <div class="soundSetting">
+  <span>SOUND</span>
+  <button id="soundBtn">ON</button>
+</div>
+
+    </div> <!-- closes instructionBox -->
+</div> <!-- closes instructionScreen -->
+    
+  
+    
+
+
+
+
+
+
+
+   <div class="titleArea">
+
+  <h1 class="logoTitle">
+    SIGNAL<br>
+    FOUND
+  </h1>
+
+  <button id="infoBtn" onclick="showInstructions()">
+    [Rules/Sound]
+  </button>
+
+</div>
+
+   
+
+    <div class="signalInstruction">
+      // LOCATE AND EXTRACT ALL SIGNAL WORDS TO DECODE THE MESSAGE
     </div>
+<div class="topPanel">
+
+ <div class="systemHintBox">
+
+  <div class="systemOutputHeader">
+    [ SYSTEM OUTPUT ]
+  </div>
+
+  <div id="signalDisplay">
+    HINT: waiting for signal.
+  </div>
+
 </div>
 
+  <div class="signalControlRow">
 
-<div class="container">
-    <h1>SignalFound</h1>
-    <p class="subtitle">Submit observations. The system will interpret.</p>
+    <div class="miniInfoBox">
+      <span class="boxLabel">WORDS REMAINING:</span>
+      <strong id="wordCount">0</strong>
+    </div>
 
-    <textarea id="userInput" placeholder="Enter your findings..."></textarea>
+    <button
+      id="newSignalBtn"
+      class="newSignalBtn"
+      onclick="handleNewSignal()"
+    >
+      NEW SIGNAL
+    </button>
 
-    <br>
+    <div class="scoreBox">
+      <div class="scoreLabel">POINTS:</div>
+      <div id="scoreDisplay">0</div>
+      <div id="pointsFlash"></div>
+    </div>
 
-    <button onclick="revealTruth()">Analyze</button>
+  </div>
 
-    <h2>System Response</h2>
-    <div id="responseOutput"></div>
 </div>
+   
+   <section id="wordSignalScreen" class="decoderPanel">
+  <div id="wordGrid" class="wordGrid"></div>
+</section>
 
-<script src="script.js"></script>
+    
+
+    
+
+  </div> <!-- closes container -->
+
+  <audio
+    id="signalSound"
+    src="signal-complete.mp3"
+    preload="auto">
+  </audio>
+
+
+<audio id="wordFoundSound" src="word-found.mp3" preload="auto"></audio>
+
+
+  <script src="script.js"></script>
 
 </body>
+
 </html>
