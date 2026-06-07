@@ -180,19 +180,40 @@ const duckMessages = [
 
 
 function unlockSound() {
-  const sound = document.getElementById("signalSound");
 
-  if (!sound || soundUnlocked) return;
+  if (soundUnlocked) return;
 
-  sound.play()
-    .then(() => {
-      sound.pause();
-      sound.currentTime = 0;
-      soundUnlocked = true;
-    })
-    .catch(() => {
-      console.log("Sound waiting for user tap");
-    });
+  const signalSound =
+    document.getElementById("signalSound");
+
+  const wordFoundSound =
+    document.getElementById("wordFoundSound");
+
+  if (signalSound) {
+    signalSound.volume = 0;
+
+    signalSound.play()
+      .then(() => {
+        signalSound.pause();
+        signalSound.currentTime = 0;
+        signalSound.volume = 0.6;
+      })
+      .catch(() => {});
+  }
+
+  if (wordFoundSound) {
+    wordFoundSound.volume = 0;
+
+    wordFoundSound.play()
+      .then(() => {
+        wordFoundSound.pause();
+        wordFoundSound.currentTime = 0;
+        wordFoundSound.volume = 0.6;
+      })
+      .catch(() => {});
+  }
+
+  soundUnlocked = true;
 }
 
 document.addEventListener("pointerdown", unlockSound, { once: true });
