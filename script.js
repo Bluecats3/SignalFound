@@ -122,14 +122,16 @@ let soundUnlocked = false;
 let usedPuzzleIndexes = [];
 
 const rewardMilestones = [
-  900,
-  2500,
-  5000,
-  10000,
-  20000,
-  30000,
-  40000,
-  50000
+1500,
+5000,
+10000,
+15000,
+30000,
+35000,
+40000,
+45000,
+50000,
+55000
 ];
 
 
@@ -2274,7 +2276,7 @@ THE: [[6,4],[6,5],[6,6]]
     "READY",
     "YEARS",
     "FROM",
-    "AGO",
+    
     "YET",
     "ARE"
   ],
@@ -2301,9 +2303,6 @@ THE: [[6,4],[6,5],[6,6]]
       [8,4],[8,5],[8,6],[8,7]
     ],
 
-    AGO: [
-      [2,5],[3,5],[4,5]
-    ],
 
     YET: [
       [10,5],[10,6],[10,7]
@@ -3200,15 +3199,16 @@ console.log("reached milestone:", reachedMilestone);
 
 let duckCount = 1;
 
-if (totalScore >= 500) duckCount = 1;
-if (totalScore >= 2500) duckCount = 2;
-if (totalScore >= 5000) duckCount = 4;
-if (totalScore >= 10000) duckCount = 6;
-if (totalScore >= 20000) duckCount = 8;
-if (totalScore >= 30000) duckCount = 10;
-if (totalScore >= 40000) duckCount = 12;
-if (totalScore >= 50000) duckCount = 14;
-if (totalScore >= 60000) duckCount = 16;
+if (totalScore >= 1500) duckCount = 1;
+if (totalScore >= 5000) duckCount = 2;
+if (totalScore >= 10000) duckCount = 3;
+if (totalScore >= 15000) duckCount = 4;
+if (totalScore >= 30000) duckCount = 5;
+if (totalScore >= 35000) duckCount = 6;
+if (totalScore >= 40000) duckCount = 7;
+if (totalScore >= 45000) duckCount = 8;
+if (totalScore >= 50000) duckCount = 9;
+if (totalScore >= 55000) duckCount = 10;
 
 pendingDuckParade = reachedMilestone;
 pendingDuckCount = duckCount;
