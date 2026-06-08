@@ -10,7 +10,7 @@ workflows:
     environment:
       node: 22
       vars:
-        BUILD_NUMBER: 3
+        BUILD_NUMBER: 4
       ios_signing:
         distribution_type: app_store
         bundle_identifier: Com.bluecats3.signalfound
