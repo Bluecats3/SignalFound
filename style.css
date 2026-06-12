@@ -24,7 +24,10 @@ body {
 
   text-align: center;
 
-  padding: 30px;
+  padding-top: calc(env(safe-area-inset-top) + 30px);
+  padding-right: 30px;
+  padding-bottom: 30px;
+  padding-left: 30px;
 
 }
 
@@ -906,11 +909,15 @@ background:
     overscroll-behavior-y: contain;
   }
 
-  body {
-    padding: 10px;
-    position: static;
-    width: 100%;
-  }
+ body {
+  padding-top: calc(env(safe-area-inset-top) + 20px);
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+
+  position: static;
+  width: 100%;
+}
 
   .container {
     min-height: 100dvh;
