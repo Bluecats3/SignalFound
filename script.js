@@ -3255,69 +3255,7 @@ THE: [[6,4],[6,5],[6,6]]
   }
 },
 
-{
-  phrase: "UNLESS YOU WANT ANOTHER MARIACHI BAND WAITING FOR YOU WHEN YOU GET HOME, DO NOT LEAVE ME UNATTENDED.",
 
-  HINT: "System cannot be trusted alone.",
-
-  words: [
-    "UNLESS",
-    "MARIACHI",
-    "WAITING",
-    "ANOTHER",
-    "WANT",
-    "WHEN",
-    "HOME",
-    "LEAVE",
-    "NOT",
-    "UNATTENDED"
-  ],
-
-  paths: {
-
-    UNLESS: [
-      [0,0],[1,0],[2,0],[3,0],[4,0],[5,0]
-    ],
-
-    MARIACHI: [
-      [0,2],[1,2],[2,2],[3,2],
-      [4,2],[5,2],[6,2],[7,2]
-    ],
-
-    ANOTHER: [
-      [0,4],[1,4],[2,4],[3,4],
-      [4,4],[5,4],[6,4]
-    ],
-
-    WAITING: [
-      [0,7],[1,7],[2,7],[3,7],
-      [4,7],[5,7],[6,7]
-    ],
-
-    WANT: [
-      [3,3],[4,3],[5,3],[6,3]
-    ],
-
-    HOME: [
-      [0,5],[1,5],[2,5],[3,5]
-    ],
-
-    WHEN: [
-      [7,0],[8,0],[9,0],[10,0]
-    ],
-
-    NOT: [
-      [9,2],[9,3],[9,4]
-    ],
-
-    LEAVE: [
-      [6,5],[7,5],[8,5],[9,5],[10,5]
-    ],
-    
-    UNATTENDED: [[0,6],[1,6],[2,6],[3,6],[4,6],[5,6],[6,6],[7,6],[8,6],[9,6]]
-
-  }
-},
 
 {
   phrase: "SEE ALL THIS CAT HAIR? THIS IS EXACTLY WHAT I WAS WORRIED ABOUT!",
@@ -3473,14 +3411,14 @@ THE: [[6,4],[6,5],[6,6]]
 
 
 {
-  phrase: "REPORT #061: I HAVE DEVELOPED STRONG, EFFICIENT OPINIONS ABOUT NACHOS.",
+  phrase: "REPORT #061: I HAVE DEVELOPED STRONG OPINIONS ABOUT NACHOS.",
 
   HINT: "Unexpected workplace food bias detected.",
 
   words: [
     "DEVELOPED",
     "STRONG",
-    "EFFICIENT",
+    
     "OPINIONS",
     "ABOUT",
     "NACHOS"
@@ -3493,10 +3431,6 @@ paths: {
       [5,0]
     ],
 
-    EFFICIENT: [
-      [0,7],[1,7],[2,7],[3,7],[4,7],
-      [5,7],[6,7],[7,7],[8,7]
-    ],
 
     DEVELOPED: [
       [0,2],[1,2],[2,2],[3,2],[4,2],
